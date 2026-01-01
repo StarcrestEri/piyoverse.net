@@ -1,0 +1,1661 @@
+/* Settings button in nav/header: inline with nav items and same size as panel-back */
+.settings-btn {
+  margin-left: auto; /* push to the right within the flex nav */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.2s;
+  position: static;
+  right: auto;
+  top: auto;
+  z-index: 3;
+}
+.settings-btn img {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+.settings-btn:hover,
+.settings-btn:focus {
+  background: none;
+}
+
+/* Hide settings button when body indicates we're on the settings page */
+body.settings-page .settings-btn { display: none !important; }
+
+/* Settings panel styling */
+.settings-panel {
+  max-width: 420px;
+  margin: 2rem auto;
+  background: rgba(0,0,0,0.18);
+  border-radius: 1rem;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+.settings-panel h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  color: #57bcff;
+}
+
+/* Small note text used in the settings panel for compatibility warnings */
+.settings-panel .settings-note {
+  margin-top: 1rem;
+  font-size: 0.65rem; /* smaller, less prominent */
+  line-height: 1.0;
+  color: rgba(255,255,255,0.68);
+}
+.black-text .settings-panel .settings-note,
+html.black-text .settings-panel .settings-note { color: #071025 !important; }
+.settings-group {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.settings-group label {
+  font-weight: 600;
+  color: #fff;
+}
+.settings-group select {
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 7px;
+  border: 1px solid #57bcff;
+  background: #0b1a2a;
+  color: #fff;
+}
+/* Section separator and larger section headings for marketplace */
+.section-separator {
+  display: block;
+  border: 0 !important;
+  height: 4px;
+  margin: 2.2rem auto 1.2rem auto;
+  width: min(900px, 80vw);
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 20%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.95) 50%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 80%, rgba(0,0,0,0.06) 100%);
+  box-shadow: 0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.games-section-title.section-large {
+  font-size: 1.45rem;
+  letter-spacing: 0.01em;
+  margin-top: 0.5rem;
+  margin-bottom: 0.7rem;
+}
+/* =======================
+   Frutiger Aero Theme
+   For Piyoverse.net
+   ======================= */
+@font-face {
+  font-family: "tahoma.otf";
+  src: url("tahoma.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "tahoma.otf";
+  src: url("tahoma.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.frutiger-aero {
+  /* Color Variables */
+  --gradient-from: rgba(12, 122, 226, 0.76);
+  --gradient-to: rgba(0, 178, 202, 0.822);
+  --highlight: #57bcff;
+  --ribbons-accent: #57bcff; /* updated dynamically by ribbons-of-life.js */
+  --ribbons-outline: #2b6fa0; /* darker default outline; updated dynamically by ribbons-of-life.js */
+
+  --foreground: oklch(0.985 0 0);
+  --popover: oklch(72.007% 0.12846 221.186);
+  --popover-foreground: oklch(0.985 0 0);
+  --muted-foreground: oklch(0.99 0 none / 0.94);
+  --accent: oklch(0.13 0 none / 0.25);
+  --accent-foreground: oklch(1 0 none);
+
+  /* Syntax Highlighting Colors */
+  --sh-class: #ffe15d;
+  --sh-identifier: #e7e7e7;
+  --sh-sign: #e7e7e7;
+  --sh-string: #e7e7e7;
+  --sh-keyword: #e7e7e7;
+  --sh-comment: #39ff43;
+  --sh-jsxliterals: #e7e7e7;
+  --sh-property: #5db0ff;
+  --sh-entity: #ffe15d;
+}
+
+/* Body & Background */
+html.frutiger-aero {
+  /* 4:3 safe area (pillarboxed) */
+  /* Defaults to 4:3, but JS can override based on crt.png's real aspect */
+  --crt-aspect-num: 4;
+  --crt-aspect-den: 3;
+  --safe-width: min(100vw, calc(100vh * var(--crt-aspect-num) / var(--crt-aspect-den)));
+  --side-bar-width: calc((100vw - var(--safe-width)) / 2);
+
+  background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
+              radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
+              radial-gradient(circle at 18% 78%, rgba(134, 255, 207, 0.18), transparent 30%),
+              linear-gradient(180deg, rgba(4, 24, 46, 0.98), rgba(3, 41, 74, 0.94) 44%, rgba(3, 16, 36, 0.98));
+  background-attachment: fixed;
+  color: #ffffff;
+  font-family: "tahoma.otf", Tahoma, Verdana, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Make body a column flex container so footer can pin to bottom when content is short */
+html.frutiger-aero, html.frutiger-aero body {
+  height: 100%;
+}
+.frutiger-aero body {
+  display: flex;
+  flex-direction: column;
+}
+.frutiger-aero main {
+  flex: 1 1 auto;
+}
+
+/* Pillarbox bars (black) */
+html.frutiger-aero::before,
+html.frutiger-aero::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: var(--side-bar-width);
+  background: #000;
+  z-index: 9000;
+  pointer-events: none;
+}
+
+html.frutiger-aero::before { left: 0; }
+html.frutiger-aero::after { right: 0; }
+
+.frutiger-aero body {
+  background: transparent;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 0; /* compact banner: no extra reserved space */
+}
+
+.frutiger-aero .ribbons-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(circle at 50% 30%, rgba(0, 140, 255, 0.12), transparent 50%);
+  filter: saturate(1.05);
+}
+
+.frutiger-aero body main {
+  padding-bottom: 0;
+}
+
+.frutiger-aero body[data-scroll-locked] main {
+  filter: blur(8px);
+}
+
+/* =======================
+   Popover & Overlay
+   ======================= */
+.frutiger-aero .bg-popover {
+  /* slightly more translucent glass-like popover */
+  background: linear-gradient(
+    165deg,
+    rgba(0, 140, 255, 0.35) 0%,
+    rgba(69, 160, 152, 0.18) 50%,
+    rgba(0, 255, 42, 0.14) 100%
+  );
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.6),
+              inset 0px 2px 1px rgba(255, 255, 255, 0.2),
+              inset 0px -2px 1px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px) saturate(1.03);
+  -webkit-backdrop-filter: blur(6px) saturate(1.03);
+  border-radius: 1rem;
+  padding: 1rem;
+  color: #ffffff;
+}
+
+.frutiger-aero .overlay {
+  background: transparent;
+}
+
+/* =======================
+   Main Content
+   ======================= */
+.frutiger-aero main {
+  /* slightly more translucent main panel to read as glass while keeping sheen */
+  background: linear-gradient(
+    180deg,
+    rgba(90, 95, 99, 0.55) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(62, 65, 67, 0.45) 100%
+  );
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3),
+              inset 0px 2px 1px rgba(255, 255, 255, 0.31),
+              inset 0px -2px 1px rgba(0, 0, 0, 0.4);
+  margin: 1rem auto;
+  width: min(1200px, var(--safe-width));
+  max-width: 1200px;
+  background-blend-mode: overlay;
+  color: #ffffff;
+  position: relative;
+}
+
+/* Panel header: centered and pinned to top of the panel */
+.frutiger-aero .site-header {
+  /* cancel main padding so the header sits flush at the top of the panel */
+  margin: -1rem -1rem 1rem;
+  padding: 1rem;
+  text-align: center;
+  display: block;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.frutiger-aero .site-header > * {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.frutiger-aero .site-header h1 {
+  margin: 0;
+}
+
+.frutiger-aero .site-header p {
+  margin: 0.35rem 0 0;
+}
+
+.frutiger-aero .panel-back {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  box-shadow: none;
+  filter: none;
+  border-radius: 0;
+  text-decoration: none;
+  z-index: 3;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Pages with a panel back button: keep first content from sitting underneath it */
+.frutiger-aero .panel-back + section {
+  padding-top: 64px;
+}
+
+.frutiger-aero .panel-back img {
+  width: 32px;
+  height: 32px;
+  display: block;
+  pointer-events: none;
+}
+
+.frutiger-aero .panel-back:hover,
+.frutiger-aero .panel-back:focus {
+  background: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* give extra breathing room after the about section */
+.frutiger-aero .about-piyoverse { padding-bottom: 2.25rem; margin-bottom: 1.25rem; }
+
+/* when panels are forced solid, replace translucent backgrounds with solid variants */
+html.frutiger-aero.solid-panels main,
+html.frutiger-aero.solid-panels .bg-popover,
+html.frutiger-aero.solid-panels .game-card {
+  /* Light-mode solid panels: keep a gentle gradient so the panels are opaque
+     but not harsh — this preserves decorative overlays while switching to
+     a brighter, high-contrast surface. */
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,245,247,0.95)) !important;
+  box-shadow: 0 12px 36px rgba(10,12,18,0.06) !important;
+  color: #071025 !important; /* dark text for readability on light panels */
+}
+
+/* ensure content sits above the solid overlay and inherits the dark text */
+html.frutiger-aero.solid-panels main > *,
+html.frutiger-aero.solid-panels .bg-popover > *,
+html.frutiger-aero.solid-panels .game-card > * {
+  position: relative;
+  z-index: 1;
+  color: inherit;
+}
+
+/* In light panel mode, ensure muted text and meta use slightly darker greys */
+html.frutiger-aero.solid-panels .game-desc,
+html.frutiger-aero.solid-panels .game-meta,
+html.frutiger-aero.solid-panels .muted {
+  color: #23303b !important;
+}
+
+/* Force panel text to white in default (dark) mode so no blue headings appear */
+.frutiger-aero main,
+.frutiger-aero .bg-popover,
+.frutiger-aero .game-card,
+.frutiger-aero .settings-panel {
+  color: #ffffff !important;
+}
+
+/* Ensure headings, links, and meta inside panels are white unless explicitly overridden */
+.frutiger-aero main h1,
+.frutiger-aero main h2,
+.frutiger-aero main h3,
+.frutiger-aero main p,
+.frutiger-aero main li,
+.frutiger-aero main a,
+.frutiger-aero .settings-panel h2,
+.frutiger-aero .settings-panel label,
+.frutiger-aero .settings-panel select,
+.frutiger-aero .game-card h3,
+.frutiger-aero .game-card .game-meta,
+.frutiger-aero .social-label {
+  color: #ffffff !important;
+}
+
+/* Footer should be its own panel with white text */
+.frutiger-aero .site-footer {
+  /* Match the panel gradient used by `main` and other panels for visual consistency */
+  background: linear-gradient(
+    180deg,
+    rgba(90,95,99,0.55) 0%,
+    rgba(0,0,0,0.45) 50%,
+    rgba(62,65,67,0.45) 100%
+  );
+  padding: 1rem;
+  border-radius: 0.8rem;
+  margin: 1rem auto 2rem auto;
+  width: min(1200px, var(--safe-width));
+  max-width: 1200px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.48);
+  color: #ffffff;
+}
+.frutiger-aero .site-footer p { margin: 0.4rem 0; color: #ffffff; }
+
+/* Divider between social links and legal text in footer */
+.frutiger-aero .footer-divider {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+  margin: 0.8rem 0;
+}
+
+/* =======================
+   Prose / Images / Code
+   ======================= */
+.frutiger-aero .prose img {
+  border-radius: 16px;
+  border: solid 0.1rem white;
+  filter: drop-shadow(2px 4px 6px black);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Drop shadow for site chrome / text that is not inside a panel
+   (panels like `main`, `.game-card`, `.bg-popover`, `.settings-panel`, `.site-footer`) */
+.frutiger-aero h1,
+.frutiger-aero h2,
+.frutiger-aero h3,
+.frutiger-aero p,
+.frutiger-aero a,
+.frutiger-aero li,
+.frutiger-aero .social-label,
+.frutiger-aero .site-title {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.62);
+}
+
+/* Disable the shadow inside panels so panel text remains crisp */
+.frutiger-aero main *,
+.frutiger-aero .game-card *,
+.frutiger-aero .bg-popover *,
+.frutiger-aero .settings-panel *,
+.frutiger-aero .site-footer * {
+  text-shadow: none !important;
+}
+
+.frutiger-aero .prose pre {
+  background: linear-gradient(
+    155deg,
+    rgba(15, 71, 134, 0.596) 0%,
+    rgba(28, 148, 92, 0.247) 50%,
+    rgba(2, 133, 24, 0.26) 100%
+  );
+  padding: 1rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  color: white;
+}
+
+/* =======================
+   Navigation
+   ======================= */
+.frutiger-aero .nav-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 10px auto 0.75rem;
+  width: min(1200px, var(--safe-width));
+  max-width: 1200px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #f2faff40, #0000001f);
+  filter: drop-shadow(2px 1px 1px black);
+  position: relative;
+}
+
+/* Small logo in the top-left of the banner/nav panel */
+.frutiger-aero .nav-logo {
+  position: static;
+  width: clamp(60px, 8vw, 92px);
+  height: clamp(60px, 8vw, 92px);
+  display: block;
+  z-index: 3;
+  margin-right: 1.2rem; /* give extra space between logo and nav items */
+}
+
+.frutiger-aero .nav-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(2px 1px 1px rgba(0,0,0,0.85));
+}
+
+/* Centered page name between banner/nav and main panel */
+.frutiger-aero .page-name-container {
+  width: min(1200px, var(--safe-width));
+  max-width: 1200px;
+  margin: 0.25rem auto 0;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.frutiger-aero .page-name {
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  font-size: clamp(1.2rem, 2.2vw, 1.9rem);
+  filter: drop-shadow(2px 1px 1px rgba(0,0,0,0.85));
+  text-align: center;
+}
+
+.frutiger-aero .nav-item {
+  padding: 0.25rem 1rem;
+  border-radius: 8px;
+  filter: drop-shadow(2px 1px 1px black);
+  /* use the same translucent blue base as game action buttons */
+  background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.frutiger-aero .nav-container .nav-item:first-of-type { margin-left: 0.6rem; }
+
+/* Settings panel save button should match other action buttons */
+.frutiger-aero .settings-panel .btn {
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+.frutiger-aero .settings-panel .btn:hover,
+.frutiger-aero .settings-panel .btn:focus {
+  background: linear-gradient(180deg, rgba(138,237,255,0.95), rgba(0,60,255,0.92));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.55);
+}
+
+.frutiger-aero .nav-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.55);
+  /* match the strong blue highlighted state used by game action buttons */
+  background: linear-gradient(180deg, rgba(202, 202, 202, 0.95), rgba(24, 24, 24, 0.92));
+}
+
+/* =======================
+   Footer
+   ======================= */
+.frutiger-aero .site-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: var(--highlight);
+  width: min(1200px, var(--safe-width));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =======================
+   Button gradient outline + animated circles
+   Applies to native buttons and elements using `.btn` (excludes plain links)
+   ======================= */
+
+.frutiger-aero button,
+.frutiger-aero .btn,
+.frutiger-aero input[type="button"],
+.frutiger-aero input[type="submit"] {
+  position: relative;
+  display: inline-block;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  /* slightly more translucent button surface */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.16));
+  color: var(--foreground);
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* gradient outline using a blurred pseudo-element */
+.frutiger-aero .nav-item::before,
+.frutiger-aero button::before,
+.frutiger-aero .btn::before,
+.frutiger-aero input[type="button"]::before,
+.frutiger-aero input[type="submit"]::before {
+  content: "";
+  position: absolute;
+  /* make the glow tighter and very subtle */
+  inset: -4px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--gradient-from), var(--gradient-to));
+  /* low blur so it's gentle and cyan-leaning */
+  filter: blur(4px) saturate(1.02);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.6s linear;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* animated circular aura */
+.frutiger-aero .nav-item::after,
+.frutiger-aero button::after,
+.frutiger-aero .btn::after,
+.frutiger-aero input[type="button"]::after,
+.frutiger-aero input[type="submit"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 140%;
+  height: 140%;
+  transform: translate(-50%, -50%) scale(0.85);
+  border-radius: 50%;
+  /* very subtle cyan aura */
+  background: radial-gradient(circle at 50% 40%, rgba(0,200,255,0.03), transparent 18%),
+              radial-gradient(circle at 60% 60%, rgba(0,200,255,0.02), transparent 22%);
+  filter: blur(4px) saturate(1.02);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.6s cubic-bezier(.2,.9,.2,1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.frutiger-aero .nav-item:hover::before,
+.frutiger-aero button:hover::before,
+.frutiger-aero .btn:hover::before,
+.frutiger-aero input[type="button"]:hover::before,
+.frutiger-aero input[type="submit"]:hover::before,
+.frutiger-aero .nav-item:focus::before,
+.frutiger-aero button:focus::before,
+.frutiger-aero .btn:focus::before,
+.frutiger-aero input[type="button"]:focus::before,
+.frutiger-aero input[type="submit"]:focus::before {
+  /* very low-opacity cyan outline */
+  opacity: 0.22;
+  transform: translateZ(0);
+  animation: outline-drift 3.6s linear infinite;
+}
+
+.frutiger-aero .nav-item:hover::after,
+.frutiger-aero button:hover::after,
+.frutiger-aero .btn:hover::after,
+.frutiger-aero input[type="button"]:hover::after,
+.frutiger-aero input[type="submit"]:hover::after,
+.frutiger-aero .nav-item:focus::after,
+.frutiger-aero button:focus::after,
+.frutiger-aero .btn:focus::after,
+.frutiger-aero input[type="button"]:focus::after,
+.frutiger-aero input[type="submit"]:focus::after {
+  /* very low-opacity cyan aura */
+  opacity: 0.12;
+  transform: translate(-50%, -50%) scale(1);
+  animation: circle-pulse 1.6s ease-out infinite;
+}
+
+/* Theme-aware background for interactive chrome when hovered */
+.frutiger-aero .btn:hover,
+.frutiger-aero button:hover,
+.frutiger-aero input[type="button"]:hover,
+.frutiger-aero input[type="submit"]:hover,
+.frutiger-aero .nav-item:hover {
+  background: var(--ribbons-accent) !important;
+  color: var(--accent-foreground) !important;
+  box-shadow: 0 6px 22px rgba(var(--ribbons-accent-rgb, 87,188,255),0.22);
+}
+
+/* Marketplace-style hover for buttons: grey gradient + sheen + stronger shading
+   Use high specificity and !important to override theme accent hover where
+   a marketplace-style, neutral hover is desired (matches marketplace buttons). */
+.frutiger-aero .btn:hover,
+.frutiger-aero button:hover,
+.frutiger-aero input[type="button"]:hover,
+.frutiger-aero input[type="submit"]:hover,
+.frutiger-aero .settings-panel .btn:hover,
+.frutiger-aero .game-actions .btn:hover {
+  background-image:
+    linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.02)),
+    linear-gradient(180deg, rgba(180,180,180,0.95), rgba(43,43,43,0.92)) !important;
+  background-blend-mode: overlay !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.55) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Add a subtle inset sheen to buttons on hover to match game-card sheen */
+.frutiger-aero .btn:hover::before,
+.frutiger-aero button:hover::before,
+.frutiger-aero input[type="button"]:hover::before,
+.frutiger-aero input[type="submit"]:hover::before {
+  opacity: 0.14 !important;
+  filter: none !important;
+}
+
+/* Keep pseudo-element glow visible and ensure text remains above */
+.frutiger-aero .btn:hover > *,
+.frutiger-aero button:hover > *,
+.frutiger-aero .nav-item:hover > * { position: relative; z-index: 3; }
+
+@keyframes circle-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+  50% { transform: translate(-50%, -50%) scale(1.03); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.6; }
+}
+
+/* games-panel removed — grid lives directly inside main */
+
+@keyframes circle-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+  50% { transform: translate(-50%, -50%) scale(1.03); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.6; }
+}
+
+/* Ensure the outline sits behind the button content */
+.frutiger-aero button > *,
+.frutiger-aero .btn > * { position: relative; z-index: 2; }
+.frutiger-aero .social-bar { gap: 10px; }
+.frutiger-aero .social-item { display:inline-flex; flex-direction: column; align-items:center; gap:8px; flex: 0 0 auto; }
+.frutiger-aero .social-label { color: var(--foreground); text-decoration: none; font-size: 0.85rem; }
+.frutiger-aero .social-label:hover { text-decoration: underline; }
+
+/* If someone keeps the flat structure (a.social-link only), ensure no overlap
+   by forcing social-link to be smaller and labels to appear if present */
+.frutiger-aero .social-link { display:block; margin:0; }
+
+
+.frutiger-aero .social-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0 0.5rem 0;
+  margin: 2rem auto 0;
+  width: min(1200px, var(--safe-width));
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.frutiger-aero .social-link {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  border-radius: 10px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  position: relative;
+}
+
+/* subtle overlay glow using pseudo-element so icons themselves remain crisp */
+.frutiger-aero .social-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.08), transparent 20%),
+              linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
+  filter: blur(6px) saturate(1.1);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.frutiger-aero .social-link:hover,
+.frutiger-aero .social-link:focus {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.55);
+  z-index: 2;
+}
+
+.frutiger-aero .social-link:hover::after,
+.frutiger-aero .social-link:focus::after {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+/* per-icon backgrounds (update paths if your assets are elsewhere) */
+.frutiger-aero .social-youtube { background-image: url('Images/youtubeicon.png'); }
+.frutiger-aero .social-discord { background-image: url('Images/discordicon.png'); }
+.frutiger-aero .social-bsky { background-image: url('Images/bskyicon.png'); }
+.frutiger-aero .social-twt { background-image: url('Images/twticon.png'); }
+
+/* IE11 fallback: if IE has trouble with the Bluesky icon, show a simple letter badge */
+.ie11 .frutiger-aero .social-bsky {
+  background-image: none !important;
+  background-color: #6fb3ff;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.ie11 .frutiger-aero .social-bsky::after {
+  content: "B";
+  color: #ffffff;
+  font-weight: 800;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+/* optional: slightly larger icons on wider screens */
+@media (min-width: 900px) {
+  .frutiger-aero .social-link { width: 56px; height: 56px; border-radius: 12px; }
+}
+
+/* accessibility: focus outline for keyboard users */
+.frutiger-aero .social-link:focus {
+  outline: 3px solid rgba(90,180,255,0.35);
+  outline-offset: 3px;
+}
+
+/* =======================
+   Games Container
+   Two game cards: Starcrest (Mega Drive) and Starcrest Adventure (GBC prototype)
+   Responsive grid: 2 columns on wide screens, 1 column on narrow screens
+   ======================= */
+.frutiger-aero .marketplace-choices {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 1.75rem 0 0;
+}
+
+.frutiger-aero .marketplace-btn {
+  min-width: min(360px, 44vw);
+  padding: 1.15rem 1.75rem;
+  font-size: 1.35rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+  color: white;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
+.frutiger-aero .marketplace-btn:hover,
+.frutiger-aero .marketplace-btn:focus {
+  background: linear-gradient(180deg, rgba(180, 180, 180, 0.95), rgba(43, 43, 43, 0.92));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.55);
+}
+
+.frutiger-aero .games-section-title {
+  margin: 0.35rem 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0b63d8;
+}
+
+.frutiger-aero main section + section {
+  margin-top: 1rem;
+}
+
+.frutiger-aero .game-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem; /* increased spacing so hover outlines don't clip neighboring cards */
+  margin: 0.9rem 0;
+  align-items: start;
+}
+
+.frutiger-aero .game-card {
+  /* No inner panels — cards are purely content rows inside the mother panel.
+    Remove padding/borders/shadows so each card doesn't read as a separate surface. */
+  background: transparent;
+  border-radius: 0;
+  padding: 0.6rem 0; /* slightly larger padding for extra breathing room */
+  display: grid;
+  grid-template-columns: clamp(60px, 7vw, 85px) 1fr;
+  column-gap: 0.8rem;
+  row-gap: 0;
+  align-items: start;
+  box-shadow: none;
+  border: none;
+}
+
+.frutiger-aero .game-card .game-thumb {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+.frutiger-aero .game-card .game-info {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.frutiger-aero .game-card .game-thumb {
+  /* Thumbnail is inline content only — no background or shadow so it doesn't
+     read as a separate panel. */
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: none;
+  background: transparent;
+  flex: 0 0 auto;
+  min-height: 0;
+}
+
+.frutiger-aero .game-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+
+.frutiger-aero .game-card h3,
+.frutiger-aero .game-card p {
+  margin: 0;
+}
+
+.frutiger-aero .game-title { font-size: 1.0rem; font-weight: 700; color: #0b63d8; line-height: 1.1; }
+.frutiger-aero .game-desc { color: rgba(255,255,255,0.92); font-size: 0.9rem; line-height: 1.18; }
+.frutiger-aero .game-meta { font-size: 0.8rem; color: rgba(255,255,255,0.78); line-height: 1.15; }
+
+.frutiger-aero .game-actions { display:flex; gap:0.5rem; margin-top: 0.25rem; }
+
+/* Make game action buttons look like the nav items for visual consistency */
+.frutiger-aero .game-actions .btn {
+  /* mirror .nav-item for consistent appearance: translucent light-blue -> blue base */
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
+  background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+
+.frutiger-aero .game-actions .btn:hover,
+.frutiger-aero .game-actions .btn:focus {
+  background: linear-gradient(180deg, rgba(138,237,255,0.95), rgba(0,60,255,0.92));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+/* Games panel - visually distinctive and modern */
+/* games live directly in main; no extra panel */
+
+/* Card hover: subtle lift + tilt effect */
+.frutiger-aero .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: 12px; }
+.frutiger-aero .game-card:hover { /* subtle highlight only, no lift */ background-color: rgba(255,255,255,0.02); transform: none; }
+
+/* Place outline around the content area (.game-info) so it doesn't overlap the thumbnail */
+.frutiger-aero .game-card { position: relative; }
+/* ensure thumb and info sit above the outline */
+.frutiger-aero .game-card .game-thumb,
+.frutiger-aero .game-card .game-info { position: relative; z-index: 1; }
+/* Outline around the full card, offset outward so it doesn't sit tight on the thumbnail */
+.frutiger-aero .game-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--ribbons-outline);
+  opacity: 1;
+  pointer-events: none;
+  transition: box-shadow 180ms ease, opacity 180ms ease;
+  z-index: 2;
+}
+.frutiger-aero .game-card:hover::after { box-shadow: 0 0 0 3px var(--ribbons-accent), 0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18); }
+
+/* Translucent curved sheen at the top inside the outline */
+.frutiger-aero .game-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0; /* span to inside of outline */
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+  background-image: 
+    linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0.06)),
+    linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0.00)),
+    linear-gradient(to top, rgba(0,0,0,0.18), rgba(0,0,0,0.02));
+  background-position: top left, top left, bottom left;
+  background-size: 100% 28px, 100% 28px, 100% 7px; /* dark sheen is 1/4 height */
+  background-repeat: no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 220ms ease;
+  z-index: 0;
+  transform: translateY(0);
+  mix-blend-mode: screen;
+}
+.frutiger-aero .game-card:hover::before { opacity: 1; transform: translateY(-2px); }
+
+/* ensure thumbnail and info are above the sheen and outline */
+.frutiger-aero .game-card .game-thumb { position: relative; z-index: 2; }
+.frutiger-aero .game-card .game-info { position: relative; z-index: 3; }
+
+/* draw subtle separators between cards so the panel feels continuous */
+/* Removed separators — the games-panel is a single mother panel with content rows */
+
+/* Small screens: single column and tighter padding inside the panel */
+@media (max-width: 520px) {
+  .frutiger-aero .game-grid { grid-template-columns: 1fr; }
+  .frutiger-aero .game-card { grid-template-columns: 1fr; }
+  .frutiger-aero .game-card .game-thumb { grid-column: 1; grid-row: auto; width: 100%; }
+  .frutiger-aero .game-card .game-info { grid-column: 1; grid-row: auto; }
+}
+
+@media (max-width: 520px) {
+  .frutiger-aero .game-grid { grid-template-columns: 1fr; }
+  .frutiger-aero .game-card .game-thumb { height: 80px; }
+}
+
+
+/* Ensure main site content stacks above the decorative icon */
+.frutiger-aero .nav-container,
+.frutiger-aero .page-name-container,
+.frutiger-aero main,
+.frutiger-aero .social-bar,
+.frutiger-aero .site-footer,
+.frutiger-aero footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* =======================
+   Internet Explorer 11 fallbacks
+   (IE ignores CSS variables, modern color spaces, grid gaps, and modern functions like min()/clamp())
+   ======================= */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* Ensure all main content is above the black bars */
+  .frutiger-aero .nav-container,
+  .frutiger-aero .page-name-container,
+  .frutiger-aero main,
+  .frutiger-aero .social-bar,
+  .frutiger-aero .site-footer,
+  .frutiger-aero footer {
+    position: relative;
+    z-index: 9001;
+  }
+  /* Ensure HTML5 elements behave as blocks */
+  main, nav, section, article, figure, header, footer { display: block; }
+
+  /* Logo sizing fallback (IE ignores clamp() and object-fit) */
+  .frutiger-aero .nav-logo {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    position: relative;
+  }
+  .frutiger-aero .nav-logo img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    -ms-interpolation-mode: bicubic;
+  }
+
+  /* Disable the CSS-variable-driven pseudo pillarbox bars (we replace them via ie-fixes.js) */
+  html:before,
+  html:after,
+  html::before,
+  html::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Pillarbox bars injected by ie-fixes.js */
+  .frutiger-aero .ie-pillarbox {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background: #000;
+    z-index: 9000;
+    pointer-events: none;
+    width: 0;
+  }
+  .frutiger-aero .ie-pillarbox-left { left: 0; }
+  .frutiger-aero .ie-pillarbox-right { right: 0; }
+
+  /* Safe-width sizing is applied via ie-fixes.js (inline styles). */
+
+  /* Theme variables won't apply in IE; set practical fallbacks */
+  html.frutiger-aero {
+    background-color: #031024;
+    color: #ffffff;
+    background-attachment: scroll;
+  }
+  .frutiger-aero { color: #ffffff; }
+  .frutiger-aero .page-name { color: #ffffff; }
+  .frutiger-aero .nav-item { color: #ffffff; }
+  .frutiger-aero .social-label { color: #ffffff; }
+
+  /* IE doesn't support `inset:`; make sure the background canvas truly covers the viewport */
+  .frutiger-aero .ribbons-canvas {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Replace var()-based gradients with fixed values */
+  .frutiger-aero .nav-item,
+  .frutiger-aero .marketplace-btn,
+  .frutiger-aero .game-actions .btn {
+    background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+    color: #fff;
+  }
+  .frutiger-aero .nav-item:hover,
+  .frutiger-aero .nav-item:focus,
+  .frutiger-aero .marketplace-btn:hover,
+  .frutiger-aero .marketplace-btn:focus,
+  .frutiger-aero .game-actions .btn:hover,
+  .frutiger-aero .game-actions .btn:focus,
+  .frutiger-aero .nav-item:active,
+  .frutiger-aero .nav-item:focus-visible,
+  .frutiger-aero .marketplace-btn:active,
+  .frutiger-aero .marketplace-btn:focus-visible,
+  .frutiger-aero .game-actions .btn:active,
+  .frutiger-aero .game-actions .btn:focus-visible {
+    background: linear-gradient(180deg, rgba(138,237,255,0.95), rgba(0,60,255,0.92));
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
+    outline: none;
+  }
+
+/* Ensure controls have smooth transitions for the pressed state */
+.frutiger-aero .nav-item,
+.frutiger-aero .marketplace-btn,
+.frutiger-aero .game-actions .btn {
+  transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* Apply similar pressed/focus styles to generic .btn and settings button */
+.frutiger-aero .btn:active,
+.frutiger-aero .btn:focus-visible,
+.frutiger-aero .settings-btn:active,
+.frutiger-aero .settings-btn:focus-visible {
+  background: linear-gradient(180deg, rgba(138,237,255,0.95), rgba(0,60,255,0.92));
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
+  outline: none;
+}
+
+  /* Flex gap fallback: use margins instead */
+  .frutiger-aero .social-bar { display: block; text-align: center; }
+  .frutiger-aero .social-item { display: inline-block; margin: 0 5px; }
+  .frutiger-aero .social-item .social-label { margin-top: 8px; }
+
+  .frutiger-aero .marketplace-choices { display: block; text-align: center; }
+  .frutiger-aero .marketplace-btn { display: inline-block; margin: 0.625rem; }
+
+  /* Game list: CSS Grid -> flexbox (keeps the same visual layout: thumb left, text right) */
+  .frutiger-aero .game-grid { display: block; }
+  .frutiger-aero .game-card {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  /* Replace clamp()/aspect-ratio sizing with fixed, IE-safe sizing */
+  .frutiger-aero .game-card .game-thumb {
+    width: 80px;
+    height: 80px;
+    margin-right: 0.8rem;
+    flex: 0 0 auto;
+  }
+  .frutiger-aero .game-card .game-info {
+    display: block;
+    flex: 1 1 auto;
+  }
+  .frutiger-aero .game-info > * { margin-bottom: 0.1rem; }
+  .frutiger-aero .game-info > *:last-child { margin-bottom: 0; }
+
+  /* Buttons spacing: gap -> margins */
+  .frutiger-aero .game-actions { display: block; margin-top: 0.25rem; }
+  .frutiger-aero .game-actions .btn { margin-right: 0.5rem; }
+  .frutiger-aero .game-actions .btn:last-child { margin-right: 0; }
+}
+
+/* IE7-specific fallback overrides (activated when `html` has class `ie7`) */
+/* IE7-specific fallback overrides (activated when `html` has class `ie7`) */
+/* Apply broadly for any page that ends up with `html.ie7` so pages that
+   don't include `frutiger-aero` still receive the IE7-safe rules. */
+html.ie7,
+html.ie7.frutiger-aero {
+  background: #031428 !important; /* stable dark background similar to modern gradient */
+}
+
+/* Remove CSS pseudo-element pillarbox bars when IE7 mode is active */
+html.ie7::before,
+html.ie7::after,
+html.ie7.frutiger-aero::before,
+html.ie7.frutiger-aero::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Also hide any DOM-injected pillarbox elements (ie-fixes.js may append these).
+   Inline styles can override rules so use several high-specificity declarations
+   and !important to ensure they are hidden on all pages. */
+html.ie7 .ie-pillarbox,
+html.ie7 #ie-pillarbox-left,
+html.ie7 #ie-pillarbox-right,
+html.ie7 .ie-pillarbox-left,
+html.ie7 .ie-pillarbox-right {
+  display: none !important;
+  width: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Simplify panel backgrounds and sizing for IE7 (apply regardless of frutiger-aero)
+   so the layout is visually consistent across all pages in IE7 mode. */
+html.ie7 main,
+html.ie7 .bg-popover,
+html.ie7 .game-card,
+html.ie7 .settings-panel,
+html.ie7 .site-footer {
+  background-color: #0b1a2a !important;
+  background-image: none !important;
+  border: 1px solid rgba(255,255,255,0.03) !important;
+}
+
+/* Force logo sizing and prevent oversized logos on pages that still show the
+   old large image. Use !important to override inline or other IE-specific rules. */
+html.ie7 .nav-logo { width: 64px !important; height: 64px !important; margin-right: 0.8rem !important; overflow: hidden !important; }
+html.ie7 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; }
+
+/* Center nav and simplify layout for IE7 pages to avoid layout breakage */
+html.ie7 .nav-container { text-align: center !important; padding-left: 0.5rem !important; padding-right: 0.5rem !important; display: block !important; }
+html.ie7 .nav-container .nav-item { display: inline-block !important; float: none !important; margin: 0 0.45rem !important; }
+
+/* Stack main/body for IE7 and set a sane width for the content area */
+html.ie7 body { display: block !important; }
+html.ie7 main { margin: 1rem auto !important; width: 94% !important; max-width: 1000px !important; }
+
+/* Ensure header text is centered in IE7 */
+html.ie7 .site-header, html.ie7 .page-name-container { text-align: center !important; }
+
+/* IE7-specific fixes: keep settings button inline with nav items, and
+  force social icons to layout horizontally and sizes to fit their canvas. */
+html.ie7 .nav-container .nav-logo { display: inline-block !important; vertical-align: middle !important; }
+html.ie7 .nav-container .nav-item { display: inline-block !important; vertical-align: middle !important; }
+html.ie7 .nav-container .settings-btn { display: inline-block !important; vertical-align: middle !important; margin-left: 0.6rem !important; float: none !important; }
+html.ie7 .nav-container .settings-btn img { width: 32px !important; height: 32px !important; display: block !important; }
+
+/* Social bar: ensure horizontal layout and constrain icon images to canvas size */
+html.ie7 .social-bar { display: block !important; text-align: center !important; white-space: nowrap !important; overflow: visible !important; }
+html.ie7 .social-bar .social-item { display: inline-block !important; margin: 0 6px !important; vertical-align: middle !important; }
+html.ie7 .social-bar .social-item .social-link { display: inline-block !important; width: 48px !important; height: 48px !important; border-radius: 10px !important; }
+html.ie7 .social-bar .social-item .social-link img { width: 48px !important; height: 48px !important; max-width: 48px !important; max-height: 48px !important; display: block !important; object-fit: contain !important; }
+html.ie7 .social-bar .social-item .social-label { display: block !important; margin-top: 6px !important; font-size: 0.85rem !important; }
+
+/* ------------------------------------------------------------------
+  IE11 layout approximations
+  These rules try to approximate the look/flow from IE11 so pages
+  rendered in modern browsers with `html.ie11` present (or real IE11)
+  closely match the IE11 layout. Values are conservative and use
+  plain properties (no CSS variables) to be compatible with older
+  engines.
+  ------------------------------------------------------------------ */
+html.ie11 .nav-container { display: flex !important; gap: 1rem !important; align-items: center !important; justify-content: flex-start !important; padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+html.ie11 .nav-container .nav-item { display: inline-block !important; float: none !important; margin: 0 0.45rem !important; }
+html.ie11 .nav-logo { width: 64px !important; height: 64px !important; margin-right: 0.8rem !important; overflow: hidden !important; }
+html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; display: block !important; }
+html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 0.8rem !important; }
+html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
+/* Avoid overly-large canvas stacking issues in forced IE11 layout */
+html.ie11 .ribbons-canvas { z-index: 0 !important; }
+
+/* Ensure pillarbox helper also hides pseudo elements where appropriate */
+html.ie11:before, html.ie11:after, html.ie11::before, html.ie11::after, .no-pillarbox:before, .no-pillarbox:after { display: none !important; }
+
+/* ------------------------------------------------------------------
+   Deeper IE11 fallback rules
+   Simplify decorative effects and force solid backgrounds so pages
+   rendered with `html.ie11` (or `?force_ie11=1`) look closer to a
+   native IE11 rendering/experience.
+   ------------------------------------------------------------------ */
+html.ie11,
+html.ie11 body {
+  background: linear-gradient(180deg, #021826 0%, #012b40 60%) !important;
+  background-attachment: scroll !important;
+  color: #fff !important;
+}
+
+/* hide/disable heavy decorative canvas and filters only when forcing IE11 fallbacks
+  (use `?force_ie11=1`) — real IE11 should still show a reduced-quality canvas. */
+html.force-ie11 .ribbons-canvas { display: none !important; }
+html.force-ie11 .ribbons-canvas, html.force-ie11 .bg-popover, html.force-ie11 .nav-logo img { filter: none !important; -webkit-filter: none !important; backdrop-filter: none !important; }
+
+/* In IE11, use the same translucent panel treatment as the normal theme.
+   This preserves the design language while keeping compatibility tweaks
+   for layout and performance in IE11. */
+html.ie11 main,
+html.ie11 .bg-popover,
+html.ie11 .game-card,
+html.ie11 .settings-panel,
+html.ie11 .site-footer {
+  background: linear-gradient(
+    180deg,
+    rgba(90, 95, 99, 0.55) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(62, 65, 67, 0.45) 100%
+  ) !important;
+  background-blend-mode: overlay !important;
+  padding: 1rem !important;
+  border-radius: 1rem !important;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.31), inset 0px -2px 1px rgba(0,0,0,0.4) !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+
+/* Remove individual inner panels for listings (games, music) in IE11 so
+   the single parent panel contains the list items. This reverts per-card
+   decorations (shadow, sheen, rounded panel) while keeping layout. */
+html.ie11 .game-card,
+html.ie11 .music-card,
+html.ie11 .listing-card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0.5rem 0 !important;
+  margin: 0 0 0.75rem 0 !important;
+}
+/* Ensure card internals remain readable and aligned inside the parent panel */
+html.ie11 .game-card .game-info,
+html.ie11 .music-card .music-info,
+html.ie11 .listing-card .info {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* constrain main width to a simpler fixed size similar to IE11 layouts */
+html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 8px !important; }
+
+/* Nav/logo adjustments to match IE11 sizing/flow */
+html.ie11 .nav-container { display: flex !important; align-items: center !important; justify-content: flex-start !important; }
+html.ie11 .nav-logo { width: 72px !important; height: 72px !important; margin-right: 1rem !important; overflow: visible !important; }
+html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; display: block !important; }
+
+/* Center social tabs in IE11 by fixing the panel width and centering it */
+html.ie11 .social-bar { display: flex !important; justify-content: center !important; align-items: center !important; width: 1000px !important; margin: 0.75rem auto 0 !important; }
+
+/* Ensure header and page title are centered and readable */
+html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
+html.ie11 .page-name { font-size: 1.45rem !important; }
+
+/* Make footer simpler and consistent width */
+html.ie11 .site-footer { width: 1000px !important; max-width: 1000px !important; margin: 1rem auto 2rem auto !important; }
+
+/* Keep the helper pillarbox rule in case some pages still need it */
+.no-pillarbox:before, .no-pillarbox:after { display: none !important; }
+
+/* Accessibility helpers */
+/* Reduce transparency: keep panels readable but respect the selected theme.
+   - In dark theme: use the normal translucent dark panel gradient.
+   - In light theme: use the light solid panel with dark text for contrast.
+*/
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] main,
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .bg-popover,
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .game-card,
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .settings-panel,
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .site-footer {
+  /* Dark-mode reduced-transparency: keep the translucent dark surface but
+     add a subtle accent tint so panels visually relate to the selected
+     theme (uses --ribbons-accent-rgb if available). */
+  /* Use theme accent to tint the dark translucent surface so panels visually
+     relate to the selected theme. We rely on `--ribbons-accent-rgb` and
+     `--ribbons-outline` which are set by `ribbonsSetTheme`. */
+  background-image:
+    linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(0,0,0,0) 60%);
+  background-blend-mode: overlay !important;
+  color: #ffffff !important;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.12), inset 0px -2px 1px rgba(0,0,0,0.38) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
+}
+
+/* Ensure reduce-transparency also applies when IE11 mode is active */
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] main,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .bg-popover,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .game-card,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .settings-panel,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .site-footer {
+  background-image:
+    linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(0,0,0,0) 60%);
+  background-blend-mode: overlay !important;
+  color: #ffffff !important;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.12), inset 0px -2px 1px rgba(0,0,0,0.38) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
+}
+
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] main,
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] .bg-popover,
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] .game-card,
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] .settings-panel,
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] .site-footer {
+  /* Light-mode reduced-transparency: lighter panels with a subtle tint
+     drawn from the theme accent so the surface matches the selected theme. */
+  /* Light panels: mix a near-white surface with a subtle theme-tint so the
+     panel matches the selected accent color. */
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,250,252,0.94) 60%),
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(255,255,255,0) 60%);
+  background-blend-mode: overlay !important;
+  color: #071025 !important;
+  box-shadow: 0 10px 28px rgba(10,12,18,0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
+}
+
+/* Ensure reduce-transparency also applies when IE11 mode is active (light theme) */
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] main,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] .bg-popover,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] .game-card,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] .settings-panel,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] .site-footer {
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,250,252,0.94) 60%),
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(255,255,255,0) 60%);
+  background-blend-mode: overlay !important;
+  color: #071025 !important;
+  box-shadow: 0 10px 28px rgba(10,12,18,0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
+}
+
+/* When reduce-transparency is active, make game-card backgrounds sit inside
+   their decorative outlines so the panel surface doesn't bleed under the
+   outline. This keeps the listing rows visually contained and improves
+   contrast in accessibility modes. */
+html.frutiger-aero.reduce-transparency .game-card {
+  padding: 0.6rem; /* ensure the content is inset from the edges */
+  border-radius: 12px !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+html.frutiger-aero.reduce-transparency .game-card::after {
+  /* inset the outline to sit on the outside edge of the panel surface */
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 0 1px var(--ribbons-outline) !important;
+  z-index: 2 !important;
+}
+
+html.frutiger-aero.reduce-transparency .game-card::before {
+  /* sheen should be clipped inside the panel area */
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  border-radius: 10px !important;
+  opacity: 0.9 !important;
+  z-index: 1 !important;
+}
+
+/* Tint the internal sheen using the theme accent so reduced-transparency
+   panels harmonize with the selected theme. */
+html.frutiger-aero.reduce-transparency .game-card::before {
+  background-image:
+    linear-gradient(to bottom, rgba(255,255,255,0.24), rgba(255,255,255,0.06)),
+    linear-gradient(to bottom, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), rgba(255,255,255,0.00)),
+    linear-gradient(to top, rgba(0,0,0,0.12), rgba(0,0,0,0.02));
+  background-position: top left, top left, bottom left;
+  background-size: 100% 28px, 100% 28px, 100% 7px;
+  background-repeat: no-repeat;
+}
+
+/* Accessibility: force black text when requested */
+/* Apply a strong, global color override so any specific white/blue
+   rules are overridden when the user requests black text. This targets
+   text-containing elements while leaving non-text properties untouched. */
+html.black-text,
+html.black-text * {
+  color: #071025 !important;
+}
+
+/* Provide additional specificity for common structural elements to
+   cover selectors that previously forced different colors with !important. */
+html.black-text h1,
+html.black-text h2,
+html.black-text h3,
+html.black-text p,
+html.black-text li,
+html.black-text a,
+html.black-text .game-title,
+html.black-text .game-desc,
+html.black-text .game-meta,
+html.black-text .settings-panel h2,
+html.black-text .settings-group label,
+html.black-text .social-label,
+html.black-text .page-name,
+html.black-text .site-title,
+html.black-text .nav-item,
+html.black-text .marketplace-btn {
+  color: #071025 !important;
+}
+
+/* Also enforce colors for SVGs, pseudo-elements, and any deeper overrides.
+   Use multiple selector variants to increase specificity against other
+   .frutiger-aero/.solid-panels rules that may also use !important. */
+html.black-text *,
+html.black-text *::before,
+html.black-text *::after,
+html.frutiger-aero.black-text *,
+html.frutiger-aero.black-text *::before,
+html.frutiger-aero.black-text *::after {
+  color: #071025 !important;
+  fill: #071025 !important;
+  stroke: #071025 !important;
+}
+
+html.black-text svg,
+html.black-text svg *,
+html.frutiger-aero.black-text svg,
+html.frutiger-aero.black-text svg * {
+  fill: #071025 !important;
+  stroke: #071025 !important;
+}
+
+/* Highest-specificity overrides to beat existing !important color rules
+   used elsewhere (like `.frutiger-aero main h1 { color: #fff !important; }`).
+   Target combinations where `html` has both the theme and black-text. */
+html.frutiger-aero.black-text,
+html.frutiger-aero.black-text *,
+html.ie11.frutiger-aero.black-text,
+html.ie11.frutiger-aero.black-text *,
+html.black-text.frutiger-aero,
+html.black-text.frutiger-aero * {
+  color: #071025 !important;
+  fill: #071025 !important;
+  stroke: #071025 !important;
+}
+
+/* Reduce animations: remove transitions and animations site-wide when requested */
+html.reduce-animation *,
+html.reduce-animation *::before,
+html.reduce-animation *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Disable ribbons: hide the canvas when user disables decorative ribbons/sparkles */
+html.no-ribbons .ribbons-canvas { display: none !important; }
+
+/* When ribbons are disabled, make the background static (no parallax/fixed)
+   for IE modes and modern browsers when requested, while preserving the
+   decorative gradients and tinting them with the selected theme accent so
+   the static background still matches the chosen theme. */
+html.frutiger-aero.no-ribbons,
+html.ie11.frutiger-aero.no-ribbons,
+html.ie7.frutiger-aero.no-ribbons,
+html.no-ribbons.frutiger-aero {
+  /* Keep the background fixed so content scrolls independently. Use
+     theme variables so the static background matches the selected theme. */
+  background-attachment: fixed !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,87,188,255),0.12), transparent 32%),
+    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), transparent 32%),
+    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,87,188,255),0.06), transparent 30%),
+    linear-gradient(180deg, var(--gradient-from, rgba(4,24,46,0.98)), var(--gradient-to, rgba(3,16,36,0.98))) !important;
+  background-blend-mode: overlay !important;
+}
+
+/* Light-mode variant: use a light base but keep theme accent overlay */
+html.frutiger-aero.no-ribbons[data-theme-mode="light"],
+html.no-ribbons.frutiger-aero[data-theme-mode="light"] {
+  background-attachment: fixed !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,87,188,255),0.06), transparent 28%),
+    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,87,188,255),0.05), transparent 26%),
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,246,248,0.94)) !important;
+  background-blend-mode: overlay !important;
+}
+
+/* Hide pillarbox bars when IE7 compatibility mode or the helper class is present.
+   Include single-colon and double-colon variants to ensure older browsers
+   (which may only understand `:before/:after`) are covered. */
+html.ie7:before,
+html.ie7:after,
+html.frutiger-aero:before,
+html.frutiger-aero:after,
+html.ie7.frutiger-aero:before,
+html.ie7.frutiger-aero:after,
+.no-pillarbox:before,
+.no-pillarbox:after {
+  display: none !important;
+}
+
+/* Restore pillarbox bars by default (unless `.no-pillarbox` is present).
+   This rule appears last to override earlier `display:none !important`
+   declarations so modern mode and IE11 mode show the black side bars.
+   Use :not(.no-pillarbox) so the helper class can still hide them when
+   explicitly requested. */
+html.frutiger-aero:not(.no-pillarbox)::before,
+html.frutiger-aero:not(.no-pillarbox)::after,
+html.ie11.frutiger-aero:not(.no-pillarbox)::before,
+html.ie11.frutiger-aero:not(.no-pillarbox)::after,
+html:not(.no-pillarbox).frutiger-aero::before,
+html:not(.no-pillarbox).frutiger-aero::after {
+  content: "" !important;
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: var(--side-bar-width) !important;
+  background: #000 !important;
+  z-index: 9000 !important;
+  pointer-events: none !important;
+  display: block !important;
+}

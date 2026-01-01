@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" class="site-theme frutiger-aero">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Piyoverse — Marketplace</title>
+    <link rel="stylesheet" href="/Frutiger Aero.css">
+    <link rel="canonical" href="/marketplace/" />
+    <script src="/ie-compat.js"></script>
+</head>
+<body>
+    <canvas id="ribbons-of-life" class="ribbons-canvas" aria-hidden="true"></canvas>
+    <nav class="nav-container">
+        <a class="nav-logo" href="/" aria-label="Home">
+            <img src="/Images/piyoverse.png" alt="Piyoverse">
+        </a>
+        <a class="nav-item" href="/" data-i18n="nav-home">Home</a>
+        <a class="nav-item" href="/marketplace/" data-i18n="nav-marketplace">Marketplace</a>
+        <a class="nav-item" href="/about/" data-i18n="nav-about">About</a>
+        <a class="settings-btn" href="/settings/" aria-label="Settings">
+            <img src="/Images/Settings.png" alt="Settings" />
+        </a>
+    </nav>
+
+    <div class="page-name-container">
+        <div class="page-name" data-i18n="marketplace-page-name">Marketplace</div>
+    </div>
+
+    <main>
+        <section>
+            <div class="marketplace-choices">
+                <a class="btn marketplace-btn" href="/marketplace-games/">Games</a>
+                <a class="btn marketplace-btn" href="/marketplace-music/">Music</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="social-bar" role="navigation" aria-label="Social links">
+            <div class="social-item"><a class="social-link social-youtube" href="#" aria-label="YouTube"></a><div class="social-label" data-i18n="social-youtube">YouTube</div></div>
+            <div class="social-item"><a class="social-link social-discord" href="#" aria-label="Discord"></a><div class="social-label" data-i18n="social-discord">Discord</div></div>
+            <div class="social-item"><a class="social-link social-bsky" href="#" aria-label="Bluesky"></a><div class="social-label" data-i18n="social-bsky">Bluesky</div></div>
+            <div class="social-item"><a class="social-link social-twt" href="#" aria-label="Twitter"></a><div class="social-label" data-i18n="social-twt">Twitter</div></div>
+        </div>
+        <hr class="footer-divider" />
+        <p data-i18n="footer-copy">&copy; 2025 Piyoverse Entertainment. All rights reserved.</p>
+        <p class="legal-note" data-i18n="legal-note">STARCREST, STARCREST ADVENTURE, ALIA, the PVE logo, the STARCREST logo, and all affiliated logos, characters, and distinctive marks are trademarks and/or registered trademarks of Piyoverse Entertainment. All rights are reserved.</p>
+    </footer>
+
+    <script src="/ie-fixes.js" defer></script>
+    <script src="/ribbons-of-life.js" defer></script>
+    <script src="/market-audio.js" defer></script>
+    <script src="/settings.js"></script>
+    <script src="/anti-inspect.js"></script>
+</body>
+</html>
