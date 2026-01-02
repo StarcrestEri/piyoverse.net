@@ -1036,8 +1036,6 @@ html.frutiger-aero.solid-panels .muted {
   box-shadow: 0 0 0 1px var(--ribbons-outline);
   background-repeat: no-repeat;
   background-image: none;
-  background-size: 720px 6px, 6px 720px, 720px 6px, 6px 720px;
-  background-position: 0px 0px, 100% 0px, 0px 100%, 0px 0px;
   opacity: 1;
   pointer-events: none;
   transition: box-shadow 180ms ease, opacity 180ms ease;
@@ -1046,40 +1044,24 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .game-card:hover::after {
   /* On hover, keep this as glow-only so it doesn't read as a second outer border. */
   box-shadow: 0 0 18px rgba(var(--ribbons-accent-rgb, 87,188,255),0.45);
+  /* Gradient border that actually follows border-radius (works in IE11 too). */
+  border: 6px solid transparent;
+  box-sizing: border-box;
   background-image:
-    repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-    repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-    repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-    repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
-  background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
+    linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
+    repeating-linear-gradient(135deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-repeat: no-repeat, repeat;
+  background-size: auto, 720px 720px;
+  background-position: 0 0, 0 0;
   animation: game-outline-sweep 1.6s linear infinite;
   z-index: 3;
 }
 
 @keyframes game-outline-sweep {
-  0% { background-position: 0px 0px, 100% 0px, 0px 100%, 0px 0px; }
-  100% { background-position: 720px 0px, 100% 720px, -720px 100%, 0px -720px; }
-}
-
-/* Modern browsers: use a conic-gradient border that actually follows the rounded corners.
-   IE11 will ignore this entire block and continue using the fallback sweep. */
-@supports (background: conic-gradient(from 0deg, #000, #fff)) {
-  .frutiger-aero .game-card:hover::after {
-    padding: 6px;
-    box-sizing: border-box;
-    background-image:
-      conic-gradient(from 0deg, rgb(42,122,214) 0deg, rgb(182,220,255) 180deg, rgb(42,122,214) 360deg),
-      linear-gradient(transparent, transparent);
-    background-origin: border-box, padding-box;
-    background-clip: border-box, padding-box;
-    background-repeat: no-repeat;
-    background-size: auto, auto;
-    animation: game-outline-rotate 1.6s linear infinite;
-  }
-}
-
-@keyframes game-outline-rotate {
-  to { transform: rotate(360deg); }
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 0 0, 720px 720px; }
 }
 
 /* Translucent curved sheen at the top inside the outline */
@@ -1232,14 +1214,17 @@ html.frutiger-aero.solid-panels .muted {
 
   /* Animated hover outline for game listings (IE11-safe, no CSS variables) */
   .frutiger-aero .game-card:hover::after {
-    box-shadow:
-      0 0 18px rgba(182,220,255,0.95);
+    box-shadow: 0 0 18px rgba(182,220,255,0.95);
+    border: 6px solid transparent;
+    box-sizing: border-box;
     background-image:
-      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-      repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-      repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
-    background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
+      linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
+      repeating-linear-gradient(135deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-repeat: no-repeat, repeat;
+    background-size: auto, 720px 720px;
+    background-position: 0 0, 0 0;
     animation: game-outline-sweep 1.6s linear infinite;
   }
   .frutiger-aero .nav-item:hover,
