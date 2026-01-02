@@ -417,7 +417,7 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .upcoming-release .starcrest-teaser {
   display: block;
   width: 100%;
-  max-width: 240px;
+  max-width: 480px;
   height: auto;
   object-fit: contain;
   border-radius: 16px;
