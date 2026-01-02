@@ -8,6 +8,11 @@ html.legacy-lowend body {
   color: #ffffff;
 }
 
+html.legacy-lowend body {
+  /* Keep content off the very edges on tiny screens (DSi). */
+  padding: 6px;
+}
+
 html.legacy-lowend::before,
 html.legacy-lowend::after,
 html.legacy-lowend body::before,
@@ -76,6 +81,17 @@ html.legacy-lowend footer {
   width: auto !important;
   max-width: none !important;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 360px) {
+  html.legacy-lowend .nav-container,
+  html.legacy-lowend .page-name-container,
+  html.legacy-lowend main,
+  html.legacy-lowend .social-bar,
+  html.legacy-lowend .site-footer,
+  html.legacy-lowend footer {
+    max-width: 240px !important;
+  }
 }
 
 html.legacy-lowend main {

@@ -189,6 +189,9 @@ html.frutiger-aero::after {
   position: fixed;
   top: 0;
   bottom: 0;
+  /* Default to no bars for engines that don't support CSS variables.
+     Prevents full-screen black overlays on browsers that treat var() as invalid. */
+  width: 0;
   width: var(--side-bar-width);
   background: #000;
   z-index: 9000;
