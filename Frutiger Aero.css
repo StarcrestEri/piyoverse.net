@@ -1402,6 +1402,23 @@ html.ie11 body {
   color: #fff !important;
 }
 
+/* Nintendo/NetFront/Opera handheld layout: keep listing cards in the IE11 style
+   (small fixed thumbnails on the left) instead of the mobile full-width thumbs. */
+html.ie11-cards .game-grid { display: block !important; }
+html.ie11-cards .game-card { display: block !important; overflow: hidden !important; }
+html.ie11-cards .game-card .game-thumb {
+  float: left !important;
+  width: 85px !important;
+  height: 85px !important;
+  margin: 0 0.8rem 0 0 !important;
+}
+html.ie11-cards .game-card .game-thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+html.ie11-cards .game-card .game-info { overflow: hidden !important; }
+
 /* hide/disable heavy decorative canvas and filters only when forcing IE11 fallbacks
   (use `?force_ie11=1`) — real IE11 should still show a reduced-quality canvas. */
 html.force-ie11 .ribbons-canvas { display: none !important; }

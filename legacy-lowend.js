@@ -6,6 +6,9 @@
     var isNintendo = false;
     try{ isNintendo = (/Nintendo\s+(3DS|DSi)/i.test(ua) || /Nitro/i.test(ua)); }catch(e){ isNintendo = false; }
 
+    var isNintendoBrowser = false;
+    try{ isNintendoBrowser = (/NintendoBrowser/i.test(ua) || /WiiU/i.test(ua)); }catch(e){ isNintendoBrowser = false; }
+
     var isNetFront = false;
     try{ isNetFront = (/NetFront/i.test(ua) || /NX\b/i.test(ua)); }catch(e){ isNetFront = false; }
 
@@ -25,14 +28,27 @@
     // Wii U / NintendoBrowser engines can mis-render the CSS pillarbox bars.
     // Disable pillarbox for them even if they don't need full low-end mode.
     try{
-      var isNintendoBrowser = false;
-      try{ isNintendoBrowser = (/NintendoBrowser/i.test(ua) || /WiiU/i.test(ua)); }catch(e){ isNintendoBrowser = false; }
       if(isNintendoBrowser){
         var deNB = document.documentElement;
         if(deNB){
           var cnNB = deNB.className || '';
           if(cnNB.indexOf('no-pillarbox') === -1){
             deNB.className = cnNB ? (cnNB + ' no-pillarbox') : 'no-pillarbox';
+          }
+        }
+      }
+    }catch(e){}
+
+    // Make small-screen Nintendo/NetFront layouts match the IE11-style listing layout
+    // (prevents full-width thumbnails that take over the screen).
+    try{
+      var needsIe11ListingLayout = !!(isNintendo || isNetFront || isOpera95 || isNintendoBrowser);
+      if(needsIe11ListingLayout){
+        var deL = document.documentElement;
+        if(deL){
+          var cnL = deL.className || '';
+          if(cnL.indexOf('ie11-cards') === -1){
+            deL.className = cnL ? (cnL + ' ie11-cards') : 'ie11-cards';
           }
         }
       }

@@ -114,7 +114,7 @@ html.legacy-lowend .site-footer {
   box-shadow: none !important;
 }
 
-/* Games listings: vertical stack */
+/* Games/music listings: IE11-style layout (small thumb at left) */
 html.legacy-lowend .game-grid {
   display: block;
 }
@@ -123,6 +123,7 @@ html.legacy-lowend .game-card {
   display: block;
   margin: 10px 0;
   padding: 6px;
+  overflow: hidden;
 }
 
 html.legacy-lowend .game-card::before,
@@ -132,8 +133,20 @@ html.legacy-lowend .game-card::after {
 }
 
 html.legacy-lowend .game-thumb {
+  float: left;
+  width: 85px;
+  height: 85px;
+  margin: 0 8px 0 0;
+}
+
+html.legacy-lowend .game-thumb img {
+  width: 85px !important;
+  height: 85px !important;
   display: block;
-  margin: 0 0 8px;
+}
+
+html.legacy-lowend .game-info {
+  overflow: hidden;
 }
 
 html.legacy-lowend img {
