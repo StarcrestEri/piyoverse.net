@@ -2,6 +2,17 @@
 (function(){
   if(window.__spa_installed) return; window.__spa_installed = true;
 
+  // Force the site onto Opal + Light (no settings page / no dark mode).
+  function enforceTheme(){
+    try{
+      var de = document.documentElement;
+      if(!de) return;
+      try{ de.setAttribute('data-theme-mode','light'); }catch(e){}
+      try{ de.setAttribute('data-theme','opal'); }catch(e){}
+    }catch(e){}
+  }
+  try{ enforceTheme(); }catch(e){}
+
   // Ensure hover/outlines for game cards remain present after SPA swaps.
     try{
       var _s = document.createElement('style');
@@ -111,7 +122,7 @@
               var src = s.getAttribute('src');
               if(src){
                 // avoid reloading global site scripts
-                var skipList = ['market-audio.js','ribbons-of-life.js','ie-fixes.js','settings.js','anti-inspect.js','spa.js'];
+                var skipList = ['market-audio.js','ribbons-of-life.js','ie-fixes.js','anti-inspect.js','spa.js'];
                 var skip = false;
                 for(var si=0; si<skipList.length; si++){ if(src.indexOf(skipList[si]) !== -1) { skip = true; break; } }
                 if(skip) continue;
@@ -127,10 +138,10 @@
 
           // call reinit hook to reattach behaviors
           try{ if(window.siteReinit) window.siteReinit(); }catch(e){}
-          // apply saved settings after SPA swaps (language/theme/audio)
-          try{ if(window.siteApplySettings) window.siteApplySettings({ source: 'spa' }); }catch(e){}
+          // Re-apply enforced theme after SPA swaps
+          try{ enforceTheme(); }catch(e){}
           // reapply ribbons/theme hooks if available (keeps outlines and accents correct)
-          try{ if(window.ribbonsSetTheme) { try{ var m = (document.documentElement.getAttribute('data-theme-mode')||'dark'); var t = (document.documentElement.getAttribute('data-theme')||'opal'); window.ribbonsSetTheme(m,t); }catch(e){} } }catch(e){}
+          try{ if(window.ribbonsSetTheme) { try{ var m = (document.documentElement.getAttribute('data-theme-mode')||'light'); var t = (document.documentElement.getAttribute('data-theme')||'opal'); window.ribbonsSetTheme(m,t); }catch(e){} } }catch(e){}
           // restore audio state if we captured it and audio element still exists
           try{
             if(preAudio){

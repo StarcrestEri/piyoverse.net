@@ -169,269 +169,19 @@
 
 
         // ---- Theme palettes ----
+        // Settings/themes have been removed; the site is forced to Opal (light).
         var THEME_PALETTES = {
-            // Dark Mode
-            'obsidian':    {TOP:[10,10,18], MID:[30,40,60], BOT:[30,30,40]},
-            'blood-maroon':{TOP:[40,0,0], MID:[120,10,30], BOT:[80,0,20]},
-            'brown-smog':  {TOP:[30,20,10], MID:[90,70,40], BOT:[60,40,20]},
-            'ocean-abyss': {TOP:[0,10,30], MID:[10,60,120], BOT:[0,30,80]},
-            'forest-green':{TOP:[0,20,10], MID:[20,80,40], BOT:[0,40,20]},
-            'mystic-teal': {TOP:[0,30,30], MID:[40,120,120], BOT:[20,80,80]},
-            'lime-lemon':  {TOP:[30,30,0], MID:[120,120,40], BOT:[80,80,0]},
-            'trans-pride': {
-                STOPS: [
-                    [91, 206, 250],
-                    [245, 169, 184],
-                    [255, 255, 255],
-                    [245, 169, 184],
-                    [91, 206, 250]
-                ]
-            },
-            // Mode-specific variants for better light/dark handling
-            'trans-pride-dark': {
-                STOPS: [
-                    [45, 103, 125],
-                    [122, 84, 92],
-                    [64, 64, 64],
-                    [122, 84, 92],
-                    [45, 103, 125]
-                ]
-            },
-            'trans-pride-light': {
-                STOPS: [
-                    [173, 226, 246],
-                    [255, 205, 215],
-                    [255, 255, 255],
-                    [255, 205, 215],
-                    [173, 226, 246]
-                ]
-            },
-            // Pride Rainbow theme (dark and light/pastel variants)
-            'pride-rainbow': {
-                STOPS: [
-                    [255,   0,   0], // red
-                    [255, 127,   0], // orange
-                    [255, 255,   0], // yellow
-                    [0,   200,   0], // green
-                    [0,    80, 255], // blue
-                    [128,   0, 128]  // purple
-                ]
-            },
-            'pride-rainbow-dark': {
-                STOPS: [
-                    [220,   0,   0],
-                    [220, 110,   0],
-                    [220, 220,   0],
-                    [0,   160,   0],
-                    [0,    60, 200],
-                    [110,   0, 110]
-                ]
-            },
-            'pride-rainbow-light': {
-                STOPS: [
-                    [255, 180, 180], // pastel red
-                    [255, 205, 160], // pastel orange
-                    [255, 255, 200], // pastel yellow
-                    [200, 255, 200], // pastel green
-                    [200, 220, 255], // pastel blue
-                    [230, 200, 255]  // pastel purple
-                ]
-            },
-            /* Lesbian Pride theme: 7-stop palette (top -> bottom). */
-            'lesbian-pride': {
-                STOPS: [
-                    [213, 45, 0],
-                    [239,118,39],
-                    [255,154,86],
-                    [255,255,255],
-                    [209,98,164],
-                    [181,86,144],
-                    [163,2,98]
-                ]
-            },
-            'lesbian-pride-dark': {
-                STOPS: [
-                    [120,25,0],
-                    [160,80,30],
-                    [160,95,50],
-                    [64,64,64],
-                    [110,48,82],
-                    [90,40,72],
-                    [95,0,50]
-                ]
-            },
-            'lesbian-pride-light': {
-                STOPS: [
-                    [213, 45, 0],
-                    [239,118,39],
-                    [255,154,86],
-                    [255,255,255],
-                    [209,98,164],
-                    [181,86,144],
-                    [163,2,98]
-                ]
-            },
-            /* Pansexual Pride / Joy */
-            'pansexual-pride': {
-                STOPS: [
-                    [255,33,140],
-                    [255,216,0],
-                    [33,177,255]
-                ]
-            },
-            'pansexual-pride-dark': {
-                STOPS: [
-                    [120,12,70],
-                    [140,110,10],
-                    [10,70,140]
-                ]
-            },
-            'pansexual-joy': {
-                STOPS: [
-                    [255,170,210],
-                    [255,240,160],
-                    [170,210,255]
-                ]
-            },
-            /* Aromantic Pride / Joy */
-            'aromantic-pride': {
-                STOPS: [
-                    [61,165,66],
-                    [167,211,121],
-                    [255,255,255],
-                    [169,169,169],
-                    [0,0,0]
-                ]
-            },
-            'aromantic-joy': {
-                STOPS: [
-                    [140,210,150],
-                    [210,240,190],
-                    [255,255,255],
-                    [200,200,200],
-                    [40,40,40]
-                ]
-            },
-            /* Genderfluid Pride / Joy */
-            'genderfluid-pride': {
-                STOPS: [
-                    [255,118,164],
-                    [255,255,255],
-                    [192,17,215],
-                    [0,0,0],
-                    [47,60,190]
-                ]
-            },
-            'genderfluid-joy': {
-                STOPS: [
-                    [255,180,210],
-                    [255,255,255],
-                    [210,140,230],
-                    [30,30,30],
-                    [160,180,255]
-                ]
-            },
-            /* Pomosexual Pride / Joy */
-            'pomosexual-pride': {
-                STOPS: [
-                    [200,120,160],
-                    [220,160,190],
-                    [200,200,220],
-                    [180,150,220],
-                    [200,200,220],
-                    [220,160,190],
-                    [200,120,160]
-                ]
-            },
-            'pomosexual-pride-dark': {
-                STOPS: [
-                    [120,80,100],
-                    [140,110,130],
-                    [130,130,150],
-                    [100,80,150],
-                    [130,130,150],
-                    [140,110,130],
-                    [120,80,100]
-                ]
-            },
-            'pomosexual-joy': {
-                STOPS: [
-                    [255,174,201],
-                    [255,198,222],
-                    [255,255,255],
-                    [232,205,255],
-                    [255,255,255],
-                    [255,198,222],
-                    [255,174,201]
-                ]
-            },
-            /* Asexual Pride: 4-stop palette (top -> bottom). */
-            'asexual-pride': {
-                STOPS: [
-                    [0, 0, 0],
-                    [163, 163, 163],
-                    [255, 255, 255],
-                    [128, 0, 128]
-                ]
-            },
-            'asexual-pride-dark': {
-                STOPS: [
-                    [0,0,0],
-                    [110,110,110],
-                    [60,60,60],
-                    [90,0,90]
-                ]
-            },
-            'asexual-pride-light': {
-                STOPS: [
-                    [20,20,20],
-                    [190,190,190],
-                    [255,255,255],
-                    [200,120,220]
-                ]
-            },
-            /* Bisexual Pride theme: 3-stop palette (top -> bottom). */
-            'bisexual-pride': {
-                STOPS: [
-                    [214, 2, 112],
-                    [155, 79, 150],
-                    [0, 56, 168]
-                ]
-            },
-            'bisexual-pride-dark': {
-                STOPS: [
-                    [120, 1, 60],
-                    [90, 45, 90],
-                    [0, 30, 100]
-                ]
-            },
-            'bisexual-pride-light': {
-                STOPS: [
-                    [255, 140, 200], /* pastel pink */
-                    [210, 150, 230], /* pastel purple */
-                    [180, 200, 255]  /* pastel blue */
-                ]
-            },
-            'radiant-amethyst':{TOP:[40,0,40], MID:[120,40,120], BOT:[80,0,80]},
-            // Light Mode
-            'opal':        {TOP:[220,240,255], MID:[180,210,230], BOT:[140,180,210]},
-            'fire-red':    {TOP:[255,220,220], MID:[255,80,80], BOT:[180,30,30]},
-            'orange-citrus':{TOP:[255,240,220], MID:[255,180,80], BOT:[255,120,0]},
-            'baby-blue':   {TOP:[220,240,255], MID:[120,180,255], BOT:[80,120,255]},
-            'passive-pink':{TOP:[255,220,240], MID:[255,120,200], BOT:[255,80,160]},
-            'cyan-bliss':  {TOP:[220,255,255], MID:[80,255,255], BOT:[0,180,180]},
-            'lemon-lime':  {TOP:[255,255,220], MID:[255,255,80], BOT:[180,180,0]},
-            'sparkling-amethyst':{TOP:[240,220,255], MID:[180,80,255], BOT:[120,0,180]},
+            'opal': {TOP:[220,240,255], MID:[180,210,230], BOT:[140,180,210]}
         };
         // Default theme
-        var _themeId = 'obsidian';
-        var _theme = THEME_PALETTES[_themeId] || {TOP:[0,0,0], MID:[5,20,60], BOT:[10,60,140]};
+        var _themeId = 'opal';
+        var _theme = THEME_PALETTES[_themeId] || {TOP:[220,240,255], MID:[180,210,230], BOT:[140,180,210]};
         var TOP = (_theme.TOP && _theme.TOP.slice) ? _theme.TOP.slice() : (_theme.STOPS && _theme.STOPS[0] ? _theme.STOPS[0].slice() : [0,0,0]);
         var MID = (_theme.MID && _theme.MID.slice) ? _theme.MID.slice() : (_theme.STOPS && _theme.STOPS[Math.floor((_theme.STOPS.length-1)/2)] ? _theme.STOPS[Math.floor((_theme.STOPS.length-1)/2)].slice() : [5,20,60]);
         var BOT = (_theme.BOT && _theme.BOT.slice) ? _theme.BOT.slice() : (_theme.STOPS && _theme.STOPS[_theme.STOPS.length-1] ? _theme.STOPS[_theme.STOPS.length-1].slice() : [10,60,140]);
         var THEME_STOPS = (_theme.STOPS && _theme.STOPS.slice) ? _theme.STOPS.slice() : null;
 
-        // Theme setter for settings.js
+        // Theme setter for site scripts
         window.ribbonsSetTheme = function(mode, themeId) {
             // Resolve palette keys with flexible fallbacks:
             // Try: themeId-mode, themeId, base-mode, base, alt '-joy' variants, then fallback.
@@ -458,10 +208,11 @@
                     var k = candidates[i];
                     if (k && THEME_PALETTES.hasOwnProperty(k)) return THEME_PALETTES[k];
                 }
-                return THEME_PALETTES['obsidian'];
+                return THEME_PALETTES['opal'];
             }
 
-            var t = resolvePalette(themeId, mode || 'dark');
+            // Dark mode removed; always resolve as light.
+            var t = resolvePalette(themeId, 'light');
             // Support multi-stop palettes (STOPS) for complex gradients like rainbow
             if (t.STOPS && t.STOPS.slice) {
                 THEME_STOPS = t.STOPS.slice();
