@@ -1494,9 +1494,26 @@ html.ie11 .game-card .game-actions { position: absolute !important; top: 50% !im
 html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 34px !important; }
 
 /* Nav/logo adjustments to match IE11 sizing/flow */
-html.ie11 .nav-container { display: flex !important; align-items: center !important; justify-content: flex-start !important; }
-html.ie11 .nav-logo { width: 72px !important; height: 72px !important; margin-right: 1rem !important; overflow: visible !important; }
+html.ie11 .nav-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  /* In IE mode, CSS variables can fail; keep nav constrained so the logo
+     and buttons remain inside the pillarbox safe area. */
+  width: 94%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+html.ie11 .nav-logo { width: 72px !important; height: 72px !important; margin-right: 1rem !important; overflow: hidden !important; }
 html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; display: block !important; }
+
+/* IE11 border fallback: modern outlines use CSS variables (unsupported in real IE11).
+   Provide a fixed-color outline so listings match modern mode more closely. */
+html.ie11 .ice-cream .game-card::after {
+  box-shadow: 0 0 0 1px #2b6fa0;
+  box-shadow: 0 0 0 1px var(--ribbons-outline);
+}
 
 /* Center social tabs in IE11 by fixing the panel width and centering it */
 html.ie11 .social-bar { display: flex !important; justify-content: center !important; align-items: center !important; width: 1000px !important; margin: 0.75rem auto 0 !important; }
