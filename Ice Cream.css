@@ -129,6 +129,9 @@ html.ie7 .section-separator {
   --highlight: #fff2b0;
   --ribbons-accent: #fff2b0; /* updated dynamically by ribbons-of-life.js */
   --ribbons-outline: #c4a768; /* warm outline; updated dynamically by ribbons-of-life.js */
+  /* Ribbon color is separate from the background tint. */
+  --ribbons-ribbon: #ffffff;
+  --ribbons-ribbon-rgb: 255,255,255;
 
   /* Fallbacks for engines that don't support OKLCH syntax */
   --foreground: #ffffff;
@@ -1454,14 +1457,16 @@ html.ie11 .bg-popover,
 html.ie11 .game-card,
 html.ie11 .settings-panel,
 html.ie11 .site-footer {
-  /* IE11 mode: white panels (no blue tint) */
-  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(245,230,175,0.92) 100%) !important;
-  background-blend-mode: normal !important;
+  /* IE11 mode: semi-dark translucent panels with white text */
+  background-image:
+    linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
+    linear-gradient(180deg, rgba(255,242,176,0.06) 0%, rgba(0,0,0,0) 60%) !important;
+  background-blend-mode: overlay !important;
   padding: 1rem !important;
   border-radius: 34px !important;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.31), inset 0px -2px 1px rgba(0,0,0,0.4) !important;
   border: none !important;
-  color: #2a210c !important;
+  color: #ffffff !important;
 }
 
 /* Forced IE11 mode (html.ie11) in modern browsers: match desired hover styling */
