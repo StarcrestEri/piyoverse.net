@@ -293,7 +293,7 @@
 		var center = 0.52 * h;
 		drawOne(center, thickBase);
 
-		var sideThickness = 0.62 * thickBase;
+		var sideThickness = 0.38 * thickBase;
 		var offset = Math.min(0.22 * h, Math.max(20, 0.72 * thickBase));
 		drawOne(center - offset, sideThickness);
 		drawOne(center + offset, sideThickness);
