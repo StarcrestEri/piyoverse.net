@@ -1385,6 +1385,12 @@ html.ie7 .social-bar .social-item .social-link { display: inline-block !importan
 html.ie7 .social-bar .social-item .social-link img { width: 48px !important; height: 48px !important; max-width: 48px !important; max-height: 48px !important; display: block !important; object-fit: contain !important; }
 html.ie7 .social-bar .social-item .social-label { display: block !important; margin-top: 6px !important; font-size: 0.85rem !important; }
 
+/* IE7: background-size isn't supported; use small 48x48 icon assets to avoid cropping */
+html.ie7 .ice-cream .social-youtube { background-image: url('Images/youtubeicon-48.png') !important; }
+html.ie7 .ice-cream .social-discord { background-image: url('Images/discordicon-48.png') !important; }
+html.ie7 .ice-cream .social-bsky { background-image: url('Images/bskyicon-48.png') !important; }
+html.ie7 .ice-cream .social-twt { background-image: url('Images/twticon-48.png') !important; }
+
 /* ------------------------------------------------------------------
   IE11 layout approximations
   These rules try to approximate the look/flow from IE11 so pages
@@ -1511,8 +1517,17 @@ html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-w
 /* IE11 border fallback: modern outlines use CSS variables (unsupported in real IE11).
    Provide a fixed-color outline so listings match modern mode more closely. */
 html.ie11 .ice-cream .game-card::after {
-  box-shadow: 0 0 0 1px #2b6fa0;
-  box-shadow: 0 0 0 1px var(--ribbons-outline);
+  /* Use border (not box-shadow) so the outline reliably renders in IE11. */
+  box-shadow: none;
+  border: 1px solid #2b6fa0;
+  border: 1px solid var(--ribbons-outline);
+}
+
+html.ie11 .ice-cream .game-card:hover::after {
+  /* Slightly thinner than modern (4px instead of 5px) */
+  border: 4px solid #b6dcff;
+  border: 4px solid var(--ribbons-accent);
+  box-shadow: 0 0 10px rgba(182,220,255,0.75);
 }
 
 /* Center social tabs in IE11 by fixing the panel width and centering it */
