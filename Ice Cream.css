@@ -240,9 +240,9 @@ html.ice-cream::after {
   /* slightly more translucent glass-like popover */
   background: linear-gradient(
     165deg,
-    rgba(0, 140, 255, 0.46) 0%,
-    rgba(69, 160, 152, 0.28) 50%,
-    rgba(0, 255, 42, 0.24) 100%
+    rgba(var(--ribbons-accent-rgb,255,242,176), 0.46) 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(var(--ribbons-outline-rgb,196,167,104), 0.18) 100%
   );
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.6),
               inset 0px 2px 1px rgba(255, 255, 255, 0.2),
@@ -727,7 +727,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .nav-item:hover {
   background: var(--ribbons-accent) !important;
   color: var(--accent-foreground) !important;
-  box-shadow: 0 6px 22px rgba(var(--ribbons-accent-rgb, 87,188,255),0.22);
+  box-shadow: 0 6px 22px rgba(var(--ribbons-accent-rgb, 255,242,176),0.22);
 }
 
 /* Marketplace-style hover for buttons: grey gradient + sheen + stronger shading
@@ -1072,7 +1072,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .game-card:hover::after {
   box-shadow:
     0 0 0 5px var(--ribbons-accent),
-    0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18);
+    0 0 14px rgba(var(--ribbons-accent-rgb, 255,242,176),0.18);
   background-image: none;
 }
 
@@ -1511,7 +1511,7 @@ html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-w
 html.ie11 .ice-cream .game-card::after {
   /* Use border (not box-shadow) so the outline reliably renders in IE11. */
   box-shadow: none;
-  border: 1px solid #2b6fa0;
+  border: 1px solid #c4a768;
   border: 1px solid var(--ribbons-outline);
 }
 
@@ -1561,11 +1561,11 @@ html.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
      `--ribbons-outline` which are set by `ribbonsSetTheme`. */
   background-image:
     linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
-    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(0,0,0,0) 60%);
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,255,242,176),0.06) 0%, rgba(0,0,0,0) 60%);
   background-blend-mode: overlay !important;
   color: #ffffff !important;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.12), inset 0px -2px 1px rgba(0,0,0,0.38) !important;
-  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,196,167,104),0.06) !important;
 }
 
 /* Ensure reduce-transparency also applies when IE11 mode is active */
@@ -1576,11 +1576,11 @@ html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .settings-panel,
 html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
   background-image:
     linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
-    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(0,0,0,0) 60%);
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,255,242,176),0.06) 0%, rgba(0,0,0,0) 60%);
   background-blend-mode: overlay !important;
   color: #ffffff !important;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.12), inset 0px -2px 1px rgba(0,0,0,0.38) !important;
-  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,196,167,104),0.06) !important;
 }
 
 html.ice-cream.reduce-transparency[data-theme-mode="light"] main,
@@ -1594,11 +1594,11 @@ html.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
      panel matches the selected accent color. */
   background-image:
     linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,250,252,0.94) 60%),
-    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(255,255,255,0) 60%);
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,255,242,176),0.06) 0%, rgba(255,255,255,0) 60%);
   background-blend-mode: overlay !important;
   color: #071025 !important;
   box-shadow: 0 10px 28px rgba(10,12,18,0.06) !important;
-  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,196,167,104),0.06) !important;
 }
 
 /* Ensure reduce-transparency also applies when IE11 mode is active (light theme) */
@@ -1609,11 +1609,11 @@ html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .settings-panel
 html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
   background-image:
     linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,250,252,0.94) 60%),
-    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(255,255,255,0) 60%);
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,255,242,176),0.06) 0%, rgba(255,255,255,0) 60%);
   background-blend-mode: overlay !important;
   color: #071025 !important;
   box-shadow: 0 10px 28px rgba(10,12,18,0.06) !important;
-  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,196,167,104),0.06) !important;
 }
 
 /* When reduce-transparency is active, make game-card backgrounds sit inside
@@ -1654,7 +1654,7 @@ html.ice-cream.reduce-transparency .game-card::before {
 html.ice-cream.reduce-transparency .game-card::before {
   background-image:
     linear-gradient(to bottom, rgba(255,255,255,0.24), rgba(255,255,255,0.06)),
-    linear-gradient(to bottom, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), rgba(255,255,255,0.00)),
+    linear-gradient(to bottom, rgba(var(--ribbons-accent-rgb,255,242,176),0.08), rgba(255,255,255,0.00)),
     linear-gradient(to top, rgba(0,0,0,0.12), rgba(0,0,0,0.02));
   background-position: top left, top left, bottom left;
   background-size: 100% 28px, 100% 28px, 100% 7px;
@@ -1753,10 +1753,10 @@ html.no-ribbons.ice-cream {
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background:
-    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,87,188,255),0.12), transparent 32%),
-    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), transparent 32%),
-    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,87,188,255),0.06), transparent 30%),
-    linear-gradient(180deg, var(--gradient-from, rgba(4,24,46,0.98)), var(--gradient-to, rgba(3,16,36,0.98))) !important;
+    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,255,242,176),0.12), transparent 32%),
+    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,255,242,176),0.08), transparent 32%),
+    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,255,242,176),0.06), transparent 30%),
+    linear-gradient(180deg, var(--gradient-from, rgba(255,250,235,0.98)), var(--gradient-to, rgba(245,230,175,0.98))) !important;
   background-blend-mode: overlay !important;
 }
 
@@ -1768,9 +1768,9 @@ html.no-ribbons.ice-cream[data-theme-mode="light"] {
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background:
-    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), transparent 28%),
-    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,87,188,255),0.06), transparent 28%),
-    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,87,188,255),0.05), transparent 26%),
+    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,255,242,176),0.08), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,255,242,176),0.06), transparent 28%),
+    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,255,242,176),0.05), transparent 26%),
     linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,246,248,0.94)) !important;
   background-blend-mode: overlay !important;
 }

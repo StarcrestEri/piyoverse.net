@@ -10,8 +10,8 @@ html.legacy-lowend body {
 
 html.legacy-lowend {
   /* Scale the whole UI down for tiny screens (DSi). */
-  font-size: 12px;
-  line-height: 1.35;
+  font-size: 11px;
+  line-height: 1.30;
 }
 
 html.legacy-lowend body {
@@ -54,27 +54,29 @@ html.legacy-lowend .nav-container {
   margin: 0 auto;
   padding: 4px;
   text-align: center;
+  white-space: nowrap;
 }
 
 html.legacy-lowend .nav-logo {
   display: inline-block;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   overflow: hidden;
   vertical-align: middle;
 }
 
 html.legacy-lowend .nav-logo img {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
 }
 
 html.legacy-lowend .nav-item {
   display: inline-block;
-  margin: 4px;
-  padding: 4px 8px;
-  border: 1px solid #2b6fa0;
-  background: #0b2a44;
+  margin: 2px;
+  padding: 3px 6px;
+  font-size: 0.95em;
+  border: 1px solid #c4a768;
+  background: #071a2b;
   color: #ffffff;
   text-decoration: none;
 }
@@ -109,7 +111,7 @@ html.legacy-lowend main,
 html.legacy-lowend .bg-popover,
 html.legacy-lowend .site-footer {
   background: #071a2b;
-  border: 1px solid #2b6fa0;
+  border: 1px solid #c4a768;
   border-radius: 4px;
   box-shadow: none !important;
 }
@@ -134,14 +136,14 @@ html.legacy-lowend .game-card::after {
 
 html.legacy-lowend .game-thumb {
   float: left;
-  width: 85px;
-  height: 85px;
+  width: 72px;
+  height: 72px;
   margin: 0 8px 0 0;
 }
 
 html.legacy-lowend .game-thumb img {
-  width: 85px !important;
-  height: 85px !important;
+  width: 72px !important;
+  height: 72px !important;
   display: block;
 }
 
@@ -199,12 +201,13 @@ html.legacy-lowend .marketplace-btn {
   display: inline-block;
   width: auto !important;
   min-width: 0 !important;
-  padding: 4px 8px;
-  border: 1px solid #2b6fa0;
-  background: #0b2a44;
+  padding: 3px 6px;
+  font-size: 0.95em;
+  border: 1px solid #c4a768;
+  background: #071a2b;
   color: #ffffff;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 6px;
   box-shadow: none !important;
   filter: none !important;
 }
@@ -213,6 +216,6 @@ html.legacy-lowend .section-separator,
 html.legacy-lowend .footer-divider {
   border: none;
   height: 1px;
-  background: #2b6fa0;
+  background: #c4a768;
   margin: 12px 0;
 }
