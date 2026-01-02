@@ -1079,7 +1079,6 @@ html.ice-cream.solid-panels .muted {
 }
 .ice-cream .game-card:hover::after {
   box-shadow:
-    0 0 0 2px var(--ribbons-outline),
     0 0 0 5px var(--ribbons-accent),
     0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18);
   background-image: none;
@@ -1236,7 +1235,6 @@ html.ice-cream.solid-panels .muted {
   /* Animated hover outline for game listings (IE11-safe, no CSS variables) */
   .ice-cream .game-card:hover::after {
     box-shadow:
-      0 0 0 2px rgba(43,111,160,0.95),
       0 0 0 5px rgba(182,220,255,0.95),
       0 0 14px rgba(182,220,255,0.95);
     background-image: none;
