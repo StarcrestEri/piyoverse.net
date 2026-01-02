@@ -8,6 +8,12 @@ html.legacy-lowend body {
   color: #ffffff;
 }
 
+html.legacy-lowend {
+  /* Scale the whole UI down for tiny screens (DSi). */
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 html.legacy-lowend body {
   /* Keep content off the very edges on tiny screens (DSi). */
   padding: 6px;
@@ -46,27 +52,27 @@ html.legacy-lowend .nav-container {
   width: auto !important;
   max-width: none !important;
   margin: 0 auto;
-  padding: 10px;
+  padding: 6px;
   text-align: center;
 }
 
 html.legacy-lowend .nav-logo {
   display: inline-block;
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   overflow: hidden;
   vertical-align: middle;
 }
 
 html.legacy-lowend .nav-logo img {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
 }
 
 html.legacy-lowend .nav-item {
   display: inline-block;
   margin: 4px;
-  padding: 6px 10px;
+  padding: 4px 8px;
   border: 1px solid #2b6fa0;
   background: #0b2a44;
   color: #ffffff;
@@ -95,7 +101,7 @@ html.legacy-lowend footer {
 }
 
 html.legacy-lowend main {
-  padding: 10px;
+  padding: 6px;
 }
 
 /* Panels: simple solid background and border */
@@ -104,7 +110,7 @@ html.legacy-lowend .bg-popover,
 html.legacy-lowend .site-footer {
   background: #071a2b;
   border: 1px solid #2b6fa0;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: none !important;
 }
 
@@ -116,7 +122,7 @@ html.legacy-lowend .game-grid {
 html.legacy-lowend .game-card {
   display: block;
   margin: 10px 0;
-  padding: 8px;
+  padding: 6px;
 }
 
 html.legacy-lowend .game-card::before,
@@ -152,12 +158,12 @@ html.legacy-lowend .marketplace-btn {
   display: inline-block;
   width: auto !important;
   min-width: 0 !important;
-  padding: 6px 10px;
+  padding: 4px 8px;
   border: 1px solid #2b6fa0;
   background: #0b2a44;
   color: #ffffff;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: none !important;
   filter: none !important;
 }

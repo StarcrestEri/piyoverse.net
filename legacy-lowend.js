@@ -22,6 +22,22 @@
     // Never enable legacy mode in IE (keeps IE11 path untouched)
     try{ if(document && document.documentMode) legacy = false; }catch(e){}
 
+    // Wii U / NintendoBrowser engines can mis-render the CSS pillarbox bars.
+    // Disable pillarbox for them even if they don't need full low-end mode.
+    try{
+      var isNintendoBrowser = false;
+      try{ isNintendoBrowser = (/NintendoBrowser/i.test(ua) || /WiiU/i.test(ua)); }catch(e){ isNintendoBrowser = false; }
+      if(isNintendoBrowser){
+        var deNB = document.documentElement;
+        if(deNB){
+          var cnNB = deNB.className || '';
+          if(cnNB.indexOf('no-pillarbox') === -1){
+            deNB.className = cnNB ? (cnNB + ' no-pillarbox') : 'no-pillarbox';
+          }
+        }
+      }
+    }catch(e){}
+
     if(!legacy) return;
 
     try{ window.__legacy_low_end = true; }catch(e){}

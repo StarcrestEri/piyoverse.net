@@ -185,29 +185,33 @@ html.frutiger-aero, html.frutiger-aero body {
 /* Pillarbox bars (black) */
 html.frutiger-aero::before,
 html.frutiger-aero::after {
-  /* Default OFF for browsers that don't support CSS variables or @supports.
-     Prevents full-screen black overlays on Wii U / 3DS-class engines. */
-  content: none;
-  display: none;
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  /* Default to no bars for engines that don't support CSS variables.
+     Prevents full-screen black overlays on browsers that treat var() as invalid. */
+  width: 0;
+  width: var(--side-bar-width);
+  background: #000;
+  z-index: 9000;
+  pointer-events: none;
 }
 
 html.frutiger-aero::before { left: 0; }
 html.frutiger-aero::after { right: 0; }
 
-/* Enable pillarbox bars only when CSS variables are supported */
-@supports (--pve: 0) {
-  html.frutiger-aero::before,
-  html.frutiger-aero::after {
-    content: "";
-    display: block;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: var(--side-bar-width);
-    background: #000;
-    z-index: 9000;
-    pointer-events: none;
-  }
+/* Keep primary content above the pillarbox pseudo-elements.
+   Some niche/older engines miscompute viewport units during zoom, which can
+   cause the side bars to briefly cover the whole screen. */
+.frutiger-aero .nav-container,
+.frutiger-aero .page-name-container,
+.frutiger-aero main,
+.frutiger-aero .social-bar,
+.frutiger-aero .site-footer,
+.frutiger-aero footer {
+  position: relative;
+  z-index: 9001;
 }
 
 .frutiger-aero body {
@@ -1570,7 +1574,7 @@ html.frutiger-aero.reduce-transparency .game-card::after {
   bottom: 0 !important;
   left: 0 !important;
   border-radius: 14px !important;
-  box-shadow: 0 0 0 1px var(--ribbons-outline) !important;
+  box-shadow: 0 0 0 2px var(--ribbons-outline) !important;
   z-index: 2 !important;
 }
 
