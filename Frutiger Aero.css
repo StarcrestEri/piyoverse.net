@@ -216,25 +216,15 @@ html.frutiger-aero::after { right: 0; }
    ======================= */
 .frutiger-aero .bg-popover {
   /* slightly more translucent glass-like popover */
-  background:
-    /* top sheen for a more "Aero" glass read (IE11-safe) */
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.18) 0%,
-      rgba(255,255,255,0.06) 26%,
-      rgba(255,255,255,0.00) 58%
-    ),
-    linear-gradient(
-      165deg,
-      rgba(0, 140, 255, 0.35) 0%,
-      rgba(69, 160, 152, 0.18) 50%,
-      rgba(0, 255, 42, 0.14) 100%
-    );
-  border: 1px solid rgba(255,255,255,0.10);
-  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.62),
-              0 0 0 1px rgba(0,0,0,0.28),
-              inset 0px 2px 1px rgba(255, 255, 255, 0.22),
-              inset 0px -2px 1px rgba(0, 0, 0, 0.22);
+  background: linear-gradient(
+    165deg,
+    rgba(0, 140, 255, 0.35) 0%,
+    rgba(69, 160, 152, 0.18) 50%,
+    rgba(0, 255, 42, 0.14) 100%
+  );
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.6),
+              inset 0px 2px 1px rgba(255, 255, 255, 0.2),
+              inset 0px -2px 1px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(6px) saturate(1.03);
   -webkit-backdrop-filter: blur(6px) saturate(1.03);
   border-radius: 1rem;
@@ -251,30 +241,21 @@ html.frutiger-aero::after { right: 0; }
    ======================= */
 .frutiger-aero main {
   /* slightly more translucent main panel to read as glass while keeping sheen */
-  background:
-    /* top sheen (IE11-safe) */
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.14) 0%,
-      rgba(255,255,255,0.05) 24%,
-      rgba(255,255,255,0.00) 56%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(90, 95, 99, 0.55) 0%,
-      rgba(0, 0, 0, 0.45) 50%,
-      rgba(62, 65, 67, 0.45) 100%
-    );
-  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(90, 95, 99, 0.55) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(62, 65, 67, 0.45) 100%
+  );
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.32),
-              0 0 0 1px rgba(0,0,0,0.22),
-              inset 0px 2px 1px rgba(255, 255, 255, 0.32),
-              inset 0px -2px 1px rgba(0, 0, 0, 0.42);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3),
+              inset 0px 2px 1px rgba(255, 255, 255, 0.31),
+              inset 0px -2px 1px rgba(0, 0, 0, 0.4);
   margin: 1rem auto;
   width: min(1200px, var(--safe-width));
   max-width: 1200px;
+  background-blend-mode: overlay;
   color: #ffffff;
   position: relative;
 }
@@ -403,29 +384,18 @@ html.frutiger-aero.solid-panels .muted {
 /* Footer should be its own panel with white text */
 .frutiger-aero .site-footer {
   /* Match the panel gradient used by `main` and other panels for visual consistency */
-  background:
-    /* top sheen (IE11-safe) */
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.12) 0%,
-      rgba(255,255,255,0.04) 26%,
-      rgba(255,255,255,0.00) 60%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(90,95,99,0.55) 0%,
-      rgba(0,0,0,0.45) 50%,
-      rgba(62,65,67,0.45) 100%
-    );
-  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(90,95,99,0.55) 0%,
+    rgba(0,0,0,0.45) 50%,
+    rgba(62,65,67,0.45) 100%
+  );
   padding: 1rem;
   border-radius: 0.8rem;
   margin: 1rem auto 2rem auto;
   width: min(1200px, var(--safe-width));
   max-width: 1200px;
-  box-shadow: 0px 8px 22px rgba(0,0,0,0.52),
-              0 0 0 1px rgba(0,0,0,0.22),
-              inset 0px 1px 0px rgba(255,255,255,0.16);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.48);
   color: #ffffff;
 }
 .frutiger-aero .site-footer p { margin: 0.4rem 0; color: #ffffff; }
