@@ -130,14 +130,6 @@ html.ie7 .section-separator {
   --ribbons-accent: #fff2b0; /* updated dynamically by ribbons-of-life.js */
   --ribbons-outline: #c4a768; /* warm outline; updated dynamically by ribbons-of-life.js */
 
-  /* Fallbacks for engines that don't support OKLCH syntax */
-  --foreground: #ffffff;
-  --popover: #ffffff;
-  --popover-foreground: #ffffff;
-  --muted-foreground: rgba(255,255,255,0.94);
-  --accent: rgba(0,0,0,0.25);
-  --accent-foreground: #ffffff;
-
   --foreground: oklch(0.985 0 0);
   --popover: oklch(72.007% 0.12846 221.186);
   --popover-foreground: oklch(0.985 0 0);
@@ -638,7 +630,6 @@ html.ice-cream.solid-panels .muted {
   border: none;
   /* slightly more translucent button surface */
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.16));
-  color: #ffffff;
   color: var(--foreground);
   padding: 0.6rem 1rem;
   border-radius: 999px;
@@ -786,7 +777,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .btn > * { position: relative; z-index: 2; }
 .ice-cream .social-bar { gap: 10px; }
 .ice-cream .social-item { display:inline-flex; flex-direction: column; align-items:center; gap:8px; flex: 0 0 auto; }
-.ice-cream .social-label { color: #ffffff; color: var(--foreground); text-decoration: none; font-size: 0.85rem; }
+.ice-cream .social-label { color: var(--foreground); text-decoration: none; font-size: 0.85rem; }
 .ice-cream .social-label:hover { text-decoration: underline; }
 
 /* If the flat structure is used (a.social-link only), ensure no overlap
@@ -1248,11 +1239,9 @@ html.ice-cream.solid-panels .muted {
   .ice-cream .marketplace-btn:focus-visible,
   .ice-cream .game-actions .btn:active,
   .ice-cream .game-actions .btn:focus-visible {
-    /* IE11 mode hover: white -> pastel yellow gradient + white outline */
-    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,242,176,0.92) 100%);
-    color: #2a210c;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.25), 0 0 0 2px rgba(255,255,255,0.95);
+    background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
     outline: none;
   }
 
@@ -1268,10 +1257,9 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .btn:focus-visible,
 .ice-cream .settings-btn:active,
 .ice-cream .settings-btn:focus-visible {
-  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,242,176,0.92) 100%);
-  color: #2a210c;
+  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(1px);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.18), 0 0 0 2px rgba(255,255,255,0.95);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
   outline: none;
 }
 
@@ -1454,27 +1442,18 @@ html.ie11 .bg-popover,
 html.ie11 .game-card,
 html.ie11 .settings-panel,
 html.ie11 .site-footer {
-  /* IE11 mode: white panels (no blue tint) */
-  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(245,230,175,0.92) 100%) !important;
-  background-blend-mode: normal !important;
+  /* IE11 mode: light blue-grey -> blue-grey panels */
+  background: linear-gradient(
+    180deg,
+    rgba(140, 165, 182, 0.78) 0%,
+    rgba(48, 72, 90, 0.74) 100%
+  ) !important;
+  background-blend-mode: overlay !important;
   padding: 1rem !important;
   border-radius: 34px !important;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.31), inset 0px -2px 1px rgba(0,0,0,0.4) !important;
   border: none !important;
-  color: #2a210c !important;
-}
-
-/* Forced IE11 mode (html.ie11) in modern browsers: match desired hover styling */
-html.ie11 .ice-cream .nav-item:hover,
-html.ie11 .ice-cream .marketplace-btn:hover,
-html.ie11 .ice-cream .game-actions .btn:hover,
-html.ie11 .ice-cream .btn:hover,
-html.ie11 .ice-cream button:hover,
-html.ie11 .ice-cream input[type="button"]:hover,
-html.ie11 .ice-cream input[type="submit"]:hover {
-  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,242,176,0.92) 100%) !important;
-  color: #2a210c !important;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25), 0 0 0 2px rgba(255,255,255,0.95) !important;
+  color: #ffffff !important;
 }
 
 /* Remove individual inner panels for listings (games, music) in IE11 so
