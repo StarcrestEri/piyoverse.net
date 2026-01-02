@@ -1,7 +1,7 @@
 ﻿.ice-cream {
   --gradient-from: rgba(0, 60, 255, 0.76);
-  --gradient-to: rgba(0, 202, 0, 0.822);
-  --highlight: #57ff60;
+  --gradient-to: rgba(0, 172, 202, 0.82);
+  --highlight: #57ddffff;
 
   --foreground: oklch(0.985 0 0);
   --popover: oklch(0.78 0.2473 144.02);
@@ -10,15 +10,15 @@
   --accent: oklch(0.13 0 none / 0.25);
   --accent-foreground: oklch(1 0 none);
 
-  --sh-class: #ffe15d;
+  --sh-class: #5dfff7ff;
   --sh-identifier: #e7e7e7;
   --sh-sign: #e7e7e7;
   --sh-string: #e7e7e7;
   --sh-keyword: #e7e7e7;
-  --sh-comment: #39ff43;
+  --sh-comment: #39e1ffff;
   --sh-jsxliterals: #e7e7e7;
   --sh-property: #5db0ff;
-  --sh-entity: #ffe15d;
+  --sh-entity: #5de7ffff;
 }
 
 .ice-cream body {

@@ -48,4 +48,4 @@ foreach($f in $oggFiles){
     }
 }
 
-Write-Output "Done. Put the generated files in the Audio/ folder (already placed there)."
+Write-Output "Done. Put the generated files in the Audio/ folder in your site (already placed there)."

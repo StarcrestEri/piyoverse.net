@@ -41,7 +41,7 @@ body.settings-page .settings-btn { display: none !important; }
 .settings-panel h2 {
   font-size: 1.3rem;
   margin-bottom: 1.2rem;
-  color: var(--highlight);
+  color: #57bcff;
 }
 
 /* Small note text used in the settings panel for compatibility warnings */
@@ -67,7 +67,7 @@ html.black-text .settings-panel .settings-note { color: #071025 !important; }
   font-size: 1rem;
   padding: 0.4rem 0.7rem;
   border-radius: 7px;
-  border: 1px solid var(--highlight);
+  border: 1px solid #57bcff;
   background: #0b1a2a;
   color: #fff;
 }
@@ -80,10 +80,10 @@ html.black-text .settings-panel .settings-note { color: #071025 !important; }
   width: 80vw;
   max-width: 900px;
   /* Fallback for browsers that don't support CSS variables in rgba() */
-  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(255,242,176,0.25) 20%, rgba(255,242,176,0.95) 50%, rgba(255,242,176,0.25) 80%, rgba(0,0,0,0.06) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(87,188,255,0.25) 20%, rgba(87,188,255,0.95) 50%, rgba(87,188,255,0.25) 80%, rgba(0,0,0,0.06) 100%);
   border-radius: 4px;
   width: min(900px, 80vw);
-  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(var(--ribbons-accent-rgb, 255,242,176),0.25) 20%, rgba(var(--ribbons-accent-rgb, 255,242,176),0.95) 50%, rgba(var(--ribbons-accent-rgb, 255,242,176),0.25) 80%, rgba(0,0,0,0.06) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 20%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.95) 50%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 80%, rgba(0,0,0,0.06) 100%);
   box-shadow: none !important;
 }
 
@@ -92,7 +92,7 @@ html.ie11 .section-separator,
 html.ie7 .section-separator {
   width: 80vw;
   max-width: 900px;
-  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(255,242,176,0.25) 20%, rgba(255,242,176,0.95) 50%, rgba(255,242,176,0.25) 80%, rgba(0,0,0,0.06) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(87,188,255,0.25) 20%, rgba(87,188,255,0.95) 50%, rgba(87,188,255,0.25) 80%, rgba(0,0,0,0.06) 100%);
   box-shadow: none !important;
 }
 
@@ -124,19 +124,11 @@ html.ie7 .section-separator {
 
 .ice-cream {
   /* Color Variables */
-  --gradient-from: rgba(255, 246, 205, 0.94);
-  --gradient-to: rgba(244, 230, 170, 0.90);
-  --highlight: #fff2b0;
-  --ribbons-accent: #fff2b0; /* updated dynamically by ribbons-of-life.js */
-  --ribbons-outline: #c4a768; /* warm outline; updated dynamically by ribbons-of-life.js */
-
-  /* Fallbacks for engines that don't support OKLCH syntax */
-  --foreground: #ffffff;
-  --popover: #ffffff;
-  --popover-foreground: #ffffff;
-  --muted-foreground: rgba(255,255,255,0.94);
-  --accent: rgba(0,0,0,0.25);
-  --accent-foreground: #ffffff;
+  --gradient-from: rgba(12, 122, 226, 0.76);
+  --gradient-to: rgba(0, 178, 202, 0.822);
+  --highlight: #57bcff;
+  --ribbons-accent: #57bcff; /* updated dynamically by ribbons-of-life.js */
+  --ribbons-outline: #2b6fa0; /* darker default outline; updated dynamically by ribbons-of-life.js */
 
   --foreground: oklch(0.985 0 0);
   --popover: oklch(72.007% 0.12846 221.186);
@@ -167,10 +159,10 @@ html.ice-cream {
   --side-bar-width: calc((100vw - var(--safe-width)) / 2);
   --content-width: calc(100vw - (var(--side-bar-width) * 2));
 
-  background: radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,255,242,176), 0.16), transparent 32%),
-              radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.16), transparent 32%),
-              radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,255,242,176), 0.12), transparent 30%),
-              linear-gradient(180deg, rgba(255, 250, 235, 0.98), rgba(252, 241, 205, 0.94) 44%, rgba(245, 230, 175, 0.98));
+  background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
+              radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
+              radial-gradient(circle at 18% 78%, rgba(134, 255, 207, 0.18), transparent 30%),
+              linear-gradient(180deg, rgba(4, 24, 46, 0.98), rgba(3, 41, 74, 0.94) 44%, rgba(3, 16, 36, 0.98));
   background-attachment: fixed;
   color: #ffffff;
   font-family: "tahoma.otf", Tahoma, Verdana, Arial, sans-serif;
@@ -191,16 +183,24 @@ html.ice-cream, html.ice-cream body {
   flex: 1 1 auto;
 }
 
-/* Pillarbox bars (black)
-   Bars are now rendered by `ribbons-of-life.js` into the background canvas.
-   Keep these pseudo-elements disabled to avoid double bars/overlays. */
+/* Pillarbox bars (black) */
 html.ice-cream::before,
 html.ice-cream::after {
   content: "";
-  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  /* Default to no bars for engines that don't support CSS variables.
+     Prevents full-screen black overlays on browsers that treat var() as invalid. */
   width: 0;
+  width: var(--side-bar-width);
+  background: #000;
+  z-index: 9000;
   pointer-events: none;
 }
+
+html.ice-cream::before { left: 0; }
+html.ice-cream::after { right: 0; }
 
 /* Keep primary content above the pillarbox pseudo-elements.
    Some niche/older engines miscompute viewport units during zoom, which can
@@ -229,7 +229,7 @@ html.ice-cream::after {
   height: 100vh;
   pointer-events: none;
   z-index: 2;
-  background: radial-gradient(circle at 50% 30%, rgba(var(--ribbons-accent-rgb,255,242,176), 0.12), transparent 50%);
+  background: radial-gradient(circle at 50% 30%, rgba(0, 140, 255, 0.12), transparent 50%);
   filter: saturate(1.05);
 }
 
@@ -248,8 +248,9 @@ html.ice-cream::after {
   /* slightly more translucent glass-like popover */
   background: linear-gradient(
     165deg,
-    rgba(255, 255, 255, 0.62) 0%,
-    rgba(var(--ribbons-accent-rgb,255,242,176), 0.34) 100%
+    rgba(0, 140, 255, 0.46) 0%,
+    rgba(69, 160, 152, 0.28) 50%,
+    rgba(0, 255, 42, 0.24) 100%
   );
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.6),
               inset 0px 2px 1px rgba(255, 255, 255, 0.2),
@@ -258,7 +259,7 @@ html.ice-cream::after {
   -webkit-backdrop-filter: blur(6px) saturate(1.03);
   border-radius: 1.75rem;
   padding: 1rem;
-  color: #2a210c;
+  color: #ffffff;
 }
 
 .ice-cream .overlay {
@@ -272,8 +273,9 @@ html.ice-cream::after {
   /* slightly more translucent main panel to read as glass while keeping sheen */
   background: linear-gradient(
     180deg,
-    rgba(245, 230, 175, 0.86) 0%,
-    rgba(255, 255, 255, 0.92) 100%
+    rgba(90, 95, 99, 0.66) 0%,
+    rgba(0, 0, 0, 0.62) 50%,
+    rgba(62, 65, 67, 0.60) 100%
   );
   padding: 1rem;
   border-radius: 1.75rem;
@@ -284,7 +286,8 @@ html.ice-cream::after {
   box-sizing: border-box;
   width: var(--content-width);
   max-width: 1200px;
-  color: #2a210c;
+  background-blend-mode: overlay;
+  color: #ffffff;
   position: relative;
 }
 
@@ -396,7 +399,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .bg-popover,
 .ice-cream .game-card,
 .ice-cream .settings-panel {
-  color: #2a210c !important;
+  color: #ffffff !important;
 }
 
 /* Ensure headings, links, and meta inside panels are white unless explicitly overridden */
@@ -412,7 +415,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .game-card h3,
 .ice-cream .game-card .game-meta,
 .ice-cream .social-label {
-  color: #2a210c !important;
+  color: #ffffff !important;
 }
 
 /* Footer should be its own panel with white text */
@@ -420,8 +423,9 @@ html.ice-cream.solid-panels .muted {
   /* Match the panel gradient used by `main` and other panels for visual consistency */
   background: linear-gradient(
     180deg,
-    rgba(245, 230, 175, 0.86) 0%,
-    rgba(255, 255, 255, 0.92) 100%
+    rgba(90,95,99,0.66) 0%,
+    rgba(0,0,0,0.62) 50%,
+    rgba(62,65,67,0.60) 100%
   );
   padding: 1rem;
   border-radius: 1.75rem;
@@ -430,9 +434,9 @@ html.ice-cream.solid-panels .muted {
   width: var(--content-width);
   max-width: 1200px;
   box-shadow: 0px 8px 20px rgba(0,0,0,0.48);
-  color: #2a210c;
+  color: #ffffff;
 }
-.ice-cream .site-footer p { margin: 0.4rem 0; color: inherit; }
+.ice-cream .site-footer p { margin: 0.4rem 0; color: #ffffff; }
 
 /* Legal text: make it about half the normal footer size */
 .ice-cream .site-footer .legal-note {
@@ -495,15 +499,15 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .prose pre {
   background: linear-gradient(
     155deg,
-    rgba(255, 255, 255, 0.72) 0%,
-    rgba(var(--ribbons-accent-rgb,255,242,176), 0.38) 55%,
-    rgba(var(--ribbons-outline-rgb,196,167,104), 0.22) 100%
+    rgba(15, 71, 134, 0.596) 0%,
+    rgba(28, 148, 92, 0.247) 50%,
+    rgba(2, 133, 24, 0.26) 100%
   );
   padding: 1rem;
   border-radius: 12px;
   overflow-x: auto;
   font-family: 'Courier New', monospace;
-  color: #2a210c;
+  color: white;
 }
 
 /* =======================
@@ -638,7 +642,6 @@ html.ice-cream.solid-panels .muted {
   border: none;
   /* slightly more translucent button surface */
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.16));
-  color: #ffffff;
   color: var(--foreground);
   padding: 0.6rem 1rem;
   border-radius: 999px;
@@ -732,7 +735,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .nav-item:hover {
   background: var(--ribbons-accent) !important;
   color: var(--accent-foreground) !important;
-  box-shadow: 0 6px 22px rgba(var(--ribbons-accent-rgb, 255,242,176),0.22);
+  box-shadow: 0 6px 22px rgba(var(--ribbons-accent-rgb, 87,188,255),0.22);
 }
 
 /* Marketplace-style hover for buttons: grey gradient + sheen + stronger shading
@@ -786,11 +789,11 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .btn > * { position: relative; z-index: 2; }
 .ice-cream .social-bar { gap: 10px; }
 .ice-cream .social-item { display:inline-flex; flex-direction: column; align-items:center; gap:8px; flex: 0 0 auto; }
-.ice-cream .social-label { color: #ffffff; color: var(--foreground); text-decoration: none; font-size: 0.85rem; }
+.ice-cream .social-label { color: var(--foreground); text-decoration: none; font-size: 0.85rem; }
 .ice-cream .social-label:hover { text-decoration: underline; }
 
-/* If the flat structure is used (a.social-link only), ensure no overlap
-  by forcing social-link to be smaller and labels to appear if present */
+/* If someone keeps the flat structure (a.social-link only), ensure no overlap
+   by forcing social-link to be smaller and labels to appear if present */
 .ice-cream .social-link { display:block; margin:0; }
 
 
@@ -849,7 +852,7 @@ html.ice-cream.solid-panels .muted {
   transform: scale(1.02);
 }
 
-/* per-icon backgrounds (update paths if assets are elsewhere) */
+/* per-icon backgrounds (update paths if your assets are elsewhere) */
 .ice-cream .social-youtube { background-image: url('Images/youtubeicon.png'); }
 .ice-cream .social-discord { background-image: url('Images/discordicon.png'); }
 .ice-cream .social-bsky { background-image: url('Images/bskyicon.png'); }
@@ -878,7 +881,7 @@ html.ice-cream.solid-panels .muted {
 
 /* accessibility: focus outline for keyboard users */
 .ice-cream .social-link:focus {
-  outline: 3px solid rgba(var(--ribbons-accent-rgb,255,242,176), 0.55);
+  outline: 3px solid rgba(90,180,255,0.35);
   outline-offset: 3px;
 }
 
@@ -1077,7 +1080,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .game-card:hover::after {
   box-shadow:
     0 0 0 5px var(--ribbons-accent),
-    0 0 14px rgba(var(--ribbons-accent-rgb, 255,242,176),0.18);
+    0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18);
   background-image: none;
 }
 
@@ -1248,11 +1251,9 @@ html.ice-cream.solid-panels .muted {
   .ice-cream .marketplace-btn:focus-visible,
   .ice-cream .game-actions .btn:active,
   .ice-cream .game-actions .btn:focus-visible {
-    /* IE11 mode hover: white -> pastel yellow gradient + white outline */
-    background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,242,176,0.92) 100%);
-    color: #2a210c;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.25), 0 0 0 2px rgba(255,255,255,0.95);
+    background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
     outline: none;
   }
 
@@ -1268,10 +1269,9 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .btn:focus-visible,
 .ice-cream .settings-btn:active,
 .ice-cream .settings-btn:focus-visible {
-  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,242,176,0.92) 100%);
-  color: #2a210c;
+  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(1px);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.18), 0 0 0 2px rgba(255,255,255,0.95);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
   outline: none;
 }
 
@@ -1385,12 +1385,6 @@ html.ie7 .social-bar .social-item .social-link { display: inline-block !importan
 html.ie7 .social-bar .social-item .social-link img { width: 48px !important; height: 48px !important; max-width: 48px !important; max-height: 48px !important; display: block !important; object-fit: contain !important; }
 html.ie7 .social-bar .social-item .social-label { display: block !important; margin-top: 6px !important; font-size: 0.85rem !important; }
 
-/* IE7: background-size isn't supported; use small 48x48 icon assets to avoid cropping */
-html.ie7 .ice-cream .social-youtube { background-image: url('Images/youtubeicon-48.png') !important; }
-html.ie7 .ice-cream .social-discord { background-image: url('Images/discordicon-48.png') !important; }
-html.ie7 .ice-cream .social-bsky { background-image: url('Images/bskyicon-48.png') !important; }
-html.ie7 .ice-cream .social-twt { background-image: url('Images/twticon-48.png') !important; }
-
 /* ------------------------------------------------------------------
   IE11 layout approximations
   These rules try to approximate the look/flow from IE11 so pages
@@ -1454,27 +1448,18 @@ html.ie11 .bg-popover,
 html.ie11 .game-card,
 html.ie11 .settings-panel,
 html.ie11 .site-footer {
-  /* IE11 mode: white panels (no blue tint) */
-  background: linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(245,230,175,0.92) 100%) !important;
-  background-blend-mode: normal !important;
+  /* IE11 mode: light blue-grey -> blue-grey panels */
+  background: linear-gradient(
+    180deg,
+    rgba(140, 165, 182, 0.78) 0%,
+    rgba(48, 72, 90, 0.74) 100%
+  ) !important;
+  background-blend-mode: overlay !important;
   padding: 1rem !important;
   border-radius: 34px !important;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.31), inset 0px -2px 1px rgba(0,0,0,0.4) !important;
   border: none !important;
-  color: #2a210c !important;
-}
-
-/* Forced IE11 mode (html.ie11) in modern browsers: match desired hover styling */
-html.ie11 .ice-cream .nav-item:hover,
-html.ie11 .ice-cream .marketplace-btn:hover,
-html.ie11 .ice-cream .game-actions .btn:hover,
-html.ie11 .ice-cream .btn:hover,
-html.ie11 .ice-cream button:hover,
-html.ie11 .ice-cream input[type="button"]:hover,
-html.ie11 .ice-cream input[type="submit"]:hover {
-  background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,242,176,0.92) 100%) !important;
-  color: #2a210c !important;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25), 0 0 0 2px rgba(255,255,255,0.95) !important;
+  color: #ffffff !important;
 }
 
 /* Remove individual inner panels for listings (games, music) in IE11 so
@@ -1526,17 +1511,8 @@ html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-w
 /* IE11 border fallback: modern outlines use CSS variables (unsupported in real IE11).
    Provide a fixed-color outline so listings match modern mode more closely. */
 html.ie11 .ice-cream .game-card::after {
-  /* Use border (not box-shadow) so the outline reliably renders in IE11. */
-  box-shadow: none;
-  border: 1px solid #c4a768;
-  border: 1px solid var(--ribbons-outline);
-}
-
-html.ie11 .ice-cream .game-card:hover::after {
-  /* Slightly thinner than modern (4px instead of 5px) */
-  border: 4px solid #b6dcff;
-  border: 4px solid var(--ribbons-accent);
-  box-shadow: 0 0 10px rgba(182,220,255,0.75);
+  box-shadow: 0 0 0 1px #2b6fa0;
+  box-shadow: 0 0 0 1px var(--ribbons-outline);
 }
 
 /* Center social tabs in IE11 by fixing the panel width and centering it */
@@ -1578,11 +1554,11 @@ html.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
      `--ribbons-outline` which are set by `ribbonsSetTheme`. */
   background-image:
     linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
-    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,255,242,176),0.06) 0%, rgba(0,0,0,0) 60%);
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(0,0,0,0) 60%);
   background-blend-mode: overlay !important;
   color: #ffffff !important;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.12), inset 0px -2px 1px rgba(0,0,0,0.38) !important;
-  border: 1px solid rgba(var(--ribbons-outline-rgb,196,167,104),0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
 }
 
 /* Ensure reduce-transparency also applies when IE11 mode is active */
@@ -1593,11 +1569,11 @@ html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .settings-panel,
 html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
   background-image:
     linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
-    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,255,242,176),0.06) 0%, rgba(0,0,0,0) 60%);
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(0,0,0,0) 60%);
   background-blend-mode: overlay !important;
   color: #ffffff !important;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.12), inset 0px -2px 1px rgba(0,0,0,0.38) !important;
-  border: 1px solid rgba(var(--ribbons-outline-rgb,196,167,104),0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
 }
 
 html.ice-cream.reduce-transparency[data-theme-mode="light"] main,
@@ -1611,11 +1587,11 @@ html.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
      panel matches the selected accent color. */
   background-image:
     linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,250,252,0.94) 60%),
-    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,255,242,176),0.06) 0%, rgba(255,255,255,0) 60%);
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(255,255,255,0) 60%);
   background-blend-mode: overlay !important;
   color: #071025 !important;
   box-shadow: 0 10px 28px rgba(10,12,18,0.06) !important;
-  border: 1px solid rgba(var(--ribbons-outline-rgb,196,167,104),0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
 }
 
 /* Ensure reduce-transparency also applies when IE11 mode is active (light theme) */
@@ -1626,11 +1602,11 @@ html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .settings-panel
 html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
   background-image:
     linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,250,252,0.94) 60%),
-    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,255,242,176),0.06) 0%, rgba(255,255,255,0) 60%);
+    linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(255,255,255,0) 60%);
   background-blend-mode: overlay !important;
   color: #071025 !important;
   box-shadow: 0 10px 28px rgba(10,12,18,0.06) !important;
-  border: 1px solid rgba(var(--ribbons-outline-rgb,196,167,104),0.06) !important;
+  border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
 }
 
 /* When reduce-transparency is active, make game-card backgrounds sit inside
@@ -1671,7 +1647,7 @@ html.ice-cream.reduce-transparency .game-card::before {
 html.ice-cream.reduce-transparency .game-card::before {
   background-image:
     linear-gradient(to bottom, rgba(255,255,255,0.24), rgba(255,255,255,0.06)),
-    linear-gradient(to bottom, rgba(var(--ribbons-accent-rgb,255,242,176),0.08), rgba(255,255,255,0.00)),
+    linear-gradient(to bottom, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), rgba(255,255,255,0.00)),
     linear-gradient(to top, rgba(0,0,0,0.12), rgba(0,0,0,0.02));
   background-position: top left, top left, bottom left;
   background-size: 100% 28px, 100% 28px, 100% 7px;
@@ -1680,7 +1656,7 @@ html.ice-cream.reduce-transparency .game-card::before {
 
 /* Accessibility: force black text when requested */
 /* Apply a strong, global color override so any specific white/blue
-  rules are overridden when black text mode is enabled. This targets
+   rules are overridden when the user requests black text. This targets
    text-containing elements while leaving non-text properties untouched. */
 html.black-text,
 html.black-text * {
@@ -1752,7 +1728,7 @@ html.reduce-animation *::after {
   animation: none !important;
 }
 
-/* Disable ribbons: hide the canvas when decorative ribbons/sparkles are disabled */
+/* Disable ribbons: hide the canvas when user disables decorative ribbons/sparkles */
 html.no-ribbons .ribbons-canvas { display: none !important; }
 
 /* When ribbons are disabled, make the background static (no parallax/fixed)
@@ -1770,10 +1746,10 @@ html.no-ribbons.ice-cream {
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background:
-    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,255,242,176),0.12), transparent 32%),
-    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,255,242,176),0.08), transparent 32%),
-    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,255,242,176),0.06), transparent 30%),
-    linear-gradient(180deg, var(--gradient-from, rgba(255,250,235,0.98)), var(--gradient-to, rgba(245,230,175,0.98))) !important;
+    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,87,188,255),0.12), transparent 32%),
+    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), transparent 32%),
+    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,87,188,255),0.06), transparent 30%),
+    linear-gradient(180deg, var(--gradient-from, rgba(4,24,46,0.98)), var(--gradient-to, rgba(3,16,36,0.98))) !important;
   background-blend-mode: overlay !important;
 }
 
@@ -1785,9 +1761,9 @@ html.no-ribbons.ice-cream[data-theme-mode="light"] {
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background:
-    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,255,242,176),0.08), transparent 28%),
-    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,255,242,176),0.06), transparent 28%),
-    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,255,242,176),0.05), transparent 26%),
+    radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(var(--ribbons-accent-rgb,87,188,255),0.06), transparent 28%),
+    radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,87,188,255),0.05), transparent 26%),
     linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,246,248,0.94)) !important;
   background-blend-mode: overlay !important;
 }
@@ -1806,20 +1782,25 @@ html.ie7.ice-cream:after,
   display: none !important;
 }
 
-/* Pillarbox bars are rendered by `ribbons-of-life.js` into the canvas.
-   Keep the CSS pseudo-bars disabled so modern browsers don't overlay the
-   canvas with potentially mis-sized var() widths (a common source of
-   "background looks wrong" reports in modern mode). */
-html.ice-cream::before,
-html.ice-cream::after,
-html.ie11.ice-cream::before,
-html.ie11.ice-cream::after,
-html.ice-cream:before,
-html.ice-cream:after,
-html.ie11.ice-cream:before,
-html.ie11.ice-cream:after {
+/* Restore pillarbox bars by default (unless `.no-pillarbox` is present).
+   This rule appears last to override earlier `display:none !important`
+   declarations so modern mode and IE11 mode show the black side bars.
+   Use :not(.no-pillarbox) so the helper class can still hide them when
+   explicitly requested. */
+html.ice-cream:not(.no-pillarbox)::before,
+html.ice-cream:not(.no-pillarbox)::after,
+html.ie11.ice-cream:not(.no-pillarbox)::before,
+html.ie11.ice-cream:not(.no-pillarbox)::after,
+html:not(.no-pillarbox).ice-cream::before,
+html:not(.no-pillarbox).ice-cream::after {
   content: "" !important;
-  display: none !important;
-  width: 0 !important;
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: var(--side-bar-width) !important;
+  background: #000 !important;
+  z-index: 9000 !important;
+  pointer-events: none !important;
+  display: block !important;
 }
 
