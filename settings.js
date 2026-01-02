@@ -914,7 +914,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modeNow = 'light';
         try{ setPref('site-theme-mode','light'); }catch(e){}
       }
-      var themeNow = getPref('site-theme','obsidian');
+      var themeNow = getPref('site-theme','opal');
       try{ applyLanguage(langNow); }catch(e){}
       try{ applyTheme(modeNow, themeNow); }catch(e){}
 
@@ -962,13 +962,13 @@ document.addEventListener('DOMContentLoaded', function() {
       // Change events
       try{ if(langSel) langSel.onchange = function(){ applyLanguage(langSel.value); }; }catch(e){}
       // Dark mode removed: always apply light.
-      try{ if(modeSel) modeSel.onchange = function(){ var currentTheme = getPref('site-theme','obsidian'); applyTheme('light', currentTheme); try{ setPref('site-theme-mode','light'); }catch(e){} }; }catch(e){}
+      try{ if(modeSel) modeSel.onchange = function(){ var currentTheme = getPref('site-theme','opal'); applyTheme('light', currentTheme); try{ setPref('site-theme-mode','light'); }catch(e){} }; }catch(e){}
       // On submit
       try{
         form.onsubmit = function(e){
           try{ if(e && e.preventDefault) e.preventDefault(); else e.returnValue = false; }catch(ex){}
           try{ applyLanguage((langSel&&langSel.value)||getPref('site-language','en')); }catch(e){}
-          try{ var currentTheme = getPref('site-theme','obsidian'); applyTheme('light', currentTheme); try{ setPref('site-theme-mode','light'); }catch(e){} }catch(e){}
+          try{ var currentTheme = getPref('site-theme','opal'); applyTheme('light', currentTheme); try{ setPref('site-theme-mode','light'); }catch(e){} }catch(e){}
           try { var musicVal = document.getElementById('music-toggle').value; setPref('site-music', musicVal); } catch(e) {}
           try { var sfxVal = document.getElementById('sfx-toggle').value; setPref('site-sfx', sfxVal); } catch(e) {}
           try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}

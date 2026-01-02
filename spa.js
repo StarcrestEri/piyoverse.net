@@ -130,7 +130,7 @@
           // apply saved settings after SPA swaps (language/theme/audio)
           try{ if(window.siteApplySettings) window.siteApplySettings({ source: 'spa' }); }catch(e){}
           // reapply ribbons/theme hooks if available (keeps outlines and accents correct)
-          try{ if(window.ribbonsSetTheme) { try{ var m = (document.documentElement.getAttribute('data-theme-mode')||'dark'); var t = (document.documentElement.getAttribute('data-theme')||'obsidian'); window.ribbonsSetTheme(m,t); }catch(e){} } }catch(e){}
+          try{ if(window.ribbonsSetTheme) { try{ var m = (document.documentElement.getAttribute('data-theme-mode')||'dark'); var t = (document.documentElement.getAttribute('data-theme')||'opal'); window.ribbonsSetTheme(m,t); }catch(e){} } }catch(e){}
           // restore audio state if we captured it and audio element still exists
           try{
             if(preAudio){
