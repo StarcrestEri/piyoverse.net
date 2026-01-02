@@ -8,6 +8,15 @@ html.legacy-lowend body {
   color: #ffffff;
 }
 
+html.legacy-lowend,
+html.legacy-lowend body {
+  height: auto !important;
+}
+
+html.legacy-lowend body {
+  display: block !important;
+}
+
 html.legacy-lowend::before,
 html.legacy-lowend::after,
 html.legacy-lowend body::before,
@@ -24,6 +33,14 @@ html.legacy-lowend #ribbons-of-life {
 html.legacy-lowend * {
   animation: none !important;
   transition: none !important;
+}
+
+/* Some site elements start hidden and fade in via animation.
+   On very old browsers we disable animations, so force everything visible. */
+html.legacy-lowend * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
 
 /* Layout: drop modern grid/flex assumptions */
@@ -54,8 +71,8 @@ html.legacy-lowend .nav-logo {
 }
 
 html.legacy-lowend .nav-logo img {
-  width: 64px;
-  height: 64px;
+  width: 64px !important;
+  height: 64px !important;
 }
 
 html.legacy-lowend .nav-item {
