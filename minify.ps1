@@ -31,9 +31,7 @@ foreach ($f in $files) {
   Assert-File $srcPath
 
   $backupPath = Join-Path $backupDir $f
-  if (-not (Test-Path -LiteralPath $backupPath)) {
-    Copy-Item -LiteralPath $srcPath -Destination $backupPath -Force
-  }
+  Copy-Item -LiteralPath $srcPath -Destination $backupPath -Force
 
   # Use terser (ES5 output for IE11 / older engines). Overwrite in-place.
   $tmpOut = Join-Path $root ($f + '.min.tmp')

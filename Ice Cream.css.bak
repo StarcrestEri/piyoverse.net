@@ -1,4 +1,4 @@
-.frutiger-aero {
+﻿.ice-cream {
   --gradient-from: rgba(0, 60, 255, 0.76);
   --gradient-to: rgba(0, 202, 0, 0.822);
   --highlight: #57ff60;
@@ -21,23 +21,23 @@
   --sh-entity: #ffe15d;
 }
 
-.frutiger-aero body {
-  background-image: url("/images/bg/frutiger-aero.jpg");
+.ice-cream body {
+  background-image: url("/images/bg/ice-cream.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: auto;
   background-attachment: fixed;
 }
 
-.frutiger-aero body main {
+.ice-cream body main {
   padding-bottom: 0;
 }
 
-.frutiger-aero body[data-scroll-locked] main {
+.ice-cream body[data-scroll-locked] main {
   filter: blur(8px);
 }
 
-.frutiger-aero .bg-popover {
+.ice-cream .bg-popover {
   background: linear-gradient(
     165deg,
     rgba(0, 140, 255, 0.45) 0%,
@@ -50,11 +50,11 @@
   inset 0px -2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.frutiger-aero .overlay {
+.ice-cream .overlay {
   background: transparent;
 }
 
-.frutiger-aero main {
+.ice-cream main {
   background: linear-gradient(
     180deg,
     rgba(90, 95, 99, 0.65) 0%,
@@ -73,13 +73,13 @@
 
 }
 
-.frutiger-aero .prose img {
+.ice-cream .prose img {
   border-radius: 16px;
   border: solid 0.1rem white;
   filter: drop-shadow(2px 4px 6px black);
 }
 
-.frutiger-aero .prose pre {
+.ice-cream .prose pre {
   background: linear-gradient(
     155deg,
     rgba(15, 71, 134, 0.596) 0%,
@@ -88,7 +88,7 @@
   );
 }
 
-.frutiger-aero .nav-container {
+.ice-cream .nav-container {
   /* border: 1px solid; */
   padding: 8px;
   border-radius: 8px;
@@ -96,8 +96,9 @@
   filter: drop-shadow(2px 1px 1px black);
 }
 
-.frutiger-aero .nav-item {
+.ice-cream .nav-item {
     border-radius: 8px;
     filter: drop-shadow(2px 1px 1px black);
     background: linear-gradient(180deg, gray, rgba(1, 1, 1, 0.5));
 }
+

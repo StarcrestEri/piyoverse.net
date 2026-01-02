@@ -1,6 +1,6 @@
-{
-  "name": "Piyoverse",
-  "short_name": "Piyoverse",
+﻿{
+  "name": "Ice Cream 0.1",
+  "short_name": "Ice Cream",
   "start_url": "/?force_ie11=1",
   "scope": "/",
   "display": "standalone",
@@ -14,3 +14,4 @@
     }
   ]
 }
+

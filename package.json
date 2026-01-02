@@ -6,8 +6,5 @@
   },
   "scripts": {
     "minify": "powershell -NoProfile -ExecutionPolicy Bypass -File ./minify.ps1"
-  },
-  "dependencies": {
-    "piyoverse-site": "file:"
   }
 }
