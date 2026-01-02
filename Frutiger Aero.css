@@ -1049,7 +1049,7 @@ html.frutiger-aero.solid-panels .muted {
   box-sizing: border-box;
   background-image:
     /* Fill layer (padding-box): hides the border gradient from the center */
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    linear-gradient(180deg, rgba(90,95,99,0.66) 0%, rgba(0,0,0,0.62) 50%, rgba(62,65,67,0.60) 100%),
     repeating-linear-gradient(135deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
@@ -1218,7 +1218,7 @@ html.frutiger-aero.solid-panels .muted {
     border: 6px solid transparent;
     box-sizing: border-box;
     background-image:
-      linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+      linear-gradient(180deg, rgba(90,95,99,0.66) 0%, rgba(0,0,0,0.62) 50%, rgba(62,65,67,0.60) 100%),
       repeating-linear-gradient(135deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
     background-clip: padding-box, border-box;
     background-origin: padding-box, border-box;
