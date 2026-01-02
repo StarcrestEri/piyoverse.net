@@ -893,7 +893,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setPref('site-theme-mode', mode);
     setPref('site-theme', themeId);
     // Optionally: update ribbons-of-life.js theme if it supports them
-    if(window.ribbonsSetTheme) window.ribbonsSetTheme(mode, themeId);
+    // If ribbonsSetTheme isn't available yet (deferred script), try again shortly.
+    function callRibbons(){ try{ if(window.ribbonsSetTheme) { window.ribbonsSetTheme(mode, themeId); return true; } }catch(e){} return false; }
+    if(!callRibbons()){
+      try{
+        var rid = setInterval(function(){ if(callRibbons()){ try{ clearInterval(rid); }catch(e){} } }, 120);
+        // ensure we stop retrying after a short window
+        setTimeout(function(){ try{ clearInterval(rid); }catch(e){} }, 3000);
+      }catch(e){}
+    }
   }
 
   // Theme variant selection removed — only `data-theme-mode` (dark/light) is exposed.

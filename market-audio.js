@@ -13,6 +13,8 @@
   var saveInterval = null;
   function createAudio(){
     if(audioEl) return audioEl;
+    // reuse existing element if page already has one (helps when scripts re-run)
+    try{ var existing = document.getElementById('piyoverse-music'); if(existing) { audioEl = existing; try{ audioEl.loop = true; }catch(e){} return audioEl; } }catch(e){}
     audioEl = document.createElement('audio');
     audioEl.id = 'piyoverse-music';
     audioEl.loop = true;

@@ -3,12 +3,13 @@
   if(window.__spa_installed) return; window.__spa_installed = true;
 
   // Ensure hover/outlines for game cards remain present after SPA swaps.
-  try{
-    var _s = document.createElement('style');
-    _s.id = 'spa-fallback-outline';
-    _s.textContent = '\n.frutiger-aero .game-card::after { content:""; position:absolute; top:6px; right:-4px; bottom:6px; left:-4px; border-radius:12px; box-shadow: 0 0 0 1px var(--ribbons-outline, #2b6fa0) !important; opacity:1 !important; pointer-events:none; transition: box-shadow 180ms ease, opacity 180ms ease; z-index:2; }\n.frutiger-aero .game-card:hover::after { box-shadow: 0 0 0 3px var(--ribbons-accent, #57bcff), 0 0 14px var(--ribbons-accent, #57bcff) !important; }\n.frutiger-aero .game-card::before { content:""; position:absolute; top:10px; bottom:6px; left:-4px; right:-4px; border-radius:10px; background-image: linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0.06)), linear-gradient(to bottom, var(--ribbons-accent, rgba(87,188,255,0.12)), rgba(255,255,255,0.00)), linear-gradient(to top, rgba(0,0,0,0.18), rgba(0,0,0,0.02)); background-position: top left, top left, bottom left; background-size: 100% 28px, 100% 28px, 100% 7px; background-repeat: no-repeat; opacity:0; pointer-events:none; transition: transform 180ms ease, opacity 180ms ease; z-index:1; }\n.frutiger-aero .game-card:hover::before { opacity:1 !important; transform: translateY(-2px) !important; }\n';
-    try{ document.getElementsByTagName('head')[0].appendChild(_s); }catch(e){}
-  }catch(e){}
+    try{
+      var _s = document.createElement('style');
+      _s.id = 'spa-fallback-outline';
+      // Use explicit colors for IE11 (avoid CSS variables) and ensure selector covers IE11
+      _s.textContent = '\nhtml.frutiger-aero .game-card::after { content:""; position:absolute; top:6px; right:-4px; bottom:6px; left:-4px; border-radius:12px; box-shadow: 0 0 0 1px rgba(43,111,160,0.95) !important; opacity:1 !important; pointer-events:none; transition: box-shadow 180ms ease, opacity 180ms ease; z-index:2; }\nhtml.frutiger-aero .game-card:hover::after { box-shadow: 0 0 0 3px rgba(182,220,255,0.95), 0 0 14px rgba(182,220,255,0.95) !important; }\nhtml.frutiger-aero .game-card::before { content:""; position:absolute; top:10px; bottom:6px; left:-4px; right:-4px; border-radius:10px; background-image: linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0.06)), linear-gradient(to bottom, rgba(182,220,255,0.12), rgba(255,255,255,0.00)), linear-gradient(to top, rgba(0,0,0,0.18), rgba(0,0,0,0.02)); background-position: top left, top left, bottom left; background-size: 100% 28px, 100% 28px, 100% 7px; background-repeat: no-repeat; opacity:0; pointer-events:none; transition: transform 180ms ease, opacity 180ms ease; z-index:1; }\nhtml.frutiger-aero .game-card:hover::before { opacity:1 !important; transform: translateY(-2px) !important; }\n';
+      try{ document.getElementsByTagName('head')[0].appendChild(_s); }catch(e){}
+    }catch(e){}
 
   function isInternalLink(a){
     try{
@@ -18,8 +19,18 @@
       href = href.trim();
       if(href.indexOf('mailto:')===0 || href.indexOf('tel:')===0) return false;
       if(a.target && a.target.toLowerCase && a.target.toLowerCase()==='_blank') return false;
-      // Resolve absolute URL
-      var resolved = (new URL(href, window.location.href)).href;
+      // Resolve absolute URL — use URL when available, fallback to anchor element (IE11)
+      var resolved = null;
+      try{
+        if(window.URL) resolved = (new URL(href, window.location.href)).href;
+      }catch(e){ resolved = null; }
+      if(!resolved){
+        try{ var a2 = document.createElement('a'); a2.href = href; // will resolve relative to document
+          // If hostname is empty, it's same-origin relative link
+          if(a2.host && a2.host !== window.location.host) return false;
+          resolved = a2.href;
+        }catch(e){ return false; }
+      }
       if(resolved.indexOf(window.location.origin) !== 0) return false;
       return true;
     }catch(e){ return false; }
