@@ -1397,7 +1397,7 @@ html.ie11 .nav-container { display: flex !important; gap: 1rem !important; align
 html.ie11 .nav-container .nav-item { display: inline-block !important; float: none !important; margin: 0 0.45rem !important; }
 html.ie11 .nav-logo { width: 64px !important; height: 64px !important; margin-right: 0.8rem !important; overflow: hidden !important; }
 html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; display: block !important; }
-html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 34px !important; }
+html.ie11 main { margin: 1rem auto !important; width: 94%; max-width: 1000px; padding: 1rem !important; border-radius: 34px !important; }
 html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
 /* Avoid overly-large canvas stacking issues in forced IE11 layout */
 html.ie11 .ribbons-canvas { z-index: 0 !important; }
@@ -1490,8 +1490,8 @@ html.ie11 .game-card .game-thumb { flex: 0 0 85px !important; margin-right: 0.8r
 html.ie11 .game-card .game-info { flex: 1 1 auto !important; position: relative !important; padding-right: 180px !important; }
 html.ie11 .game-card .game-actions { position: absolute !important; top: 50% !important; right: 0 !important; transform: translateY(-50%) !important; margin-top: 0 !important; }
 
-/* constrain main width to a simpler fixed size similar to IE11 layouts */
-html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 34px !important; }
+/* constrain main width so content stays inside pillarbox bars */
+html.ie11 main { margin: 1rem auto !important; width: 94%; max-width: 1000px; padding: 1rem !important; border-radius: 34px !important; }
 
 /* Nav/logo adjustments to match IE11 sizing/flow */
 html.ie11 .nav-container {
@@ -1516,7 +1516,7 @@ html.ie11 .ice-cream .game-card::after {
 }
 
 /* Center social tabs in IE11 by fixing the panel width and centering it */
-html.ie11 .social-bar { display: flex !important; justify-content: center !important; align-items: center !important; width: 1000px !important; margin: 0.75rem auto 0 !important; }
+html.ie11 .social-bar { display: flex !important; justify-content: center !important; align-items: center !important; width: 94%; max-width: 1000px; margin: 0.75rem auto 0 !important; }
 
 /* Ensure header and page title are centered and readable */
 html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
@@ -1528,7 +1528,10 @@ html.ie11 .page-name {
 }
 
 /* Make footer simpler and consistent width */
-html.ie11 .site-footer { width: 1000px !important; max-width: 1000px !important; margin: 1rem auto 2rem auto !important; }
+html.ie11 .site-footer { width: 94%; max-width: 1000px; margin: 1rem auto 2rem auto !important; }
+
+/* Keep the page title panel inside the pillarbox safe area in IE11 */
+html.ie11 .page-name-container { width: 94%; max-width: 1000px; margin-left: auto; margin-right: auto; }
 
 /* Keep the helper pillarbox rule in case some pages still need it */
 .no-pillarbox:before, .no-pillarbox:after { display: none !important; }
