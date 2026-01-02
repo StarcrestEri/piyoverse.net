@@ -168,7 +168,6 @@ html.ice-cream {
   --crt-aspect-den: 3;
   --safe-width: min(100vw, calc(100vh * var(--crt-aspect-num) / var(--crt-aspect-den)));
   --side-bar-width: calc((100vw - var(--safe-width)) / 2);
-  --content-width: calc(100vw - (var(--side-bar-width) * 2));
 
   background: radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,255,242,176), 0.16), transparent 32%),
               radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.16), transparent 32%),
@@ -284,8 +283,7 @@ html.ice-cream::after {
               inset 0px 2px 1px rgba(255, 255, 255, 0.31),
               inset 0px -2px 1px rgba(0, 0, 0, 0.4);
   margin: 1rem auto;
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   max-width: 1200px;
   color: #2a210c;
   position: relative;
@@ -429,19 +427,12 @@ html.ice-cream.solid-panels .muted {
   padding: 1rem;
   border-radius: 1.75rem;
   margin: 1rem auto 2rem auto;
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   max-width: 1200px;
   box-shadow: 0px 8px 20px rgba(0,0,0,0.48);
   color: #2a210c;
 }
 .ice-cream .site-footer p { margin: 0.4rem 0; color: inherit; }
-
-/* Legal text: make it about half the normal footer size */
-.ice-cream .site-footer .legal-note {
-  font-size: 0.45rem;
-  line-height: 1.2;
-}
 
 /* Ensure the Starcrest teaser image fits inside the home panel */
 .ice-cream .upcoming-release .starcrest-teaser {
@@ -518,8 +509,7 @@ html.ice-cream.solid-panels .muted {
   align-items: center;
   justify-content: flex-start;
   margin: 10px auto 0.75rem;
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   max-width: 1200px;
   padding: 5px 10px;
   border-radius: 8px;
@@ -549,8 +539,7 @@ html.ice-cream.solid-panels .muted {
 
 /* Centered page name between banner/nav and main panel */
 .ice-cream .page-name-container {
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   max-width: 1200px;
   margin: 0.25rem auto 0;
   padding: 0 1rem;
@@ -619,8 +608,7 @@ html.ice-cream.solid-panels .muted {
   padding: 1rem;
   font-size: 0.9rem;
   color: var(--highlight);
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   margin-left: auto;
   margin-right: auto;
 }
