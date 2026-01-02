@@ -247,6 +247,52 @@ html.frutiger-aero::after { right: 0; }
 }
 
 /* =======================
+   Faux "Liquid Glass" refraction (IE11-friendly approximation)
+   We can't distort the *real* backdrop in IE11, so we render a copy of the
+   page background inside panels and warp it with an SVG displacement filter.
+   Requires <filter id="aeroWarp"> present in the page HTML.
+   ======================= */
+.frutiger-aero .bg-popover,
+.frutiger-aero .site-footer {
+  position: relative;
+}
+
+.frutiger-aero main::after,
+.frutiger-aero .bg-popover::after,
+.frutiger-aero .site-footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Copy of the site background, aligned to viewport like the real one */
+  background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
+              radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
+              radial-gradient(circle at 18% 78%, rgba(134, 255, 207, 0.18), transparent 30%),
+              linear-gradient(180deg, rgba(4, 24, 46, 0.98), rgba(3, 41, 74, 0.94) 44%, rgba(3, 16, 36, 0.98));
+  background-attachment: fixed;
+
+  /* Subtle so it reads as refraction, not a second background */
+  opacity: 0.14;
+
+  /* SVG displacement: works in IE11 (approximation) */
+  filter: url(#aeroWarp);
+}
+
+/* Keep panel content above the faux-refraction layer */
+.frutiger-aero main > *,
+.frutiger-aero .bg-popover > *,
+.frutiger-aero .site-footer > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =======================
    Main Content
    ======================= */
 .frutiger-aero main {
