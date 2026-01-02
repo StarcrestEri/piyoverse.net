@@ -79,7 +79,9 @@
     }, Math.round((duration||600)/steps));
   }
 
-  if(isMarketplace && window.siteMusicEnabled){
+  // Run site music when the user has music enabled site-wide.
+  // This enables persistent audio for SPA-style navigation.
+  if(window.siteMusicEnabled){
     try{
       var a = createAudio();
       var p = null;
@@ -223,6 +225,8 @@
     }
     // attach after DOM ready
     if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', attachHover); else attachHover();
+    // expose a reinit hook so SPA navigation can re-run attachment logic
+    try{ window.siteReinit = function(){ try{ attachHover(); }catch(e){} }; }catch(e){}
   }catch(e){}
 
   // Expose a simple SFX player
