@@ -1,0 +1,16 @@
+{
+  "name": "Piyoverse",
+  "short_name": "Piyoverse",
+  "start_url": "/?force_ie11=1",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#021826",
+  "theme_color": "#021826",
+  "icons": [
+    {
+      "src": "/Images/piyoverse.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
