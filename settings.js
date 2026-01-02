@@ -908,7 +908,12 @@ document.addEventListener('DOMContentLoaded', function() {
   window.siteApplySettings = function(){
     try{
       var langNow = getPref('site-language','en');
-      var modeNow = getPref('site-theme-mode','dark');
+      var modeNow = getPref('site-theme-mode','light');
+      // Dark mode has been removed; coerce any persisted value to light.
+      if(modeNow !== 'light') {
+        modeNow = 'light';
+        try{ setPref('site-theme-mode','light'); }catch(e){}
+      }
       var themeNow = getPref('site-theme','obsidian');
       try{ applyLanguage(langNow); }catch(e){}
       try{ applyTheme(modeNow, themeNow); }catch(e){}
@@ -944,7 +949,11 @@ document.addEventListener('DOMContentLoaded', function() {
       var modeSel = document.getElementById('theme-mode');
       // Load saved
       var savedLang = getPref('site-language','en');
-      var savedMode = getPref('site-theme-mode','dark');
+      var savedMode = getPref('site-theme-mode','light');
+      if(savedMode !== 'light') {
+        savedMode = 'light';
+        try{ setPref('site-theme-mode','light'); }catch(e){}
+      }
       try{ if(langSel) langSel.value = savedLang; }catch(e){}
       try{ if(modeSel) modeSel.value = savedMode; }catch(e){}
       // music / sfx toggles
@@ -952,13 +961,14 @@ document.addEventListener('DOMContentLoaded', function() {
       try { var savedSfx = getPref('site-sfx','on'); var st = document.getElementById('sfx-toggle'); if(st) st.value = savedSfx; } catch(e) {}
       // Change events
       try{ if(langSel) langSel.onchange = function(){ applyLanguage(langSel.value); }; }catch(e){}
-      try{ if(modeSel) modeSel.onchange = function(){ var currentTheme = getPref('site-theme','obsidian'); applyTheme(modeSel.value, currentTheme); }; }catch(e){}
+      // Dark mode removed: always apply light.
+      try{ if(modeSel) modeSel.onchange = function(){ var currentTheme = getPref('site-theme','obsidian'); applyTheme('light', currentTheme); try{ setPref('site-theme-mode','light'); }catch(e){} }; }catch(e){}
       // On submit
       try{
         form.onsubmit = function(e){
           try{ if(e && e.preventDefault) e.preventDefault(); else e.returnValue = false; }catch(ex){}
           try{ applyLanguage((langSel&&langSel.value)||getPref('site-language','en')); }catch(e){}
-          try{ var currentTheme = getPref('site-theme','obsidian'); applyTheme((modeSel&&modeSel.value)||getPref('site-theme-mode','dark'), currentTheme); }catch(e){}
+          try{ var currentTheme = getPref('site-theme','obsidian'); applyTheme('light', currentTheme); try{ setPref('site-theme-mode','light'); }catch(e){} }catch(e){}
           try { var musicVal = document.getElementById('music-toggle').value; setPref('site-music', musicVal); } catch(e) {}
           try { var sfxVal = document.getElementById('sfx-toggle').value; setPref('site-sfx', sfxVal); } catch(e) {}
           try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}
@@ -966,7 +976,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Reapply saved values to the form so they reflect persisted state
           try{ var mt2 = document.getElementById('music-toggle'); if(mt2) mt2.value = getPref('site-music','on'); }catch(e){}
           try{ var st2 = document.getElementById('sfx-toggle'); if(st2) st2.value = getPref('site-sfx','on'); }catch(e){}
-          try{ if(modeSel) modeSel.value = getPref('site-theme-mode','dark'); }catch(e){}
+          try{ if(modeSel) modeSel.value = 'light'; }catch(e){}
           try{ if(langSel) langSel.value = getPref('site-language','en'); }catch(e){}
           try{ alert('Settings saved!'); }catch(e){}
           // Apply full settings (helps SPA pages + keeps audio in sync)
