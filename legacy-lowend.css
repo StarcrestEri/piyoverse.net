@@ -64,15 +64,18 @@ html.legacy-lowend .nav-container {
 
 html.legacy-lowend .nav-logo {
   display: inline-block;
-  width: 64px;
-  height: 64px;
-  overflow: hidden;
+  width: auto;
+  height: auto;
+  overflow: visible;
   vertical-align: middle;
 }
 
 html.legacy-lowend .nav-logo img {
-  width: 64px !important;
-  height: 64px !important;
+  display: block;
+  margin: 0 auto;
+  width: 200px !important;
+  max-width: 240px !important;
+  height: auto !important;
 }
 
 html.legacy-lowend .nav-item {
