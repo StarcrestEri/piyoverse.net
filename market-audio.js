@@ -1,4 +1,5 @@
 (function(){
+  try{ if(window.__legacy_low_end) return; }catch(e){}
   function pageName(){ try { return (location.pathname||'').split('/').pop().toLowerCase(); } catch(e){ return ''; } }
   var name = pageName();
   var isMarketplace = (name.indexOf('marketplace') === 0);

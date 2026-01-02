@@ -1,4 +1,5 @@
 (function () {
+  try{ if(window.__legacy_low_end) return; }catch(e){}
   function closestAnchor(el) {
     while (el && el !== document.documentElement) {
       if (el.tagName && el.tagName.toLowerCase() === 'a') return el;

@@ -1,5 +1,6 @@
 /* Simple SPA navigation (IE11-compatible) */
 (function(){
+  try{ if(window.__legacy_low_end) return; }catch(e){}
   if(window.__spa_installed) return; window.__spa_installed = true;
 
   // Force the site onto Opal + Light (no settings page / no dark mode).

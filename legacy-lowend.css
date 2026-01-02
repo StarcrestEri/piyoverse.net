@@ -1,0 +1,155 @@
+/* Legacy low-end support (Opera 9.5 / NetFront NX / Nintendo browsers)
+   Only applies when <html> has class "legacy-lowend".
+*/
+
+html.legacy-lowend,
+html.legacy-lowend body {
+  background: #031024;
+  color: #ffffff;
+}
+
+html.legacy-lowend::before,
+html.legacy-lowend::after,
+html.legacy-lowend body::before,
+html.legacy-lowend body::after {
+  content: none !important;
+  display: none !important;
+}
+
+html.legacy-lowend .ribbons-canvas,
+html.legacy-lowend #ribbons-of-life {
+  display: none !important;
+}
+
+html.legacy-lowend * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Layout: drop modern grid/flex assumptions */
+html.legacy-lowend main,
+html.legacy-lowend nav,
+html.legacy-lowend section,
+html.legacy-lowend article,
+html.legacy-lowend figure,
+html.legacy-lowend header,
+html.legacy-lowend footer {
+  display: block;
+}
+
+html.legacy-lowend .nav-container {
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+
+html.legacy-lowend .nav-logo {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+html.legacy-lowend .nav-logo img {
+  width: 64px;
+  height: 64px;
+}
+
+html.legacy-lowend .nav-item {
+  display: inline-block;
+  margin: 4px;
+  padding: 6px 10px;
+  border: 1px solid #2b6fa0;
+  background: #0b2a44;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+html.legacy-lowend .page-name-container,
+html.legacy-lowend main,
+html.legacy-lowend .social-bar,
+html.legacy-lowend .site-footer,
+html.legacy-lowend footer {
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 auto;
+}
+
+html.legacy-lowend main {
+  padding: 10px;
+}
+
+/* Panels: simple solid background and border */
+html.legacy-lowend main,
+html.legacy-lowend .bg-popover,
+html.legacy-lowend .site-footer {
+  background: #071a2b;
+  border: 1px solid #2b6fa0;
+  border-radius: 6px;
+  box-shadow: none !important;
+}
+
+/* Games listings: vertical stack */
+html.legacy-lowend .game-grid {
+  display: block;
+}
+
+html.legacy-lowend .game-card {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+html.legacy-lowend .game-card::before,
+html.legacy-lowend .game-card::after {
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+html.legacy-lowend .game-thumb {
+  display: block;
+  margin: 0 0 8px;
+}
+
+html.legacy-lowend img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+html.legacy-lowend .game-actions {
+  position: static !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  margin-top: 8px;
+}
+
+html.legacy-lowend .btn,
+html.legacy-lowend button,
+html.legacy-lowend input[type="button"],
+html.legacy-lowend input[type="submit"],
+html.legacy-lowend .game-actions .btn,
+html.legacy-lowend .marketplace-btn {
+  display: inline-block;
+  width: auto !important;
+  min-width: 0 !important;
+  padding: 6px 10px;
+  border: 1px solid #2b6fa0;
+  background: #0b2a44;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 10px;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+html.legacy-lowend .section-separator,
+html.legacy-lowend .footer-divider {
+  border: none;
+  height: 1px;
+  background: #2b6fa0;
+  margin: 12px 0;
+}

@@ -1,5 +1,6 @@
 /* Bloomy Waves (Canvas) — ES5 / IE11-safe */
 (function () {
+    try { if (window.__legacy_low_end) return; } catch (e) {}
     // ---- Tiny polyfills for IE11 ----
     if (!window.performance) { window.performance = {}; }
     if (!window.performance.now) {
