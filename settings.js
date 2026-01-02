@@ -906,37 +906,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Theme variant selection removed — only `data-theme-mode` (dark/light) is exposed.
 
-  // On settings page
-  if(document.getElementById('settings-form')) {
-    var langSel = document.getElementById('language');
-    var modeSel = document.getElementById('theme-mode');
-    // Load saved
-    var savedLang = getPref('site-language','en');
-    var savedMode = getPref('site-theme-mode','dark');
-    langSel.value = savedLang;
-    modeSel.value = savedMode;
-    // music / sfx toggles
-    try { var savedMusic = getPref('site-music','on'); var mt = document.getElementById('music-toggle'); if(mt) mt.value = savedMusic; } catch(e) {}
-    try { var savedSfx = getPref('site-sfx','on'); var st = document.getElementById('sfx-toggle'); if(st) st.value = savedSfx; } catch(e) {}
-    // Change events
-    langSel.onchange = function(){ applyLanguage(langSel.value); };
-    modeSel.onchange = function(){
-      var currentTheme = getPref('site-theme','obsidian');
-      applyTheme(modeSel.value, currentTheme);
-    };
-    // On submit
-    document.getElementById('settings-form').onsubmit = function(e){
-      e.preventDefault();
-      applyLanguage(langSel.value);
-      var currentTheme = getPref('site-theme','obsidian');
-      applyTheme(modeSel.value, currentTheme);
-      try { var musicVal = document.getElementById('music-toggle').value; setPref('site-music', musicVal); } catch(e) {}
-      try { var sfxVal = document.getElementById('sfx-toggle').value; setPref('site-sfx', sfxVal); } catch(e) {}
-      try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}
-      try{ if(window.siteMusicEnabled && window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); else { try{ var __ma = document.getElementById('piyoverse-music'); if(__ma){ try{ __ma.pause(); __ma.volume = 0; }catch(e){} } }catch(e){} }catch(e){}
-      alert('Settings saved!');
-    };
+  // Initialize settings page (callable so SPA can re-run after content swaps)
+  function initSettingsForm(){
+    try{
+      var form = document.getElementById('settings-form');
+      if(!form) return;
+      var langSel = document.getElementById('language');
+      var modeSel = document.getElementById('theme-mode');
+      // Load saved
+      var savedLang = getPref('site-language','en');
+      var savedMode = getPref('site-theme-mode','dark');
+      try{ if(langSel) langSel.value = savedLang; }catch(e){}
+      try{ if(modeSel) modeSel.value = savedMode; }catch(e){}
+      // music / sfx toggles
+      try { var savedMusic = getPref('site-music','on'); var mt = document.getElementById('music-toggle'); if(mt) mt.value = savedMusic; } catch(e) {}
+      try { var savedSfx = getPref('site-sfx','on'); var st = document.getElementById('sfx-toggle'); if(st) st.value = savedSfx; } catch(e) {}
+      // Change events
+      try{ if(langSel) langSel.onchange = function(){ applyLanguage(langSel.value); }; }catch(e){}
+      try{ if(modeSel) modeSel.onchange = function(){ var currentTheme = getPref('site-theme','obsidian'); applyTheme(modeSel.value, currentTheme); }; }catch(e){}
+      // On submit
+      try{
+        form.onsubmit = function(e){
+          try{ if(e && e.preventDefault) e.preventDefault(); else e.returnValue = false; }catch(ex){}
+          try{ applyLanguage((langSel&&langSel.value)||getPref('site-language','en')); }catch(e){}
+          try{ var currentTheme = getPref('site-theme','obsidian'); applyTheme((modeSel&&modeSel.value)||getPref('site-theme-mode','dark'), currentTheme); }catch(e){}
+          try { var musicVal = document.getElementById('music-toggle').value; setPref('site-music', musicVal); } catch(e) {}
+          try { var sfxVal = document.getElementById('sfx-toggle').value; setPref('site-sfx', sfxVal); } catch(e) {}
+          try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}
+          try{ if(window.siteMusicEnabled && window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); else { try{ var __ma = document.getElementById('piyoverse-music'); if(__ma){ try{ __ma.pause(); __ma.volume = 0; }catch(e){} } }catch(e){} }catch(e){}
+          // Reapply saved values to the form so they reflect persisted state
+          try{ var mt2 = document.getElementById('music-toggle'); if(mt2) mt2.value = getPref('site-music','on'); }catch(e){}
+          try{ var st2 = document.getElementById('sfx-toggle'); if(st2) st2.value = getPref('site-sfx','on'); }catch(e){}
+          try{ if(modeSel) modeSel.value = getPref('site-theme-mode','dark'); }catch(e){}
+          try{ if(langSel) langSel.value = getPref('site-language','en'); }catch(e){}
+          try{ alert('Settings saved!'); }catch(e){}
+        };
+      }catch(e){}
+    }catch(e){}
   }
+  // Run once on initial load
+  try{ initSettingsForm(); }catch(e){}
+  // Register with SPA reinit without clobbering existing reinit hooks
+  try{
+    var __oldReinit = window.siteReinit;
+    window.siteReinit = function(){ try{ if(typeof __oldReinit === 'function') __oldReinit(); }catch(e){} try{ initSettingsForm(); }catch(e){} };
+  }catch(e){}
 
   // On every page: apply saved settings
   var lang = getPref('site-language','en');

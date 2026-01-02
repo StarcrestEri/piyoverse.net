@@ -33,6 +33,7 @@
     }catch(e){ audioEl.src = '/Audio/DOS.mp3'; }
     audioEl.setAttribute('aria-hidden','true');
     document.body.appendChild(audioEl);
+    try{ attachAudioListeners(audioEl); }catch(e){}
     // resume time if available (helps continuity across page loads)
     try {
       var saved = sessionStorage.getItem('market-music-time');
@@ -41,6 +42,19 @@
       }
     } catch(e) {}
     return audioEl;
+  }
+
+  // Attach play/pause listeners when element exists so we can persist flag
+  function attachAudioListeners(el){
+    try{
+      if(!el) return;
+      try{ el.removeEventListener('play', attachAudioListeners.__playFn); }catch(e){}
+      try{ el.removeEventListener('pause', attachAudioListeners.__pauseFn); }catch(e){}
+      attachAudioListeners.__playFn = function(){ try{ setPlayingFlag(true); }catch(e){} };
+      attachAudioListeners.__pauseFn = function(){ try{ setPlayingFlag(false); }catch(e){} };
+      try{ el.addEventListener('play', attachAudioListeners.__playFn); }catch(e){}
+      try{ el.addEventListener('pause', attachAudioListeners.__pauseFn); }catch(e){}
+    }catch(e){}
   }
 
   // Unlock audio on first user gesture to satisfy autoplay policies
@@ -81,6 +95,11 @@
     }, Math.round((duration||600)/steps));
   }
 
+  // helper to persist whether music was playing so refresh can attempt resume
+  function setPlayingFlag(isPlaying){
+    try{ localStorage.setItem('site-music-playing', isPlaying ? '1' : '0'); }catch(e){}
+  }
+
   // Ensure music is playing when enabled. Exposed for SPA/settings toggles.
   window.siteEnsureMusicPlaying = function(){
     try{
@@ -99,11 +118,24 @@
       try{ if (saveInterval) clearInterval(saveInterval); saveInterval = setInterval(function(){ try{ if(audioEl && !audioEl.paused) sessionStorage.setItem('market-music-time', String(audioEl.currentTime)); }catch(e){} }, 1000); }catch(e){}
       // ensure unlock on gesture
       unlockAudioOnGesture();
+      try{ setPlayingFlag(true); }catch(e){}
     }catch(e){}
   };
 
   // attempt initial start if enabled
-  try{ if(window.siteMusicEnabled && window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); }catch(e){}
+  try{
+    // If user previously had music playing, attempt resume after refresh.
+    var wasPlaying = false;
+    try{ wasPlaying = (localStorage.getItem('site-music-playing') === '1'); }catch(e){}
+    if(window.siteMusicEnabled && window.siteEnsureMusicPlaying){
+      // If it was playing, try to resume; otherwise still ensure audio element exists
+      if(wasPlaying) {
+        try{ window.siteEnsureMusicPlaying(); }catch(e){}
+      } else {
+        try{ createAudio(); }catch(e){}
+      }
+    }
+  }catch(e){}
 
   // Respond to storage events (other tabs) so toggling music elsewhere resumes/pauses here
   try{
@@ -116,6 +148,7 @@
             if(window.siteMusicEnabled){ try{ if(window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); }catch(e){} }
             else {
               try{ var _a = document.getElementById('piyoverse-music'); if(_a){ try{ _a.pause(); _a.volume = 0; }catch(e){} } }catch(e){}
+              try{ setPlayingFlag(false); }catch(e){}
             }
           }
         }catch(e){}
@@ -134,7 +167,7 @@
         p = a.play && a.play();
       }catch(e){ p = null; }
       if(p && p.then){
-        p.then(function(){ fadeTo(targetVol, 900); }).catch(function(){
+        p.then(function(){ fadeTo(targetVol, 900); try{ setPlayingFlag(true); }catch(e){} }).catch(function(){
           // autoplay blocked; defer resume until user interaction
           deferredResume = true;
         });
@@ -199,6 +232,14 @@
       }
     }catch(e){}
   });
+
+  // monitor play/pause to update persisted playing flag
+  try{
+    document.addEventListener && audioEl && audioEl.addEventListener && audioEl.addEventListener('play', function(){ try{ setPlayingFlag(true); }catch(e){} });
+  }catch(e){}
+  try{
+    document.addEventListener && audioEl && audioEl.addEventListener && audioEl.addEventListener('pause', function(){ try{ setPlayingFlag(false); }catch(e){} });
+  }catch(e){}
 
   // delegated SFX: trigger on pointerdown (user gesture) and pointerover fallback
   (function(){
