@@ -540,7 +540,7 @@ html.frutiger-aero.solid-panels .muted {
   border-radius: 999px;
   filter: drop-shadow(2px 1px 1px black);
   /* use the same translucent blue base as game action buttons */
-  background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
+  background: linear-gradient(180deg, rgba(79, 110, 129, 0.28), rgba(175, 207, 230, 0.22));
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -576,7 +576,7 @@ html.frutiger-aero.solid-panels .muted {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.55);
   /* match the strong blue highlighted state used by game action buttons */
-  background: linear-gradient(180deg, rgba(202, 202, 202, 0.95), rgba(24, 24, 24, 0.92));
+  background: linear-gradient(180deg, rgba(161, 188, 211, 0.95), rgba(74, 92, 121, 0.92));
 }
 
 /* =======================
