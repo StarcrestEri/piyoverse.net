@@ -904,6 +904,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Apply all saved settings (callable from SPA after content swaps)
+  window.siteApplySettings = function(){
+    try{
+      var langNow = getPref('site-language','en');
+      var modeNow = getPref('site-theme-mode','dark');
+      var themeNow = getPref('site-theme','obsidian');
+      try{ applyLanguage(langNow); }catch(e){}
+      try{ applyTheme(modeNow, themeNow); }catch(e){}
+
+      // Audio flags
+      try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); } catch(e) {}
+      try { window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}
+
+      // Enforce music state without fighting the SPA audio restore
+      try{
+        if(window.siteMusicEnabled){
+          if(window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying();
+          try{ localStorage.setItem('site-music-playing','1'); }catch(e){}
+        } else {
+          try{
+            var a = document.getElementById('piyoverse-music');
+            if(a){ try{ a.pause(); }catch(e){} try{ a.volume = 0; }catch(e){} }
+          }catch(e){}
+          try{ localStorage.setItem('site-music-playing','0'); }catch(e){}
+        }
+      }catch(e){}
+    }catch(e){}
+  };
+
   // Theme variant selection removed — only `data-theme-mode` (dark/light) is exposed.
 
   // Initialize settings page (callable so SPA can re-run after content swaps)
@@ -940,10 +969,8 @@ document.addEventListener('DOMContentLoaded', function() {
           try{ if(modeSel) modeSel.value = getPref('site-theme-mode','dark'); }catch(e){}
           try{ if(langSel) langSel.value = getPref('site-language','en'); }catch(e){}
           try{ alert('Settings saved!'); }catch(e){}
-          // Ensure music-playing flag reflects the persisted music setting so reload/resume logic
-          try{ if(window.localStorage){ try{ localStorage.setItem('site-music-playing', (getPref('site-music','on') === 'on')? '1' : '0'); }catch(e){} } }catch(e){}
-          // Reload the page so saved settings are applied consistently (helps when audio persists)
-          try{ window.location.reload(); }catch(e){}
+          // Apply full settings (helps SPA pages + keeps audio in sync)
+          try{ if(window.siteApplySettings) window.siteApplySettings({ source: 'settings-save' }); }catch(e){}
         };
       }catch(e){}
     }catch(e){}
@@ -957,13 +984,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }catch(e){}
 
   // On every page: apply saved settings
-  var lang = getPref('site-language','en');
-  var mode = getPref('site-theme-mode','dark');
-  var theme = getPref('site-theme','obsidian');
-  applyLanguage(lang);
-  applyTheme(mode, theme);
-  // Apply theme mode on load (dark/light)
-  try { var modeNow = getPref('site-theme-mode','dark'); applyTheme(modeNow, getPref('site-theme','obsidian')); } catch(e) {}
+  try{ if(window.siteApplySettings) window.siteApplySettings({ source: 'page-load' }); }catch(e){}
   // transiently reapply for a short window to cover lazy loads / browser optimizations
   transientReapply(5000, 400);
   try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}

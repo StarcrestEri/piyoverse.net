@@ -64,8 +64,20 @@
     try{
       var url = href;
       // preserve audio state if present (avoid restarting DOS.mp3)
+      // IMPORTANT: only preserve/restore if user has music enabled.
       var preAudio = null;
-      try{ var ael = document.getElementById('piyoverse-music'); if(ael){ preAudio = { playing: !ael.paused, time: ael.currentTime }; } }catch(e){ preAudio = null; }
+      try{
+        var musicEnabled = true;
+        try{
+          // default is on
+          var pref = localStorage.getItem('site-music');
+          if(pref === 'off') musicEnabled = false;
+        }catch(e){ musicEnabled = true; }
+        // also respect in-memory flag if present
+        try{ if(window.siteMusicEnabled === false) musicEnabled = false; }catch(e){}
+        var ael = document.getElementById('piyoverse-music');
+        if(musicEnabled && ael){ preAudio = { playing: !ael.paused, time: ael.currentTime }; }
+      }catch(e){ preAudio = null; }
       // Use XHR for IE11 compatibility
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
@@ -115,6 +127,8 @@
 
           // call reinit hook to reattach behaviors
           try{ if(window.siteReinit) window.siteReinit(); }catch(e){}
+          // apply saved settings after SPA swaps (language/theme/audio)
+          try{ if(window.siteApplySettings) window.siteApplySettings({ source: 'spa' }); }catch(e){}
           // reapply ribbons/theme hooks if available (keeps outlines and accents correct)
           try{ if(window.ribbonsSetTheme) { try{ var m = (document.documentElement.getAttribute('data-theme-mode')||'dark'); var t = (document.documentElement.getAttribute('data-theme')||'obsidian'); window.ribbonsSetTheme(m,t); }catch(e){} } }catch(e){}
           // restore audio state if we captured it and audio element still exists
@@ -123,7 +137,22 @@
               var after = document.getElementById('piyoverse-music');
               if(after && after !== null){
                 try{ if(typeof preAudio.time === 'number' && Math.abs((after.currentTime||0) - preAudio.time) > 0.5) { try{ after.currentTime = preAudio.time; }catch(e){} } }catch(e){}
-                try{ if(preAudio.playing){ var pp = after.play && after.play(); if(pp && pp.then){ pp.catch(function(){}); } } }catch(e){}
+                // Only resume if music is still enabled
+                try{
+                  var musicEnabledNow = true;
+                  try{
+                    var prefNow = localStorage.getItem('site-music');
+                    if(prefNow === 'off') musicEnabledNow = false;
+                  }catch(e){ musicEnabledNow = true; }
+                  try{ if(window.siteMusicEnabled === false) musicEnabledNow = false; }catch(e){}
+                  if(musicEnabledNow && preAudio.playing){
+                    var pp = after.play && after.play();
+                    if(pp && pp.then){ pp.catch(function(){}); }
+                  } else {
+                    try{ after.pause && after.pause(); }catch(e){}
+                    try{ after.volume = 0; }catch(e){}
+                  }
+                }catch(e){}
               }
             }
           }catch(e){}
