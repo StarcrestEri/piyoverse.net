@@ -1,4 +1,4 @@
-﻿/* Settings button in nav/header: inline with nav items and same size as panel-back */
+/* Settings button in nav/header: inline with nav items and same size as panel-back */
 .settings-btn {
   margin-left: auto; /* push to the right within the flex nav */
   display: flex;
@@ -103,7 +103,7 @@ html.ie7 .section-separator {
   margin-bottom: 0.7rem;
 }
 /* =======================
-   Ice Cream 0.1 Theme
+   Frutiger Aero Theme
    For Piyoverse.net
    ======================= */
 @font-face {
@@ -122,7 +122,7 @@ html.ie7 .section-separator {
   font-display: swap;
 }
 
-.ice-cream {
+.frutiger-aero {
   /* Color Variables */
   --gradient-from: rgba(12, 122, 226, 0.76);
   --gradient-to: rgba(0, 178, 202, 0.822);
@@ -150,14 +150,13 @@ html.ie7 .section-separator {
 }
 
 /* Body & Background */
-html.ice-cream {
+html.frutiger-aero {
   /* 4:3 safe area (pillarboxed) */
   /* Defaults to 4:3, but JS can override based on crt.png's real aspect */
   --crt-aspect-num: 4;
   --crt-aspect-den: 3;
   --safe-width: min(100vw, calc(100vh * var(--crt-aspect-num) / var(--crt-aspect-den)));
   --side-bar-width: calc((100vw - var(--safe-width)) / 2);
-  --content-width: calc(100vw - (var(--side-bar-width) * 2));
 
   background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
               radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
@@ -172,22 +171,22 @@ html.ice-cream {
 }
 
 /* Make body a column flex container so footer can pin to bottom when content is short */
-html.ice-cream, html.ice-cream body {
+html.frutiger-aero, html.frutiger-aero body {
   height: 100%;
 }
-.ice-cream body {
+.frutiger-aero body {
   display: flex;
   flex-direction: column;
 }
-.ice-cream main {
+.frutiger-aero main {
   flex: 1 1 auto;
 }
 
 /* Pillarbox bars (black)
    Bars are now rendered by `ribbons-of-life.js` into the background canvas.
    Keep these pseudo-elements disabled to avoid double bars/overlays. */
-html.ice-cream::before,
-html.ice-cream::after {
+html.frutiger-aero::before,
+html.frutiger-aero::after {
   content: "";
   display: none;
   width: 0;
@@ -197,24 +196,24 @@ html.ice-cream::after {
 /* Keep primary content above the pillarbox pseudo-elements.
    Some niche/older engines miscompute viewport units during zoom, which can
    cause the side bars to briefly cover the whole screen. */
-.ice-cream .nav-container,
-.ice-cream .page-name-container,
-.ice-cream main,
-.ice-cream .social-bar,
-.ice-cream .site-footer,
-.ice-cream footer {
+.frutiger-aero .nav-container,
+.frutiger-aero .page-name-container,
+.frutiger-aero main,
+.frutiger-aero .social-bar,
+.frutiger-aero .site-footer,
+.frutiger-aero footer {
   position: relative;
   z-index: 9001;
 }
 
-.ice-cream body {
+.frutiger-aero body {
   background: transparent;
   min-height: 100vh;
   position: relative;
   padding-top: 0; /* compact banner: no extra reserved space */
 }
 
-.ice-cream .ribbons-canvas {
+.frutiger-aero .ribbons-canvas {
   position: fixed;
   inset: 0;
   width: 100vw;
@@ -225,18 +224,18 @@ html.ice-cream::after {
   filter: saturate(1.05);
 }
 
-.ice-cream body main {
+.frutiger-aero body main {
   padding-bottom: 0;
 }
 
-.ice-cream body[data-scroll-locked] main {
+.frutiger-aero body[data-scroll-locked] main {
   filter: blur(8px);
 }
 
 /* =======================
    Popover & Overlay
    ======================= */
-.ice-cream .bg-popover {
+.frutiger-aero .bg-popover {
   /* slightly more translucent glass-like popover */
   background: linear-gradient(
     165deg,
@@ -254,14 +253,14 @@ html.ice-cream::after {
   color: #ffffff;
 }
 
-.ice-cream .overlay {
+.frutiger-aero .overlay {
   background: transparent;
 }
 
 /* =======================
    Main Content
    ======================= */
-.ice-cream main {
+.frutiger-aero main {
   /* slightly more translucent main panel to read as glass while keeping sheen */
   background: linear-gradient(
     180deg,
@@ -275,8 +274,7 @@ html.ice-cream::after {
               inset 0px 2px 1px rgba(255, 255, 255, 0.31),
               inset 0px -2px 1px rgba(0, 0, 0, 0.4);
   margin: 1rem auto;
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   max-width: 1200px;
   background-blend-mode: overlay;
   color: #ffffff;
@@ -284,7 +282,7 @@ html.ice-cream::after {
 }
 
 /* Panel header: centered and pinned to top of the panel */
-.ice-cream .site-header {
+.frutiger-aero .site-header {
   /* cancel main padding so the header sits flush at the top of the panel */
   margin: -1rem -1rem 1rem;
   padding: 1rem;
@@ -294,7 +292,7 @@ html.ice-cream::after {
   box-sizing: border-box;
 }
 
-.ice-cream .site-header > * {
+.frutiger-aero .site-header > * {
   width: 100%;
   max-width: 100%;
   margin-left: auto;
@@ -302,15 +300,15 @@ html.ice-cream::after {
   text-align: center;
 }
 
-.ice-cream .site-header h1 {
+.frutiger-aero .site-header h1 {
   margin: 0;
 }
 
-.ice-cream .site-header p {
+.frutiger-aero .site-header p {
   margin: 0.35rem 0 0;
 }
 
-.ice-cream .panel-back {
+.frutiger-aero .panel-back {
   position: absolute;
   top: 12px;
   left: 12px;
@@ -331,37 +329,31 @@ html.ice-cream::after {
 }
 
 /* Pages with a panel back button: keep first content from sitting underneath it */
-.ice-cream .panel-back + section {
+.frutiger-aero .panel-back + section {
   padding-top: 64px;
 }
 
-.ice-cream .panel-back img {
+.frutiger-aero .panel-back img {
   width: 32px;
   height: 32px;
   display: block;
   pointer-events: none;
 }
 
-.ice-cream .panel-back:hover,
-.ice-cream .panel-back:focus {
+.frutiger-aero .panel-back:hover,
+.frutiger-aero .panel-back:focus {
   background: none;
   outline: none;
   box-shadow: none;
 }
 
 /* give extra breathing room after the about section */
-.ice-cream .about-piyoverse { padding-bottom: 2.25rem; margin-bottom: 1.25rem; }
-
-/* Make About body text slightly smaller (home + About page share the same i18n key) */
-.ice-cream [data-i18n="about-desc"] {
-  font-size: 0.95rem;
-  line-height: 1.25;
-}
+.frutiger-aero .about-piyoverse { padding-bottom: 2.25rem; margin-bottom: 1.25rem; }
 
 /* when panels are forced solid, replace translucent backgrounds with solid variants */
-html.ice-cream.solid-panels main,
-html.ice-cream.solid-panels .bg-popover,
-html.ice-cream.solid-panels .game-card {
+html.frutiger-aero.solid-panels main,
+html.frutiger-aero.solid-panels .bg-popover,
+html.frutiger-aero.solid-panels .game-card {
   /* Light-mode solid panels: keep a gentle gradient so the panels are opaque
      but not harsh — this preserves decorative overlays while switching to
      a brighter, high-contrast surface. */
@@ -371,47 +363,47 @@ html.ice-cream.solid-panels .game-card {
 }
 
 /* ensure content sits above the solid overlay and inherits the dark text */
-html.ice-cream.solid-panels main > *,
-html.ice-cream.solid-panels .bg-popover > *,
-html.ice-cream.solid-panels .game-card > * {
+html.frutiger-aero.solid-panels main > *,
+html.frutiger-aero.solid-panels .bg-popover > *,
+html.frutiger-aero.solid-panels .game-card > * {
   position: relative;
   z-index: 1;
   color: inherit;
 }
 
 /* In light panel mode, ensure muted text and meta use slightly darker greys */
-html.ice-cream.solid-panels .game-desc,
-html.ice-cream.solid-panels .game-meta,
-html.ice-cream.solid-panels .muted {
+html.frutiger-aero.solid-panels .game-desc,
+html.frutiger-aero.solid-panels .game-meta,
+html.frutiger-aero.solid-panels .muted {
   color: #23303b !important;
 }
 
 /* Force panel text to white in default (dark) mode so no blue headings appear */
-.ice-cream main,
-.ice-cream .bg-popover,
-.ice-cream .game-card,
-.ice-cream .settings-panel {
+.frutiger-aero main,
+.frutiger-aero .bg-popover,
+.frutiger-aero .game-card,
+.frutiger-aero .settings-panel {
   color: #ffffff !important;
 }
 
 /* Ensure headings, links, and meta inside panels are white unless explicitly overridden */
-.ice-cream main h1,
-.ice-cream main h2,
-.ice-cream main h3,
-.ice-cream main p,
-.ice-cream main li,
-.ice-cream main a,
-.ice-cream .settings-panel h2,
-.ice-cream .settings-panel label,
-.ice-cream .settings-panel select,
-.ice-cream .game-card h3,
-.ice-cream .game-card .game-meta,
-.ice-cream .social-label {
+.frutiger-aero main h1,
+.frutiger-aero main h2,
+.frutiger-aero main h3,
+.frutiger-aero main p,
+.frutiger-aero main li,
+.frutiger-aero main a,
+.frutiger-aero .settings-panel h2,
+.frutiger-aero .settings-panel label,
+.frutiger-aero .settings-panel select,
+.frutiger-aero .game-card h3,
+.frutiger-aero .game-card .game-meta,
+.frutiger-aero .social-label {
   color: #ffffff !important;
 }
 
 /* Footer should be its own panel with white text */
-.ice-cream .site-footer {
+.frutiger-aero .site-footer {
   /* Match the panel gradient used by `main` and other panels for visual consistency */
   background: linear-gradient(
     180deg,
@@ -422,22 +414,15 @@ html.ice-cream.solid-panels .muted {
   padding: 1rem;
   border-radius: 1.75rem;
   margin: 1rem auto 2rem auto;
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   max-width: 1200px;
   box-shadow: 0px 8px 20px rgba(0,0,0,0.48);
   color: #ffffff;
 }
-.ice-cream .site-footer p { margin: 0.4rem 0; color: #ffffff; }
-
-/* Legal text: make it about half the normal footer size */
-.ice-cream .site-footer .legal-note {
-  font-size: 0.45rem;
-  line-height: 1.2;
-}
+.frutiger-aero .site-footer p { margin: 0.4rem 0; color: #ffffff; }
 
 /* Ensure the Starcrest teaser image fits inside the home panel */
-.ice-cream .upcoming-release .starcrest-teaser {
+.frutiger-aero .upcoming-release .starcrest-teaser {
   display: block;
   width: 100%;
   max-width: 480px;
@@ -448,7 +433,7 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* Divider between social links and legal text in footer */
-.ice-cream .footer-divider {
+.frutiger-aero .footer-divider {
   border: 0;
   height: 1px;
   background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.16), rgba(255,255,255,0.06));
@@ -458,7 +443,7 @@ html.ice-cream.solid-panels .muted {
 /* =======================
    Prose / Images / Code
    ======================= */
-.ice-cream .prose img {
+.frutiger-aero .prose img {
   border-radius: 16px;
   border: solid 0.1rem white;
   filter: drop-shadow(2px 4px 6px black);
@@ -468,27 +453,27 @@ html.ice-cream.solid-panels .muted {
 
 /* Drop shadow for site chrome / text that is not inside a panel
    (panels like `main`, `.game-card`, `.bg-popover`, `.settings-panel`, `.site-footer`) */
-.ice-cream h1,
-.ice-cream h2,
-.ice-cream h3,
-.ice-cream p,
-.ice-cream a,
-.ice-cream li,
-.ice-cream .social-label,
-.ice-cream .site-title {
+.frutiger-aero h1,
+.frutiger-aero h2,
+.frutiger-aero h3,
+.frutiger-aero p,
+.frutiger-aero a,
+.frutiger-aero li,
+.frutiger-aero .social-label,
+.frutiger-aero .site-title {
   text-shadow: 0 2px 6px rgba(0,0,0,0.62);
 }
 
 /* Disable the shadow inside panels so panel text remains crisp */
-.ice-cream main *,
-.ice-cream .game-card *,
-.ice-cream .bg-popover *,
-.ice-cream .settings-panel *,
-.ice-cream .site-footer * {
+.frutiger-aero main *,
+.frutiger-aero .game-card *,
+.frutiger-aero .bg-popover *,
+.frutiger-aero .settings-panel *,
+.frutiger-aero .site-footer * {
   text-shadow: none !important;
 }
 
-.ice-cream .prose pre {
+.frutiger-aero .prose pre {
   background: linear-gradient(
     155deg,
     rgba(15, 71, 134, 0.596) 0%,
@@ -505,14 +490,13 @@ html.ice-cream.solid-panels .muted {
 /* =======================
    Navigation
    ======================= */
-.ice-cream .nav-container {
+.frutiger-aero .nav-container {
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: flex-start;
   margin: 10px auto 0.75rem;
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   max-width: 1200px;
   padding: 5px 10px;
   border-radius: 8px;
@@ -522,7 +506,7 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* Small logo in the top-left of the banner/nav panel */
-.ice-cream .nav-logo {
+.frutiger-aero .nav-logo {
   position: static;
   width: clamp(60px, 8vw, 92px);
   height: clamp(60px, 8vw, 92px);
@@ -531,7 +515,7 @@ html.ice-cream.solid-panels .muted {
   margin-right: 1.2rem; /* give extra space between logo and nav items */
 }
 
-.ice-cream .nav-logo img {
+.frutiger-aero .nav-logo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -541,9 +525,8 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* Centered page name between banner/nav and main panel */
-.ice-cream .page-name-container {
-  box-sizing: border-box;
-  width: var(--content-width);
+.frutiger-aero .page-name-container {
+  width: min(1200px, var(--safe-width));
   max-width: 1200px;
   margin: 0.25rem auto 0;
   padding: 0 1rem;
@@ -551,7 +534,7 @@ html.ice-cream.solid-panels .muted {
   justify-content: center;
 }
 
-.ice-cream .page-name {
+.frutiger-aero .page-name {
   font-weight: 800;
   color: #ffffff;
   line-height: 1.1;
@@ -560,7 +543,7 @@ html.ice-cream.solid-panels .muted {
   text-align: center;
 }
 
-.ice-cream .nav-item {
+.frutiger-aero .nav-item {
   padding: 0.25rem 1rem;
   border-radius: 999px;
   filter: drop-shadow(2px 1px 1px black);
@@ -572,10 +555,10 @@ html.ice-cream.solid-panels .muted {
   transition: all 0.3s ease;
 }
 
-.ice-cream .nav-container .nav-item:first-of-type { margin-left: 0.6rem; }
+.frutiger-aero .nav-container .nav-item:first-of-type { margin-left: 0.6rem; }
 
 /* Settings panel save button should match other action buttons */
-.ice-cream .settings-panel .btn {
+.frutiger-aero .settings-panel .btn {
   padding: 0.35rem 0.85rem;
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
@@ -590,14 +573,14 @@ html.ice-cream.solid-panels .muted {
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
-.ice-cream .settings-panel .btn:hover,
-.ice-cream .settings-panel .btn:focus {
+.frutiger-aero .settings-panel .btn:hover,
+.frutiger-aero .settings-panel .btn:focus {
   background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0,0,0,0.55);
 }
 
-.ice-cream .nav-item:hover {
+.frutiger-aero .nav-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.55);
   /* match the strong blue highlighted state used by game action buttons */
@@ -607,13 +590,12 @@ html.ice-cream.solid-panels .muted {
 /* =======================
    Footer
    ======================= */
-.ice-cream .site-footer {
+.frutiger-aero .site-footer {
   text-align: center;
   padding: 1rem;
   font-size: 0.9rem;
   color: var(--highlight);
-  box-sizing: border-box;
-  width: var(--content-width);
+  width: min(1200px, var(--safe-width));
   margin-left: auto;
   margin-right: auto;
 }
@@ -623,10 +605,10 @@ html.ice-cream.solid-panels .muted {
    Applies to native buttons and elements using `.btn` (excludes plain links)
    ======================= */
 
-.ice-cream button,
-.ice-cream .btn,
-.ice-cream input[type="button"],
-.ice-cream input[type="submit"] {
+.frutiger-aero button,
+.frutiger-aero .btn,
+.frutiger-aero input[type="button"],
+.frutiger-aero input[type="submit"] {
   position: relative;
   display: inline-block;
   appearance: none;
@@ -644,11 +626,11 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* gradient outline using a blurred pseudo-element */
-.ice-cream .nav-item::before,
-.ice-cream button::before,
-.ice-cream .btn::before,
-.ice-cream input[type="button"]::before,
-.ice-cream input[type="submit"]::before {
+.frutiger-aero .nav-item::before,
+.frutiger-aero button::before,
+.frutiger-aero .btn::before,
+.frutiger-aero input[type="button"]::before,
+.frutiger-aero input[type="submit"]::before {
   content: "";
   position: absolute;
   /* make the glow tighter and very subtle */
@@ -664,11 +646,11 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* animated circular aura */
-.ice-cream .nav-item::after,
-.ice-cream button::after,
-.ice-cream .btn::after,
-.ice-cream input[type="button"]::after,
-.ice-cream input[type="submit"]::after {
+.frutiger-aero .nav-item::after,
+.frutiger-aero button::after,
+.frutiger-aero .btn::after,
+.frutiger-aero input[type="button"]::after,
+.frutiger-aero input[type="submit"]::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -687,32 +669,32 @@ html.ice-cream.solid-panels .muted {
   z-index: 0;
 }
 
-.ice-cream .nav-item:hover::before,
-.ice-cream button:hover::before,
-.ice-cream .btn:hover::before,
-.ice-cream input[type="button"]:hover::before,
-.ice-cream input[type="submit"]:hover::before,
-.ice-cream .nav-item:focus::before,
-.ice-cream button:focus::before,
-.ice-cream .btn:focus::before,
-.ice-cream input[type="button"]:focus::before,
-.ice-cream input[type="submit"]:focus::before {
+.frutiger-aero .nav-item:hover::before,
+.frutiger-aero button:hover::before,
+.frutiger-aero .btn:hover::before,
+.frutiger-aero input[type="button"]:hover::before,
+.frutiger-aero input[type="submit"]:hover::before,
+.frutiger-aero .nav-item:focus::before,
+.frutiger-aero button:focus::before,
+.frutiger-aero .btn:focus::before,
+.frutiger-aero input[type="button"]:focus::before,
+.frutiger-aero input[type="submit"]:focus::before {
   /* very low-opacity cyan outline */
   opacity: 0.22;
   transform: translateZ(0);
   animation: outline-drift 3.6s linear infinite;
 }
 
-.ice-cream .nav-item:hover::after,
-.ice-cream button:hover::after,
-.ice-cream .btn:hover::after,
-.ice-cream input[type="button"]:hover::after,
-.ice-cream input[type="submit"]:hover::after,
-.ice-cream .nav-item:focus-visible::after,
-.ice-cream button:focus-visible::after,
-.ice-cream .btn:focus-visible::after,
-.ice-cream input[type="button"]:focus-visible::after,
-.ice-cream input[type="submit"]:focus-visible::after {
+.frutiger-aero .nav-item:hover::after,
+.frutiger-aero button:hover::after,
+.frutiger-aero .btn:hover::after,
+.frutiger-aero input[type="button"]:hover::after,
+.frutiger-aero input[type="submit"]:hover::after,
+.frutiger-aero .nav-item:focus-visible::after,
+.frutiger-aero button:focus-visible::after,
+.frutiger-aero .btn:focus-visible::after,
+.frutiger-aero input[type="button"]:focus-visible::after,
+.frutiger-aero input[type="submit"]:focus-visible::after {
   /* very low-opacity cyan aura */
   opacity: 0.12;
   transform: translate(-50%, -50%) scale(1);
@@ -720,11 +702,11 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* Theme-aware background for interactive chrome when hovered */
-.ice-cream .btn:hover,
-.ice-cream button:hover,
-.ice-cream input[type="button"]:hover,
-.ice-cream input[type="submit"]:hover,
-.ice-cream .nav-item:hover {
+.frutiger-aero .btn:hover,
+.frutiger-aero button:hover,
+.frutiger-aero input[type="button"]:hover,
+.frutiger-aero input[type="submit"]:hover,
+.frutiger-aero .nav-item:hover {
   background: var(--ribbons-accent) !important;
   color: var(--accent-foreground) !important;
   box-shadow: 0 6px 22px rgba(var(--ribbons-accent-rgb, 87,188,255),0.22);
@@ -733,12 +715,12 @@ html.ice-cream.solid-panels .muted {
 /* Marketplace-style hover for buttons: grey gradient + sheen + stronger shading
    Use high specificity and !important to override theme accent hover where
    a marketplace-style, neutral hover is desired (matches marketplace buttons). */
-.ice-cream .btn:hover,
-.ice-cream button:hover,
-.ice-cream input[type="button"]:hover,
-.ice-cream input[type="submit"]:hover,
-.ice-cream .settings-panel .btn:hover,
-.ice-cream .game-actions .btn:hover {
+.frutiger-aero .btn:hover,
+.frutiger-aero button:hover,
+.frutiger-aero input[type="button"]:hover,
+.frutiger-aero input[type="submit"]:hover,
+.frutiger-aero .settings-panel .btn:hover,
+.frutiger-aero .game-actions .btn:hover {
   background-image:
     linear-gradient(to bottom, rgba(255,255,255,0.18), rgba(255,255,255,0.02)),
     linear-gradient(180deg, rgba(180,180,180,0.95), rgba(43,43,43,0.92)) !important;
@@ -749,18 +731,18 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* Add a subtle inset sheen to buttons on hover to match game-card sheen */
-.ice-cream .btn:hover::before,
-.ice-cream button:hover::before,
-.ice-cream input[type="button"]:hover::before,
-.ice-cream input[type="submit"]:hover::before {
+.frutiger-aero .btn:hover::before,
+.frutiger-aero button:hover::before,
+.frutiger-aero input[type="button"]:hover::before,
+.frutiger-aero input[type="submit"]:hover::before {
   opacity: 0.14 !important;
   filter: none !important;
 }
 
 /* Keep pseudo-element glow visible and ensure text remains above */
-.ice-cream .btn:hover > *,
-.ice-cream button:hover > *,
-.ice-cream .nav-item:hover > * { position: relative; z-index: 3; }
+.frutiger-aero .btn:hover > *,
+.frutiger-aero button:hover > *,
+.frutiger-aero .nav-item:hover > * { position: relative; z-index: 3; }
 
 @keyframes circle-pulse {
   0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
@@ -777,19 +759,19 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* Ensure the outline sits behind the button content */
-.ice-cream button > *,
-.ice-cream .btn > * { position: relative; z-index: 2; }
-.ice-cream .social-bar { gap: 10px; }
-.ice-cream .social-item { display:inline-flex; flex-direction: column; align-items:center; gap:8px; flex: 0 0 auto; }
-.ice-cream .social-label { color: var(--foreground); text-decoration: none; font-size: 0.85rem; }
-.ice-cream .social-label:hover { text-decoration: underline; }
+.frutiger-aero button > *,
+.frutiger-aero .btn > * { position: relative; z-index: 2; }
+.frutiger-aero .social-bar { gap: 10px; }
+.frutiger-aero .social-item { display:inline-flex; flex-direction: column; align-items:center; gap:8px; flex: 0 0 auto; }
+.frutiger-aero .social-label { color: var(--foreground); text-decoration: none; font-size: 0.85rem; }
+.frutiger-aero .social-label:hover { text-decoration: underline; }
 
 /* If the flat structure is used (a.social-link only), ensure no overlap
   by forcing social-link to be smaller and labels to appear if present */
-.ice-cream .social-link { display:block; margin:0; }
+.frutiger-aero .social-link { display:block; margin:0; }
 
 
-.ice-cream .social-bar {
+.frutiger-aero .social-bar {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -804,7 +786,7 @@ html.ice-cream.solid-panels .muted {
   -webkit-overflow-scrolling: touch;
 }
 
-.ice-cream .social-link {
+.frutiger-aero .social-link {
   width: 48px;
   height: 48px;
   display: inline-block;
@@ -818,7 +800,7 @@ html.ice-cream.solid-panels .muted {
 }
 
 /* subtle overlay glow using pseudo-element so icons themselves remain crisp */
-.ice-cream .social-link::after {
+.frutiger-aero .social-link::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -831,34 +813,34 @@ html.ice-cream.solid-panels .muted {
   pointer-events: none;
 }
 
-.ice-cream .social-link:hover,
-.ice-cream .social-link:focus {
+.frutiger-aero .social-link:hover,
+.frutiger-aero .social-link:focus {
   transform: translateY(-4px) scale(1.06);
   box-shadow: 0 8px 18px rgba(0,0,0,0.55);
   z-index: 2;
 }
 
-.ice-cream .social-link:hover::after,
-.ice-cream .social-link:focus::after {
+.frutiger-aero .social-link:hover::after,
+.frutiger-aero .social-link:focus::after {
   opacity: 1;
   transform: scale(1.02);
 }
 
 /* per-icon backgrounds (update paths if assets are elsewhere) */
-.ice-cream .social-youtube { background-image: url('Images/youtubeicon.png'); }
-.ice-cream .social-discord { background-image: url('Images/discordicon.png'); }
-.ice-cream .social-bsky { background-image: url('Images/bskyicon.png'); }
-.ice-cream .social-twt { background-image: url('Images/twticon.png'); }
+.frutiger-aero .social-youtube { background-image: url('Images/youtubeicon.png'); }
+.frutiger-aero .social-discord { background-image: url('Images/discordicon.png'); }
+.frutiger-aero .social-bsky { background-image: url('Images/bskyicon.png'); }
+.frutiger-aero .social-twt { background-image: url('Images/twticon.png'); }
 
 /* IE11 fallback: if IE has trouble with the Bluesky icon, show a simple letter badge */
-.ie11 .ice-cream .social-bsky {
+.ie11 .frutiger-aero .social-bsky {
   background-image: none !important;
   background-color: #6fb3ff;
   display: flex !important;
   align-items: center;
   justify-content: center;
 }
-.ie11 .ice-cream .social-bsky::after {
+.ie11 .frutiger-aero .social-bsky::after {
   content: "B";
   color: #ffffff;
   font-weight: 800;
@@ -868,11 +850,11 @@ html.ice-cream.solid-panels .muted {
 
 /* optional: slightly larger icons on wider screens */
 @media (min-width: 900px) {
-  .ice-cream .social-link { width: 56px; height: 56px; border-radius: 12px; }
+  .frutiger-aero .social-link { width: 56px; height: 56px; border-radius: 12px; }
 }
 
 /* accessibility: focus outline for keyboard users */
-.ice-cream .social-link:focus {
+.frutiger-aero .social-link:focus {
   outline: 3px solid rgba(90,180,255,0.35);
   outline-offset: 3px;
 }
@@ -882,7 +864,7 @@ html.ice-cream.solid-panels .muted {
    Two game cards: Starcrest (Mega Drive) and Starcrest Adventure (GBC prototype)
    Responsive grid: 2 columns on wide screens, 1 column on narrow screens
    ======================= */
-.ice-cream .marketplace-choices {
+.frutiger-aero .marketplace-choices {
   display: flex;
   gap: 1.25rem;
   justify-content: center;
@@ -891,7 +873,7 @@ html.ice-cream.solid-panels .muted {
   margin: 1.75rem 0 0;
 }
 
-.ice-cream .marketplace-btn {
+.frutiger-aero .marketplace-btn {
   min-width: min(360px, 44vw);
   padding: 1.15rem 1.75rem;
   font-size: 1.35rem;
@@ -908,25 +890,25 @@ html.ice-cream.solid-panels .muted {
   box-shadow: 0 2px 10px rgba(0,0,0,0.35);
 }
 
-.ice-cream .marketplace-btn:hover,
-.ice-cream .marketplace-btn:focus-visible {
+.frutiger-aero .marketplace-btn:hover,
+.frutiger-aero .marketplace-btn:focus-visible {
   background: linear-gradient(180deg, rgba(180, 180, 180, 0.95), rgba(43, 43, 43, 0.92));
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0,0,0,0.55);
 }
 
-.ice-cream .games-section-title {
+.frutiger-aero .games-section-title {
   margin: 0.35rem 0 0.35rem;
   font-size: 1.05rem;
   font-weight: 800;
   color: #0b63d8;
 }
 
-.ice-cream main section + section {
+.frutiger-aero main section + section {
   margin-top: 1rem;
 }
 
-.ice-cream .game-grid {
+.frutiger-aero .game-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.2rem; /* increased spacing so hover outlines don't clip neighboring cards */
@@ -934,7 +916,7 @@ html.ice-cream.solid-panels .muted {
   align-items: start;
 }
 
-.ice-cream .game-card {
+.frutiger-aero .game-card {
   /* No inner panels — cards are purely content rows inside the mother panel.
     Remove padding/borders/shadows so each card doesn't read as a separate surface. */
   background: transparent;
@@ -949,12 +931,12 @@ html.ice-cream.solid-panels .muted {
   border: none;
 }
 
-.ice-cream .game-card .game-thumb {
+.frutiger-aero .game-card .game-thumb {
   grid-column: 1;
   grid-row: 1;
   align-self: start;
 }
-.ice-cream .game-card .game-info {
+.frutiger-aero .game-card .game-info {
   grid-column: 2;
   grid-row: 1;
   display: block;
@@ -964,7 +946,7 @@ html.ice-cream.solid-panels .muted {
   min-width: 0;
 }
 
-.ice-cream .game-card .game-thumb {
+.frutiger-aero .game-card .game-thumb {
   /* Thumbnail is inline content only — no background or shadow so it doesn't
      read as a separate panel. */
   width: 100%;
@@ -979,18 +961,18 @@ html.ice-cream.solid-panels .muted {
   min-height: 0;
 }
 
-.ice-cream .game-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.frutiger-aero .game-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
 
-.ice-cream .game-card h3,
-.ice-cream .game-card p {
+.frutiger-aero .game-card h3,
+.frutiger-aero .game-card p {
   margin: 0;
 }
 
-.ice-cream .game-title { font-size: 1.0rem; font-weight: 700; color: #0b63d8; line-height: 1.1; }
-.ice-cream .game-desc { color: rgba(255,255,255,0.92); font-size: 0.9rem; line-height: 1.18; }
-.ice-cream .game-meta { font-size: 0.8rem; color: rgba(255,255,255,0.78); line-height: 1.15; }
+.frutiger-aero .game-title { font-size: 1.0rem; font-weight: 700; color: #0b63d8; line-height: 1.1; }
+.frutiger-aero .game-desc { color: rgba(255,255,255,0.92); font-size: 0.9rem; line-height: 1.18; }
+.frutiger-aero .game-meta { font-size: 0.8rem; color: rgba(255,255,255,0.78); line-height: 1.15; }
 
-.ice-cream .game-actions {
+.frutiger-aero .game-actions {
   position: absolute;
   right: 0;
   top: 50%;
@@ -1001,17 +983,17 @@ html.ice-cream.solid-panels .muted {
 }
 
 @media (max-width: 560px) {
-  .ice-cream .game-card .game-info { padding-right: 0; }
-  .ice-cream .game-actions {
+  .frutiger-aero .game-card .game-info { padding-right: 0; }
+  .frutiger-aero .game-actions {
     position: static;
     transform: none;
     margin-top: 0.35rem;
   }
-  .ice-cream .game-actions .btn { width: 7.5rem; }
+  .frutiger-aero .game-actions .btn { width: 7.5rem; }
 }
 
 /* Make game action buttons look like the nav items for visual consistency */
-.ice-cream .game-actions .btn {
+.frutiger-aero .game-actions .btn {
   /* mirror .nav-item for consistent appearance: translucent light-blue -> blue base */
   padding: 0.35rem 0.85rem;
   width: 7.5rem;
@@ -1031,8 +1013,8 @@ html.ice-cream.solid-panels .muted {
   box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
-.ice-cream .game-actions .btn:hover,
-.ice-cream .game-actions .btn:focus-visible {
+.frutiger-aero .game-actions .btn:hover,
+.frutiger-aero .game-actions .btn:focus-visible {
   background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.5);
@@ -1042,16 +1024,16 @@ html.ice-cream.solid-panels .muted {
 /* games live directly in main; no extra panel */
 
 /* Card hover: subtle lift + tilt effect */
-.ice-cream .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: 14px; }
-.ice-cream .game-card:hover { /* subtle highlight only, no lift */ background-color: rgba(255,255,255,0.02); transform: none; }
+.frutiger-aero .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: 14px; }
+.frutiger-aero .game-card:hover { /* subtle highlight only, no lift */ background-color: rgba(255,255,255,0.02); transform: none; }
 
 /* Place outline around the content area (.game-info) so it doesn't overlap the thumbnail */
-.ice-cream .game-card { position: relative; }
+.frutiger-aero .game-card { position: relative; }
 /* ensure thumb and info sit above the outline */
-.ice-cream .game-card .game-thumb,
-.ice-cream .game-card .game-info { position: relative; z-index: 1; }
+.frutiger-aero .game-card .game-thumb,
+.frutiger-aero .game-card .game-info { position: relative; z-index: 1; }
 /* Outline around the full card, offset outward so it doesn't sit tight on the thumbnail */
-.ice-cream .game-card::after {
+.frutiger-aero .game-card::after {
   content: "";
   position: absolute;
   top: 0;
@@ -1069,15 +1051,16 @@ html.ice-cream.solid-panels .muted {
   transition: box-shadow 180ms ease, opacity 180ms ease;
   z-index: 2;
 }
-.ice-cream .game-card:hover::after {
+.frutiger-aero .game-card:hover::after {
   box-shadow:
+    0 0 0 2px var(--ribbons-outline),
     0 0 0 5px var(--ribbons-accent),
     0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18);
   background-image: none;
 }
 
 /* Translucent curved sheen at the top inside the outline */
-.ice-cream .game-card::before {
+.frutiger-aero .game-card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -1099,36 +1082,36 @@ html.ice-cream.solid-panels .muted {
   transform: translateY(0);
   mix-blend-mode: screen;
 }
-.ice-cream .game-card:hover::before { opacity: 1; transform: translateY(-2px); }
+.frutiger-aero .game-card:hover::before { opacity: 1; transform: translateY(-2px); }
 
 /* ensure thumbnail and info are above the sheen and outline */
-.ice-cream .game-card .game-thumb { position: relative; z-index: 2; }
-.ice-cream .game-card .game-info { position: relative; z-index: 3; }
+.frutiger-aero .game-card .game-thumb { position: relative; z-index: 2; }
+.frutiger-aero .game-card .game-info { position: relative; z-index: 3; }
 
 /* draw subtle separators between cards so the panel feels continuous */
 /* Removed separators — the games-panel is a single mother panel with content rows */
 
 /* Small screens: single column and tighter padding inside the panel */
 @media (max-width: 520px) {
-  .ice-cream .game-grid { grid-template-columns: 1fr; }
-  .ice-cream .game-card { grid-template-columns: 1fr; }
-  .ice-cream .game-card .game-thumb { grid-column: 1; grid-row: auto; width: 100%; }
-  .ice-cream .game-card .game-info { grid-column: 1; grid-row: auto; }
+  .frutiger-aero .game-grid { grid-template-columns: 1fr; }
+  .frutiger-aero .game-card { grid-template-columns: 1fr; }
+  .frutiger-aero .game-card .game-thumb { grid-column: 1; grid-row: auto; width: 100%; }
+  .frutiger-aero .game-card .game-info { grid-column: 1; grid-row: auto; }
 }
 
 @media (max-width: 520px) {
-  .ice-cream .game-grid { grid-template-columns: 1fr; }
-  .ice-cream .game-card .game-thumb { height: 80px; }
+  .frutiger-aero .game-grid { grid-template-columns: 1fr; }
+  .frutiger-aero .game-card .game-thumb { height: 80px; }
 }
 
 
 /* Ensure main site content stacks above the decorative icon */
-.ice-cream .nav-container,
-.ice-cream .page-name-container,
-.ice-cream main,
-.ice-cream .social-bar,
-.ice-cream .site-footer,
-.ice-cream footer {
+.frutiger-aero .nav-container,
+.frutiger-aero .page-name-container,
+.frutiger-aero main,
+.frutiger-aero .social-bar,
+.frutiger-aero .site-footer,
+.frutiger-aero footer {
   position: relative;
   z-index: 2;
 }
@@ -1139,12 +1122,12 @@ html.ice-cream.solid-panels .muted {
    ======================= */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   /* Ensure all main content is above the black bars */
-  .ice-cream .nav-container,
-  .ice-cream .page-name-container,
-  .ice-cream main,
-  .ice-cream .social-bar,
-  .ice-cream .site-footer,
-  .ice-cream footer {
+  .frutiger-aero .nav-container,
+  .frutiger-aero .page-name-container,
+  .frutiger-aero main,
+  .frutiger-aero .social-bar,
+  .frutiger-aero .site-footer,
+  .frutiger-aero footer {
     position: relative;
     z-index: 9001;
   }
@@ -1152,13 +1135,13 @@ html.ice-cream.solid-panels .muted {
   main, nav, section, article, figure, header, footer { display: block; }
 
   /* Logo sizing fallback (IE ignores clamp() and object-fit) */
-  .ice-cream .nav-logo {
+  .frutiger-aero .nav-logo {
     width: 80px;
     height: 80px;
     overflow: hidden;
     position: relative;
   }
-  .ice-cream .nav-logo img {
+  .frutiger-aero .nav-logo img {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1180,7 +1163,7 @@ html.ice-cream.solid-panels .muted {
   }
 
   /* Pillarbox bars injected by ie-fixes.js */
-  .ice-cream .ie-pillarbox {
+  .frutiger-aero .ie-pillarbox {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -1189,24 +1172,24 @@ html.ice-cream.solid-panels .muted {
     pointer-events: none;
     width: 0;
   }
-  .ice-cream .ie-pillarbox-left { left: 0; }
-  .ice-cream .ie-pillarbox-right { right: 0; }
+  .frutiger-aero .ie-pillarbox-left { left: 0; }
+  .frutiger-aero .ie-pillarbox-right { right: 0; }
 
   /* Safe-width sizing is applied via ie-fixes.js (inline styles). */
 
   /* Theme variables won't apply in IE; set practical fallbacks */
-  html.ice-cream {
+  html.frutiger-aero {
     background-color: #031024;
     color: #ffffff;
     background-attachment: scroll;
   }
-  .ice-cream { color: #ffffff; }
-  .ice-cream .page-name { color: #ffffff; }
-  .ice-cream .nav-item { color: #ffffff; }
-  .ice-cream .social-label { color: #ffffff; }
+  .frutiger-aero { color: #ffffff; }
+  .frutiger-aero .page-name { color: #ffffff; }
+  .frutiger-aero .nav-item { color: #ffffff; }
+  .frutiger-aero .social-label { color: #ffffff; }
 
   /* IE doesn't support `inset:`; make sure the background canvas truly covers the viewport */
-  .ice-cream .ribbons-canvas {
+  .frutiger-aero .ribbons-canvas {
     top: 0;
     left: 0;
     right: 0;
@@ -1217,32 +1200,33 @@ html.ice-cream.solid-panels .muted {
   }
 
   /* Replace var()-based gradients with fixed values */
-  .ice-cream .nav-item,
-  .ice-cream .marketplace-btn,
-  .ice-cream .game-actions .btn {
+  .frutiger-aero .nav-item,
+  .frutiger-aero .marketplace-btn,
+  .frutiger-aero .game-actions .btn {
     background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
     color: #fff;
   }
 
   /* Animated hover outline for game listings (IE11-safe, no CSS variables) */
-  .ice-cream .game-card:hover::after {
+  .frutiger-aero .game-card:hover::after {
     box-shadow:
+      0 0 0 2px rgba(43,111,160,0.95),
       0 0 0 5px rgba(182,220,255,0.95),
       0 0 14px rgba(182,220,255,0.95);
     background-image: none;
   }
-  .ice-cream .nav-item:hover,
-  .ice-cream .nav-item:focus,
-  .ice-cream .marketplace-btn:hover,
-  .ice-cream .marketplace-btn:focus,
-  .ice-cream .game-actions .btn:hover,
-  .ice-cream .game-actions .btn:focus,
-  .ice-cream .nav-item:active,
-  .ice-cream .nav-item:focus-visible,
-  .ice-cream .marketplace-btn:active,
-  .ice-cream .marketplace-btn:focus-visible,
-  .ice-cream .game-actions .btn:active,
-  .ice-cream .game-actions .btn:focus-visible {
+  .frutiger-aero .nav-item:hover,
+  .frutiger-aero .nav-item:focus,
+  .frutiger-aero .marketplace-btn:hover,
+  .frutiger-aero .marketplace-btn:focus,
+  .frutiger-aero .game-actions .btn:hover,
+  .frutiger-aero .game-actions .btn:focus,
+  .frutiger-aero .nav-item:active,
+  .frutiger-aero .nav-item:focus-visible,
+  .frutiger-aero .marketplace-btn:active,
+  .frutiger-aero .marketplace-btn:focus-visible,
+  .frutiger-aero .game-actions .btn:active,
+  .frutiger-aero .game-actions .btn:focus-visible {
     background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
     transform: translateY(1px);
     box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
@@ -1250,17 +1234,17 @@ html.ice-cream.solid-panels .muted {
   }
 
 /* Ensure controls have smooth transitions for the pressed state */
-.ice-cream .nav-item,
-.ice-cream .marketplace-btn,
-.ice-cream .game-actions .btn {
+.frutiger-aero .nav-item,
+.frutiger-aero .marketplace-btn,
+.frutiger-aero .game-actions .btn {
   transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 /* Apply similar pressed/focus styles to generic .btn and settings button */
-.ice-cream .btn:active,
-.ice-cream .btn:focus-visible,
-.ice-cream .settings-btn:active,
-.ice-cream .settings-btn:focus-visible {
+.frutiger-aero .btn:active,
+.frutiger-aero .btn:focus-visible,
+.frutiger-aero .settings-btn:active,
+.frutiger-aero .settings-btn:focus-visible {
   background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(1px);
   box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
@@ -1268,54 +1252,54 @@ html.ice-cream.solid-panels .muted {
 }
 
   /* Flex gap fallback: use margins instead */
-  .ice-cream .social-bar { display: block; text-align: center; }
-  .ice-cream .social-item { display: inline-block; margin: 0 5px; }
-  .ice-cream .social-item .social-label { margin-top: 8px; }
+  .frutiger-aero .social-bar { display: block; text-align: center; }
+  .frutiger-aero .social-item { display: inline-block; margin: 0 5px; }
+  .frutiger-aero .social-item .social-label { margin-top: 8px; }
 
-  .ice-cream .marketplace-choices { display: block; text-align: center; }
-  .ice-cream .marketplace-btn { display: inline-block; margin: 0.625rem; }
+  .frutiger-aero .marketplace-choices { display: block; text-align: center; }
+  .frutiger-aero .marketplace-btn { display: inline-block; margin: 0.625rem; }
 
   /* Game list: CSS Grid -> flexbox (keeps the same visual layout: thumb left, text right) */
-  .ice-cream .game-grid { display: block; }
-  .ice-cream .game-card {
+  .frutiger-aero .game-grid { display: block; }
+  .frutiger-aero .game-card {
     display: flex;
     align-items: flex-start;
   }
 
   /* Replace clamp()/aspect-ratio sizing with fixed, IE-safe sizing */
-  .ice-cream .game-card .game-thumb {
+  .frutiger-aero .game-card .game-thumb {
     width: 80px;
     height: 80px;
     margin-right: 0.8rem;
     flex: 0 0 auto;
   }
-  .ice-cream .game-card .game-info {
+  .frutiger-aero .game-card .game-info {
     display: block;
     flex: 1 1 auto;
   }
-  .ice-cream .game-info > * { margin-bottom: 0.1rem; }
-  .ice-cream .game-info > *:last-child { margin-bottom: 0; }
+  .frutiger-aero .game-info > * { margin-bottom: 0.1rem; }
+  .frutiger-aero .game-info > *:last-child { margin-bottom: 0; }
 
   /* Buttons spacing: gap -> margins */
-  .ice-cream .game-actions { display: block; margin-top: 0.25rem; }
-  .ice-cream .game-actions .btn { margin-right: 0.5rem; }
-  .ice-cream .game-actions .btn:last-child { margin-right: 0; }
+  .frutiger-aero .game-actions { display: block; margin-top: 0.25rem; }
+  .frutiger-aero .game-actions .btn { margin-right: 0.5rem; }
+  .frutiger-aero .game-actions .btn:last-child { margin-right: 0; }
 }
 
 /* IE7-specific fallback overrides (activated when `html` has class `ie7`) */
 /* IE7-specific fallback overrides (activated when `html` has class `ie7`) */
 /* Apply broadly for any page that ends up with `html.ie7` so pages that
-   don't include `ice-cream` still receive the IE7-safe rules. */
+   don't include `frutiger-aero` still receive the IE7-safe rules. */
 html.ie7,
-html.ie7.ice-cream {
+html.ie7.frutiger-aero {
   background: #031428 !important; /* stable dark background similar to modern gradient */
 }
 
 /* Remove CSS pseudo-element pillarbox bars when IE7 mode is active */
 html.ie7::before,
 html.ie7::after,
-html.ie7.ice-cream::before,
-html.ie7.ice-cream::after {
+html.ie7.frutiger-aero::before,
+html.ie7.frutiger-aero::after {
   display: none !important;
   content: none !important;
 }
@@ -1335,7 +1319,7 @@ html.ie7 .ie-pillarbox-right {
   pointer-events: none !important;
 }
 
-/* Simplify panel backgrounds and sizing for IE7 (apply regardless of ice-cream)
+/* Simplify panel backgrounds and sizing for IE7 (apply regardless of frutiger-aero)
    so the layout is visually consistent across all pages in IE7 mode. */
 html.ie7 main,
 html.ie7 .bg-popover,
@@ -1377,12 +1361,6 @@ html.ie7 .social-bar .social-item .social-link { display: inline-block !importan
 html.ie7 .social-bar .social-item .social-link img { width: 48px !important; height: 48px !important; max-width: 48px !important; max-height: 48px !important; display: block !important; object-fit: contain !important; }
 html.ie7 .social-bar .social-item .social-label { display: block !important; margin-top: 6px !important; font-size: 0.85rem !important; }
 
-/* IE7: background-size isn't supported; use small 48x48 icon assets to avoid cropping */
-html.ie7 .ice-cream .social-youtube { background-image: url('Images/youtubeicon-48.png') !important; }
-html.ie7 .ice-cream .social-discord { background-image: url('Images/discordicon-48.png') !important; }
-html.ie7 .ice-cream .social-bsky { background-image: url('Images/bskyicon-48.png') !important; }
-html.ie7 .ice-cream .social-twt { background-image: url('Images/twticon-48.png') !important; }
-
 /* ------------------------------------------------------------------
   IE11 layout approximations
   These rules try to approximate the look/flow from IE11 so pages
@@ -1395,7 +1373,7 @@ html.ie11 .nav-container { display: flex !important; gap: 1rem !important; align
 html.ie11 .nav-container .nav-item { display: inline-block !important; float: none !important; margin: 0 0.45rem !important; }
 html.ie11 .nav-logo { width: 64px !important; height: 64px !important; margin-right: 0.8rem !important; overflow: hidden !important; }
 html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; display: block !important; }
-html.ie11 main { margin: 1rem auto !important; width: 94%; max-width: 1000px; padding: 1rem !important; border-radius: 34px !important; }
+html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 34px !important; }
 html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
 /* Avoid overly-large canvas stacking issues in forced IE11 layout */
 html.ie11 .ribbons-canvas { z-index: 0 !important; }
@@ -1488,42 +1466,16 @@ html.ie11 .game-card .game-thumb { flex: 0 0 85px !important; margin-right: 0.8r
 html.ie11 .game-card .game-info { flex: 1 1 auto !important; position: relative !important; padding-right: 180px !important; }
 html.ie11 .game-card .game-actions { position: absolute !important; top: 50% !important; right: 0 !important; transform: translateY(-50%) !important; margin-top: 0 !important; }
 
-/* constrain main width so content stays inside pillarbox bars */
-html.ie11 main { margin: 1rem auto !important; width: 94%; max-width: 1000px; padding: 1rem !important; border-radius: 34px !important; }
+/* constrain main width to a simpler fixed size similar to IE11 layouts */
+html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 34px !important; }
 
 /* Nav/logo adjustments to match IE11 sizing/flow */
-html.ie11 .nav-container {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  /* In IE mode, CSS variables can fail; keep nav constrained so the logo
-     and buttons remain inside the pillarbox safe area. */
-  width: 94%;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-html.ie11 .nav-logo { width: 72px !important; height: 72px !important; margin-right: 1rem !important; overflow: hidden !important; }
+html.ie11 .nav-container { display: flex !important; align-items: center !important; justify-content: flex-start !important; }
+html.ie11 .nav-logo { width: 72px !important; height: 72px !important; margin-right: 1rem !important; overflow: visible !important; }
 html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; display: block !important; }
 
-/* IE11 border fallback: modern outlines use CSS variables (unsupported in real IE11).
-   Provide a fixed-color outline so listings match modern mode more closely. */
-html.ie11 .ice-cream .game-card::after {
-  /* Use border (not box-shadow) so the outline reliably renders in IE11. */
-  box-shadow: none;
-  border: 1px solid #2b6fa0;
-  border: 1px solid var(--ribbons-outline);
-}
-
-html.ie11 .ice-cream .game-card:hover::after {
-  /* Slightly thinner than modern (4px instead of 5px) */
-  border: 4px solid #b6dcff;
-  border: 4px solid var(--ribbons-accent);
-  box-shadow: 0 0 10px rgba(182,220,255,0.75);
-}
-
 /* Center social tabs in IE11 by fixing the panel width and centering it */
-html.ie11 .social-bar { display: flex !important; justify-content: center !important; align-items: center !important; width: 94%; max-width: 1000px; margin: 0.75rem auto 0 !important; }
+html.ie11 .social-bar { display: flex !important; justify-content: center !important; align-items: center !important; width: 1000px !important; margin: 0.75rem auto 0 !important; }
 
 /* Ensure header and page title are centered and readable */
 html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
@@ -1535,10 +1487,7 @@ html.ie11 .page-name {
 }
 
 /* Make footer simpler and consistent width */
-html.ie11 .site-footer { width: 94%; max-width: 1000px; margin: 1rem auto 2rem auto !important; }
-
-/* Keep the page title panel inside the pillarbox safe area in IE11 */
-html.ie11 .page-name-container { width: 94%; max-width: 1000px; margin-left: auto; margin-right: auto; }
+html.ie11 .site-footer { width: 1000px !important; max-width: 1000px !important; margin: 1rem auto 2rem auto !important; }
 
 /* Keep the helper pillarbox rule in case some pages still need it */
 .no-pillarbox:before, .no-pillarbox:after { display: none !important; }
@@ -1548,11 +1497,11 @@ html.ie11 .page-name-container { width: 94%; max-width: 1000px; margin-left: aut
    - In dark theme: use the normal translucent dark panel gradient.
    - In light theme: use the light solid panel with dark text for contrast.
 */
-html.ice-cream.reduce-transparency[data-theme-mode="dark"] main,
-html.ice-cream.reduce-transparency[data-theme-mode="dark"] .bg-popover,
-html.ice-cream.reduce-transparency[data-theme-mode="dark"] .game-card,
-html.ice-cream.reduce-transparency[data-theme-mode="dark"] .settings-panel,
-html.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] main,
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .bg-popover,
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .game-card,
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .settings-panel,
+html.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .site-footer {
   /* Dark-mode reduced-transparency: keep the translucent dark surface but
      add a subtle accent tint so panels visually relate to the selected
      theme (uses --ribbons-accent-rgb if available). */
@@ -1569,11 +1518,11 @@ html.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
 }
 
 /* Ensure reduce-transparency also applies when IE11 mode is active */
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] main,
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .bg-popover,
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .game-card,
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .settings-panel,
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] main,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .bg-popover,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .game-card,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .settings-panel,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="dark"] .site-footer {
   background-image:
     linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
     linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(0,0,0,0) 60%);
@@ -1583,11 +1532,11 @@ html.ie11.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
   border: 1px solid rgba(var(--ribbons-outline-rgb,43,111,160),0.06) !important;
 }
 
-html.ice-cream.reduce-transparency[data-theme-mode="light"] main,
-html.ice-cream.reduce-transparency[data-theme-mode="light"] .bg-popover,
-html.ice-cream.reduce-transparency[data-theme-mode="light"] .game-card,
-html.ice-cream.reduce-transparency[data-theme-mode="light"] .settings-panel,
-html.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] main,
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] .bg-popover,
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] .game-card,
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] .settings-panel,
+html.frutiger-aero.reduce-transparency[data-theme-mode="light"] .site-footer {
   /* Light-mode reduced-transparency: lighter panels with a subtle tint
      drawn from the theme accent so the surface matches the selected theme. */
   /* Light panels: mix a near-white surface with a subtle theme-tint so the
@@ -1602,11 +1551,11 @@ html.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
 }
 
 /* Ensure reduce-transparency also applies when IE11 mode is active (light theme) */
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] main,
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .bg-popover,
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .game-card,
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .settings-panel,
-html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] main,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] .bg-popover,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] .game-card,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] .settings-panel,
+html.ie11.frutiger-aero.reduce-transparency[data-theme-mode="light"] .site-footer {
   background-image:
     linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(250,250,252,0.94) 60%),
     linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(255,255,255,0) 60%);
@@ -1620,14 +1569,14 @@ html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
    their decorative outlines so the panel surface doesn't bleed under the
    outline. This keeps the listing rows visually contained and improves
    contrast in accessibility modes. */
-html.ice-cream.reduce-transparency .game-card {
+html.frutiger-aero.reduce-transparency .game-card {
   padding: 0.6rem; /* ensure the content is inset from the edges */
   border-radius: 14px !important;
   position: relative !important;
   overflow: visible !important;
 }
 
-html.ice-cream.reduce-transparency .game-card::after {
+html.frutiger-aero.reduce-transparency .game-card::after {
   /* inset the outline to sit on the outside edge of the panel surface */
   top: 0 !important;
   right: 0 !important;
@@ -1638,7 +1587,7 @@ html.ice-cream.reduce-transparency .game-card::after {
   z-index: 2 !important;
 }
 
-html.ice-cream.reduce-transparency .game-card::before {
+html.frutiger-aero.reduce-transparency .game-card::before {
   /* sheen should be clipped inside the panel area */
   top: 0 !important;
   right: 0 !important;
@@ -1651,7 +1600,7 @@ html.ice-cream.reduce-transparency .game-card::before {
 
 /* Tint the internal sheen using the theme accent so reduced-transparency
    panels harmonize with the selected theme. */
-html.ice-cream.reduce-transparency .game-card::before {
+html.frutiger-aero.reduce-transparency .game-card::before {
   background-image:
     linear-gradient(to bottom, rgba(255,255,255,0.24), rgba(255,255,255,0.06)),
     linear-gradient(to bottom, rgba(var(--ribbons-accent-rgb,87,188,255),0.08), rgba(255,255,255,0.00)),
@@ -1693,13 +1642,13 @@ html.black-text .marketplace-btn {
 
 /* Also enforce colors for SVGs, pseudo-elements, and any deeper overrides.
    Use multiple selector variants to increase specificity against other
-   .ice-cream/.solid-panels rules that may also use !important. */
+   .frutiger-aero/.solid-panels rules that may also use !important. */
 html.black-text *,
 html.black-text *::before,
 html.black-text *::after,
-html.ice-cream.black-text *,
-html.ice-cream.black-text *::before,
-html.ice-cream.black-text *::after {
+html.frutiger-aero.black-text *,
+html.frutiger-aero.black-text *::before,
+html.frutiger-aero.black-text *::after {
   color: #071025 !important;
   fill: #071025 !important;
   stroke: #071025 !important;
@@ -1707,21 +1656,21 @@ html.ice-cream.black-text *::after {
 
 html.black-text svg,
 html.black-text svg *,
-html.ice-cream.black-text svg,
-html.ice-cream.black-text svg * {
+html.frutiger-aero.black-text svg,
+html.frutiger-aero.black-text svg * {
   fill: #071025 !important;
   stroke: #071025 !important;
 }
 
 /* Highest-specificity overrides to beat existing !important color rules
-   used elsewhere (like `.ice-cream main h1 { color: #fff !important; }`).
+   used elsewhere (like `.frutiger-aero main h1 { color: #fff !important; }`).
    Target combinations where `html` has both the theme and black-text. */
-html.ice-cream.black-text,
-html.ice-cream.black-text *,
-html.ie11.ice-cream.black-text,
-html.ie11.ice-cream.black-text *,
-html.black-text.ice-cream,
-html.black-text.ice-cream * {
+html.frutiger-aero.black-text,
+html.frutiger-aero.black-text *,
+html.ie11.frutiger-aero.black-text,
+html.ie11.frutiger-aero.black-text *,
+html.black-text.frutiger-aero,
+html.black-text.frutiger-aero * {
   color: #071025 !important;
   fill: #071025 !important;
   stroke: #071025 !important;
@@ -1742,10 +1691,10 @@ html.no-ribbons .ribbons-canvas { display: none !important; }
    for IE modes and modern browsers when requested, while preserving the
    decorative gradients and tinting them with the selected theme accent so
    the static background still matches the chosen theme. */
-html.ice-cream.no-ribbons,
-html.ie11.ice-cream.no-ribbons,
-html.ie7.ice-cream.no-ribbons,
-html.no-ribbons.ice-cream {
+html.frutiger-aero.no-ribbons,
+html.ie11.frutiger-aero.no-ribbons,
+html.ie7.frutiger-aero.no-ribbons,
+html.no-ribbons.frutiger-aero {
   /* Keep the background fixed so content scrolls independently. Use
      theme variables so the static background matches the selected theme. */
   background-attachment: fixed !important;
@@ -1761,8 +1710,8 @@ html.no-ribbons.ice-cream {
 }
 
 /* Light-mode variant: use a light base but keep theme accent overlay */
-html.ice-cream.no-ribbons[data-theme-mode="light"],
-html.no-ribbons.ice-cream[data-theme-mode="light"] {
+html.frutiger-aero.no-ribbons[data-theme-mode="light"],
+html.no-ribbons.frutiger-aero[data-theme-mode="light"] {
   background-attachment: fixed !important;
   background-position: center top !important;
   background-repeat: no-repeat !important;
@@ -1780,10 +1729,10 @@ html.no-ribbons.ice-cream[data-theme-mode="light"] {
    (which may only understand `:before/:after`) are covered. */
 html.ie7:before,
 html.ie7:after,
-html.ice-cream:before,
-html.ice-cream:after,
-html.ie7.ice-cream:before,
-html.ie7.ice-cream:after,
+html.frutiger-aero:before,
+html.frutiger-aero:after,
+html.ie7.frutiger-aero:before,
+html.ie7.frutiger-aero:after,
 .no-pillarbox:before,
 .no-pillarbox:after {
   display: none !important;
@@ -1794,12 +1743,12 @@ html.ie7.ice-cream:after,
    declarations so modern mode and IE11 mode show the black side bars.
    Use :not(.no-pillarbox) so the helper class can still hide them when
    explicitly requested. */
-html.ice-cream:not(.no-pillarbox)::before,
-html.ice-cream:not(.no-pillarbox)::after,
-html.ie11.ice-cream:not(.no-pillarbox)::before,
-html.ie11.ice-cream:not(.no-pillarbox)::after,
-html:not(.no-pillarbox).ice-cream::before,
-html:not(.no-pillarbox).ice-cream::after {
+html.frutiger-aero:not(.no-pillarbox)::before,
+html.frutiger-aero:not(.no-pillarbox)::after,
+html.ie11.frutiger-aero:not(.no-pillarbox)::before,
+html.ie11.frutiger-aero:not(.no-pillarbox)::after,
+html:not(.no-pillarbox).frutiger-aero::before,
+html:not(.no-pillarbox).frutiger-aero::after {
   content: "" !important;
   position: fixed !important;
   top: 0 !important;
@@ -1810,4 +1759,3 @@ html:not(.no-pillarbox).ice-cream::after {
   pointer-events: none !important;
   display: block !important;
 }
-
