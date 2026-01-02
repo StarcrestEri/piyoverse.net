@@ -11,7 +11,7 @@ Usage (from repo root):
 
 Notes:
 - This updates files in-place. Commit or back up your repo first.
-- It only handles filenames at the repository root. If you keep page files in subfolders, run from that folder instead.
+- It only handles filenames at the repository root. If page files are in subfolders, run from that folder instead.
 #>
 
 Set-StrictMode -Version Latest

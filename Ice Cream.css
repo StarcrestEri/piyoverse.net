@@ -183,24 +183,16 @@ html.ice-cream, html.ice-cream body {
   flex: 1 1 auto;
 }
 
-/* Pillarbox bars (black) */
+/* Pillarbox bars (black)
+   Bars are now rendered by `ribbons-of-life.js` into the background canvas.
+   Keep these pseudo-elements disabled to avoid double bars/overlays. */
 html.ice-cream::before,
 html.ice-cream::after {
   content: "";
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  /* Default to no bars for engines that don't support CSS variables.
-     Prevents full-screen black overlays on browsers that treat var() as invalid. */
+  display: none;
   width: 0;
-  width: var(--side-bar-width);
-  background: #000;
-  z-index: 9000;
   pointer-events: none;
 }
-
-html.ice-cream::before { left: 0; }
-html.ice-cream::after { right: 0; }
 
 /* Keep primary content above the pillarbox pseudo-elements.
    Some niche/older engines miscompute viewport units during zoom, which can
@@ -792,8 +784,8 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .social-label { color: var(--foreground); text-decoration: none; font-size: 0.85rem; }
 .ice-cream .social-label:hover { text-decoration: underline; }
 
-/* If someone keeps the flat structure (a.social-link only), ensure no overlap
-   by forcing social-link to be smaller and labels to appear if present */
+/* If the flat structure is used (a.social-link only), ensure no overlap
+  by forcing social-link to be smaller and labels to appear if present */
 .ice-cream .social-link { display:block; margin:0; }
 
 
@@ -852,7 +844,7 @@ html.ice-cream.solid-panels .muted {
   transform: scale(1.02);
 }
 
-/* per-icon backgrounds (update paths if your assets are elsewhere) */
+/* per-icon backgrounds (update paths if assets are elsewhere) */
 .ice-cream .social-youtube { background-image: url('Images/youtubeicon.png'); }
 .ice-cream .social-discord { background-image: url('Images/discordicon.png'); }
 .ice-cream .social-bsky { background-image: url('Images/bskyicon.png'); }
@@ -1385,6 +1377,12 @@ html.ie7 .social-bar .social-item .social-link { display: inline-block !importan
 html.ie7 .social-bar .social-item .social-link img { width: 48px !important; height: 48px !important; max-width: 48px !important; max-height: 48px !important; display: block !important; object-fit: contain !important; }
 html.ie7 .social-bar .social-item .social-label { display: block !important; margin-top: 6px !important; font-size: 0.85rem !important; }
 
+/* IE7: background-size isn't supported; use small 48x48 icon assets to avoid cropping */
+html.ie7 .ice-cream .social-youtube { background-image: url('Images/youtubeicon-48.png') !important; }
+html.ie7 .ice-cream .social-discord { background-image: url('Images/discordicon-48.png') !important; }
+html.ie7 .ice-cream .social-bsky { background-image: url('Images/bskyicon-48.png') !important; }
+html.ie7 .ice-cream .social-twt { background-image: url('Images/twticon-48.png') !important; }
+
 /* ------------------------------------------------------------------
   IE11 layout approximations
   These rules try to approximate the look/flow from IE11 so pages
@@ -1511,8 +1509,17 @@ html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-w
 /* IE11 border fallback: modern outlines use CSS variables (unsupported in real IE11).
    Provide a fixed-color outline so listings match modern mode more closely. */
 html.ie11 .ice-cream .game-card::after {
-  box-shadow: 0 0 0 1px #2b6fa0;
-  box-shadow: 0 0 0 1px var(--ribbons-outline);
+  /* Use border (not box-shadow) so the outline reliably renders in IE11. */
+  box-shadow: none;
+  border: 1px solid #2b6fa0;
+  border: 1px solid var(--ribbons-outline);
+}
+
+html.ie11 .ice-cream .game-card:hover::after {
+  /* Slightly thinner than modern (4px instead of 5px) */
+  border: 4px solid #b6dcff;
+  border: 4px solid var(--ribbons-accent);
+  box-shadow: 0 0 10px rgba(182,220,255,0.75);
 }
 
 /* Center social tabs in IE11 by fixing the panel width and centering it */
@@ -1656,7 +1663,7 @@ html.ice-cream.reduce-transparency .game-card::before {
 
 /* Accessibility: force black text when requested */
 /* Apply a strong, global color override so any specific white/blue
-   rules are overridden when the user requests black text. This targets
+  rules are overridden when black text mode is enabled. This targets
    text-containing elements while leaving non-text properties untouched. */
 html.black-text,
 html.black-text * {
@@ -1728,7 +1735,7 @@ html.reduce-animation *::after {
   animation: none !important;
 }
 
-/* Disable ribbons: hide the canvas when user disables decorative ribbons/sparkles */
+/* Disable ribbons: hide the canvas when decorative ribbons/sparkles are disabled */
 html.no-ribbons .ribbons-canvas { display: none !important; }
 
 /* When ribbons are disabled, make the background static (no parallax/fixed)
