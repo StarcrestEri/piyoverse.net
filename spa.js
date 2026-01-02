@@ -2,6 +2,14 @@
 (function(){
   if(window.__spa_installed) return; window.__spa_installed = true;
 
+  // Ensure hover/outlines for game cards remain present after SPA swaps.
+  try{
+    var _s = document.createElement('style');
+    _s.id = 'spa-fallback-outline';
+    _s.textContent = '\n.frutiger-aero .game-card::after { content:""; position:absolute; top:6px; right:-4px; bottom:6px; left:-4px; border-radius:12px; box-shadow: 0 0 0 1px var(--ribbons-outline, #2b6fa0) !important; opacity:1 !important; pointer-events:none; transition: box-shadow 180ms ease, opacity 180ms ease; z-index:2; }\n.frutiger-aero .game-card:hover::after { box-shadow: 0 0 0 3px var(--ribbons-accent, #57bcff), 0 0 14px var(--ribbons-accent, #57bcff) !important; }\n.frutiger-aero .game-card::before { content:""; position:absolute; top:10px; bottom:6px; left:-4px; right:-4px; border-radius:10px; background-image: linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0.06)), linear-gradient(to bottom, var(--ribbons-accent, rgba(87,188,255,0.12)), rgba(255,255,255,0.00)), linear-gradient(to top, rgba(0,0,0,0.18), rgba(0,0,0,0.02)); background-position: top left, top left, bottom left; background-size: 100% 28px, 100% 28px, 100% 7px; background-repeat: no-repeat; opacity:0; pointer-events:none; transition: transform 180ms ease, opacity 180ms ease; z-index:1; }\n.frutiger-aero .game-card:hover::before { opacity:1 !important; transform: translateY(-2px) !important; }\n';
+    try{ document.getElementsByTagName('head')[0].appendChild(_s); }catch(e){}
+  }catch(e){}
+
   function isInternalLink(a){
     try{
       if(!a || !a.getAttribute) return false;
@@ -44,6 +52,9 @@
   function ajaxNavigate(href, addToHistory){
     try{
       var url = href;
+      // preserve audio state if present (avoid restarting DOS.mp3)
+      var preAudio = null;
+      try{ var ael = document.getElementById('piyoverse-music'); if(ael){ preAudio = { playing: !ael.paused, time: ael.currentTime }; } }catch(e){ preAudio = null; }
       // Use XHR for IE11 compatibility
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
@@ -93,6 +104,18 @@
 
           // call reinit hook to reattach behaviors
           try{ if(window.siteReinit) window.siteReinit(); }catch(e){}
+          // reapply ribbons/theme hooks if available (keeps outlines and accents correct)
+          try{ if(window.ribbonsSetTheme) { try{ var m = (document.documentElement.getAttribute('data-theme-mode')||'dark'); var t = (document.documentElement.getAttribute('data-theme')||'obsidian'); window.ribbonsSetTheme(m,t); }catch(e){} } }catch(e){}
+          // restore audio state if we captured it and audio element still exists
+          try{
+            if(preAudio){
+              var after = document.getElementById('piyoverse-music');
+              if(after && after !== null){
+                try{ if(typeof preAudio.time === 'number' && Math.abs((after.currentTime||0) - preAudio.time) > 0.5) { try{ after.currentTime = preAudio.time; }catch(e){} } }catch(e){}
+                try{ if(preAudio.playing){ var pp = after.play && after.play(); if(pp && pp.then){ pp.catch(function(){}); } } }catch(e){}
+              }
+            }
+          }catch(e){}
 
           try{ window.scrollTo(0,0); }catch(e){}
         } else {

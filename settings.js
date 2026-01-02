@@ -896,79 +896,36 @@ document.addEventListener('DOMContentLoaded', function() {
     if(window.ribbonsSetTheme) window.ribbonsSetTheme(mode, themeId);
   }
 
-  // Populate theme options
-  function populateThemes() {
-    var modeSel = document.getElementById('theme-mode');
-    var themeSel = document.getElementById('theme');
-    if(!modeSel||!themeSel) return;
-    var mode = modeSel.value;
-    themeSel.innerHTML = '';
-    // Use current language to label theme options so they appear translated immediately
-    var lang = (typeof __currentLang !== 'undefined' && __currentLang) ? __currentLang : getPref('site-language','en');
-    var dict = I18N[lang] || I18N['en'];
-    (themes[mode]||[]).forEach(function(t){
-      var opt = document.createElement('option');
-      opt.value = t.id;
-      var key = 'theme-' + t.id;
-      opt.textContent = (dict && dict[key]) ? dict[key] : t.name;
-      opt.setAttribute('data-i18n', key);
-      themeSel.appendChild(opt);
-    });
-  }
+  // Theme variant selection removed — only `data-theme-mode` (dark/light) is exposed.
 
   // On settings page
   if(document.getElementById('settings-form')) {
     var langSel = document.getElementById('language');
     var modeSel = document.getElementById('theme-mode');
-    var themeSel = document.getElementById('theme');
     // Load saved
     var savedLang = getPref('site-language','en');
     var savedMode = getPref('site-theme-mode','dark');
-    var savedTheme = getPref('site-theme','obsidian');
     langSel.value = savedLang;
     modeSel.value = savedMode;
-    populateThemes();
-    themeSel.value = savedTheme;
     // music / sfx toggles
     try { var savedMusic = getPref('site-music','on'); var mt = document.getElementById('music-toggle'); if(mt) mt.value = savedMusic; } catch(e) {}
     try { var savedSfx = getPref('site-sfx','on'); var st = document.getElementById('sfx-toggle'); if(st) st.value = savedSfx; } catch(e) {}
-    // accessibility/display toggles
-    try { var savedReduceTransparency = getPref('site-reduce-transparency','0'); var rtt = document.getElementById('reduce-transparency'); if(rtt) rtt.checked = (savedReduceTransparency === '1'); } catch(e) {}
-    try { var savedReduceAnimation = getPref('site-reduce-animation','0'); var rat = document.getElementById('reduce-animation'); if(rat) rat.checked = (savedReduceAnimation === '1'); } catch(e) {}
-    try { var savedDisableRibbons = getPref('site-disable-ribbons','0'); var dr = document.getElementById('disable-ribbons'); if(dr) dr.checked = (savedDisableRibbons === '1'); } catch(e) {}
-    try { var savedBlackText = getPref('site-black-text','0'); var bt = document.getElementById('black-text'); if(bt) bt.checked = (savedBlackText === '1'); } catch(e) {}
     // Change events
     langSel.onchange = function(){ applyLanguage(langSel.value); };
     modeSel.onchange = function(){
-      populateThemes();
-      // After repopulating, try to restore previous theme if it exists
-      var savedTheme = getPref('site-theme', 'obsidian');
-      if ([].some.call(themeSel.options, function(opt){return opt.value === savedTheme;})) {
-        themeSel.value = savedTheme;
-      } else if (themeSel.options.length > 0) {
-        themeSel.value = themeSel.options[0].value;
-      }
-      applyTheme(modeSel.value, themeSel.value);
+      var currentTheme = getPref('site-theme','obsidian');
+      applyTheme(modeSel.value, currentTheme);
     };
-    themeSel.onchange = function(){ applyTheme(modeSel.value, themeSel.value); };
     // On submit
     document.getElementById('settings-form').onsubmit = function(e){
       e.preventDefault();
       applyLanguage(langSel.value);
-      applyTheme(modeSel.value, themeSel.value);
+      var currentTheme = getPref('site-theme','obsidian');
+      applyTheme(modeSel.value, currentTheme);
       try { var musicVal = document.getElementById('music-toggle').value; setPref('site-music', musicVal); } catch(e) {}
       try { var sfxVal = document.getElementById('sfx-toggle').value; setPref('site-sfx', sfxVal); } catch(e) {}
-      try { var rtt = document.getElementById('reduce-transparency').checked ? '1' : '0'; setPref('site-reduce-transparency', rtt); } catch(e) {}
-      try { var rat = document.getElementById('reduce-animation').checked ? '1' : '0'; setPref('site-reduce-animation', rat); } catch(e) {}
-      try { var dr = document.getElementById('disable-ribbons').checked ? '1' : '0'; setPref('site-disable-ribbons', dr); } catch(e) {}
-      try { var bt = document.getElementById('black-text').checked ? '1' : '0'; setPref('site-black-text', bt); } catch(e) {}
       try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}
       try{ if(window.siteMusicEnabled && window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); else { try{ var __ma = document.getElementById('piyoverse-music'); if(__ma){ try{ __ma.pause(); __ma.volume = 0; }catch(e){} } }catch(e){} }catch(e){}
-      // Apply accessibility/display settings immediately
-      try { if(getPref('site-reduce-transparency','0') === '1') document.documentElement.classList.add('reduce-transparency'); else document.documentElement.classList.remove('reduce-transparency'); } catch(e) {}
-      try { if(getPref('site-reduce-animation','0') === '1') document.documentElement.classList.add('reduce-animation'); else document.documentElement.classList.remove('reduce-animation'); } catch(e) {}
-      try { if(getPref('site-disable-ribbons','0') === '1') { document.documentElement.classList.add('no-ribbons'); window.__PVE_DISABLE_RIBBONS = true; var c = document.querySelector('.ribbons-canvas'); if(c) c.style.display = 'none'; } else { document.documentElement.classList.remove('no-ribbons'); window.__PVE_DISABLE_RIBBONS = false; } } catch(e) {}
-      try { if(getPref('site-black-text','0') === '1') document.documentElement.classList.add('black-text'); else document.documentElement.classList.remove('black-text'); } catch(e) {}
       alert('Settings saved!');
     };
   }
@@ -979,11 +936,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var theme = getPref('site-theme','obsidian');
   applyLanguage(lang);
   applyTheme(mode, theme);
-  // Apply accessibility/display prefs on load
-  try { if(getPref('site-reduce-transparency','0') === '1') document.documentElement.classList.add('reduce-transparency'); } catch(e) {}
-  try { if(getPref('site-reduce-animation','0') === '1') document.documentElement.classList.add('reduce-animation'); } catch(e) {}
-  try { if(getPref('site-disable-ribbons','0') === '1') { document.documentElement.classList.add('no-ribbons'); window.__PVE_DISABLE_RIBBONS = true; var c = document.querySelector('.ribbons-canvas'); if(c) c.style.display = 'none'; } } catch(e) {}
-  try { if(getPref('site-black-text','0') === '1') document.documentElement.classList.add('black-text'); } catch(e) {}
+  // Apply theme mode on load (dark/light)
+  try { var modeNow = getPref('site-theme-mode','dark'); applyTheme(modeNow, getPref('site-theme','obsidian')); } catch(e) {}
   // transiently reapply for a short window to cover lazy loads / browser optimizations
   transientReapply(5000, 400);
   try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}
