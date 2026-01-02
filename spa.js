@@ -183,8 +183,73 @@
 
   function onPopState(){ ajaxNavigate(window.location.href, false); }
 
+  // Prevent "stuck" focus styles after mouse clicks while preserving keyboard focus.
+  function installUnstickClickFocus(){
+    try{
+      var lastPointerDown = null;
+
+      function matchesUnstickTarget(el){
+        try{
+          if(!el || !el.tagName) return false;
+          var tag = el.tagName.toLowerCase();
+          if(tag === 'button') return true;
+          if(tag === 'input'){
+            var type = (el.type || '').toLowerCase();
+            return (type === 'button' || type === 'submit');
+          }
+          if(tag === 'a'){
+            var cls = (el.className || '');
+            return (cls.indexOf('btn') !== -1 || cls.indexOf('nav-item') !== -1 || cls.indexOf('marketplace-btn') !== -1);
+          }
+          return false;
+        }catch(e){ return false; }
+      }
+
+      function findTarget(start){
+        var el = start;
+        while(el && el !== document.documentElement){
+          if(matchesUnstickTarget(el)) return el;
+          el = el.parentNode;
+        }
+        return null;
+      }
+
+      function onPointerDown(ev){
+        ev = ev || window.event;
+        var t = ev.target || ev.srcElement;
+        lastPointerDown = findTarget(t);
+      }
+
+      function onClick(ev){
+        try{
+          if(!lastPointerDown) return;
+          var t = (ev && (ev.target || ev.srcElement)) || null;
+          var clicked = findTarget(t);
+          if(clicked && clicked === lastPointerDown){
+            try{ if(clicked.blur) clicked.blur(); }catch(e){}
+          }
+        }finally{
+          lastPointerDown = null;
+        }
+      }
+
+      if(document.addEventListener){
+        // Modern browsers
+        document.addEventListener('pointerdown', onPointerDown, true);
+        // IE11 + older fallback
+        document.addEventListener('mousedown', onPointerDown, true);
+        document.addEventListener('click', onClick, true);
+      } else if(document.attachEvent){
+        document.attachEvent('onmousedown', onPointerDown);
+        document.attachEvent('onclick', onClick);
+      }
+    }catch(e){}
+  }
+
   if(document.addEventListener) document.addEventListener('click', onLinkClick, false);
   else if(document.attachEvent) document.attachEvent('onclick', onLinkClick);
   if(window.addEventListener) window.addEventListener('popstate', onPopState);
   else if(window.attachEvent) window.attachEvent('onpopstate', onPopState);
+
+  try{ installUnstickClickFocus(); }catch(e){}
 })();

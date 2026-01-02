@@ -682,11 +682,11 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .btn:hover::after,
 .frutiger-aero input[type="button"]:hover::after,
 .frutiger-aero input[type="submit"]:hover::after,
-.frutiger-aero .nav-item:focus::after,
-.frutiger-aero button:focus::after,
-.frutiger-aero .btn:focus::after,
-.frutiger-aero input[type="button"]:focus::after,
-.frutiger-aero input[type="submit"]:focus::after {
+.frutiger-aero .nav-item:focus-visible::after,
+.frutiger-aero button:focus-visible::after,
+.frutiger-aero .btn:focus-visible::after,
+.frutiger-aero input[type="button"]:focus-visible::after,
+.frutiger-aero input[type="submit"]:focus-visible::after {
   /* very low-opacity cyan aura */
   opacity: 0.12;
   transform: translate(-50%, -50%) scale(1);
@@ -883,7 +883,7 @@ html.frutiger-aero.solid-panels .muted {
 }
 
 .frutiger-aero .marketplace-btn:hover,
-.frutiger-aero .marketplace-btn:focus {
+.frutiger-aero .marketplace-btn:focus-visible {
   background: linear-gradient(180deg, rgba(180, 180, 180, 0.95), rgba(43, 43, 43, 0.92));
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0,0,0,0.55);
@@ -1004,7 +1004,7 @@ html.frutiger-aero.solid-panels .muted {
 }
 
 .frutiger-aero .game-actions .btn:hover,
-.frutiger-aero .game-actions .btn:focus {
+.frutiger-aero .game-actions .btn:focus-visible {
   background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.5);
