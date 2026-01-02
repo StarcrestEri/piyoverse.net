@@ -1232,15 +1232,19 @@ html.frutiger-aero.solid-panels .muted {
 
   /* Animated hover outline for game listings (IE11-safe, no CSS variables) */
   .frutiger-aero .game-card:hover::after {
-    box-shadow:
-      0 0 18px rgba(182,220,255,0.95);
+    /* Use a true rounded ring so corners are curved in IE11. */
+    box-shadow: 0 0 18px rgba(182,220,255,0.95);
+    border: 6px solid transparent;
+    box-sizing: border-box;
     background-image:
-      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-      repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px),
-      repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
-    background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
-    animation: game-outline-sweep 1.6s linear infinite;
+      linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
+      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    background-repeat: no-repeat;
+    background-size: auto, auto;
+    transform-origin: 50% 50%;
+    animation: game-outline-rotate 1.6s linear infinite;
   }
   .frutiger-aero .nav-item:hover,
   .frutiger-aero .nav-item:focus,
