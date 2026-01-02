@@ -1034,12 +1034,32 @@ html.frutiger-aero.solid-panels .muted {
   left: 0;
   border-radius: 14px;
   box-shadow: 0 0 0 1px var(--ribbons-outline);
+  background-repeat: no-repeat;
+  background-image: none;
+  background-size: 200% 3px, 3px 200%, 200% 3px, 3px 200%;
+  background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%;
   opacity: 1;
   pointer-events: none;
   transition: box-shadow 180ms ease, opacity 180ms ease;
   z-index: 2;
 }
-.frutiger-aero .game-card:hover::after { box-shadow: 0 0 0 3px var(--ribbons-accent), 0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18); }
+.frutiger-aero .game-card:hover::after {
+  box-shadow:
+    0 0 0 1px var(--ribbons-outline),
+    0 0 0 3px var(--ribbons-accent),
+    0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18);
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0), rgba(var(--ribbons-accent-rgb, 87,188,255),0.95), rgba(0,0,0,0)),
+    linear-gradient(180deg, rgba(0,0,0,0), rgba(var(--ribbons-accent-rgb, 87,188,255),0.95), rgba(0,0,0,0)),
+    linear-gradient(90deg, rgba(0,0,0,0), rgba(var(--ribbons-accent-rgb, 87,188,255),0.95), rgba(0,0,0,0)),
+    linear-gradient(180deg, rgba(0,0,0,0), rgba(var(--ribbons-accent-rgb, 87,188,255),0.95), rgba(0,0,0,0));
+  animation: game-outline-sweep 1.6s linear infinite;
+}
+
+@keyframes game-outline-sweep {
+  0% { background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%; }
+  100% { background-position: 100% 0%, 100% 100%, 0% 100%, 0% 0%; }
+}
 
 /* Translucent curved sheen at the top inside the outline */
 .frutiger-aero .game-card::before {
@@ -1187,6 +1207,20 @@ html.frutiger-aero.solid-panels .muted {
   .frutiger-aero .game-actions .btn {
     background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
     color: #fff;
+  }
+
+  /* Animated hover outline for game listings (IE11-safe, no CSS variables) */
+  .frutiger-aero .game-card:hover::after {
+    box-shadow:
+      0 0 0 1px rgba(43,111,160,0.95),
+      0 0 0 3px rgba(182,220,255,0.95),
+      0 0 14px rgba(182,220,255,0.95);
+    background-image:
+      linear-gradient(90deg, rgba(0,0,0,0), rgba(182,220,255,0.95), rgba(0,0,0,0)),
+      linear-gradient(180deg, rgba(0,0,0,0), rgba(182,220,255,0.95), rgba(0,0,0,0)),
+      linear-gradient(90deg, rgba(0,0,0,0), rgba(182,220,255,0.95), rgba(0,0,0,0)),
+      linear-gradient(180deg, rgba(0,0,0,0), rgba(182,220,255,0.95), rgba(0,0,0,0));
+    animation: game-outline-sweep 1.6s linear infinite;
   }
   .frutiger-aero .nav-item:hover,
   .frutiger-aero .nav-item:focus,
