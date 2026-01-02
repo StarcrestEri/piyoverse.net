@@ -108,7 +108,10 @@
           try{
             var newMain = doc.getElementsByTagName('main')[0];
             var oldMain = document.getElementsByTagName('main')[0];
-            if(newMain && oldMain) oldMain.innerHTML = newMain.innerHTML;
+            // If the target page isn't a real SPA-capable page (e.g. it's a redirect stub
+            // without <main>), fall back to normal navigation.
+            if(!newMain || !oldMain){ window.location.href = href; return; }
+            oldMain.innerHTML = newMain.innerHTML;
             var newPN = doc.querySelector('.page-name-container'); var oldPN = document.querySelector('.page-name-container');
             if(newPN && oldPN) oldPN.innerHTML = newPN.innerHTML;
           }catch(e){}
