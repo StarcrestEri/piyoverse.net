@@ -537,7 +537,7 @@ html.frutiger-aero.solid-panels .muted {
 
 .frutiger-aero .nav-item {
   padding: 0.25rem 1rem;
-  border-radius: 12px;
+  border-radius: 999px;
   filter: drop-shadow(2px 1px 1px black);
   /* use the same translucent blue base as game action buttons */
   background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
@@ -552,7 +552,7 @@ html.frutiger-aero.solid-panels .muted {
 /* Settings panel save button should match other action buttons */
 .frutiger-aero .settings-panel .btn {
   padding: 0.35rem 0.85rem;
-  border-radius: 12px;
+  border-radius: 999px;
   background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   color: #ffffff;
   text-decoration: none;
@@ -610,7 +610,7 @@ html.frutiger-aero.solid-panels .muted {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.16));
   color: var(--foreground);
   padding: 0.6rem 1rem;
-  border-radius: 14px;
+  border-radius: 999px;
   cursor: pointer;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
   z-index: 1;
@@ -627,7 +627,7 @@ html.frutiger-aero.solid-panels .muted {
   position: absolute;
   /* make the glow tighter and very subtle */
   inset: -4px;
-  border-radius: 16px;
+  border-radius: 999px;
   background: linear-gradient(90deg, var(--gradient-from), var(--gradient-to));
   /* low blur so it's gentle and cyan-leaning */
   filter: blur(4px) saturate(1.02);
