@@ -236,8 +236,8 @@ html.frutiger-aero::after { right: 0; }
     rgba(0, 255, 42, 0.24) 100%
   );
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.6),
-              inset 0px 5px 3px rgba(255, 255, 255, 0.2),
-              inset 0px -5px 3px rgba(0, 0, 0, 0.26);
+              inset 0px 2px 1px rgba(255, 255, 255, 0.2),
+              inset 0px -2px 1px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(6px) saturate(1.03);
   -webkit-backdrop-filter: blur(6px) saturate(1.03);
   border-radius: 1.35rem;
@@ -263,8 +263,8 @@ html.frutiger-aero::after { right: 0; }
   padding: 1rem;
   border-radius: 1.35rem;
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3),
-              inset 0px 6px 3px rgba(255, 255, 255, 0.29),
-              inset 0px -6px 3px rgba(0, 0, 0, 0.52);
+              inset 0px 2px 1px rgba(255, 255, 255, 0.31),
+              inset 0px -2px 1px rgba(0, 0, 0, 0.4);
   margin: 1rem auto;
   width: min(1200px, var(--safe-width));
   max-width: 1200px;
@@ -408,9 +408,7 @@ html.frutiger-aero.solid-panels .muted {
   margin: 1rem auto 2rem auto;
   width: min(1200px, var(--safe-width));
   max-width: 1200px;
-  box-shadow: 0px 8px 20px rgba(0,0,0,0.48),
-              inset 0px 6px 3px rgba(255, 255, 255, 0.25),
-              inset 0px -6px 3px rgba(0, 0, 0, 0.48);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.48);
   color: #ffffff;
 }
 .frutiger-aero .site-footer p { margin: 0.4rem 0; color: #ffffff; }
@@ -418,10 +416,11 @@ html.frutiger-aero.solid-panels .muted {
 /* Ensure the Starcrest teaser image fits inside the home panel */
 .frutiger-aero .upcoming-release .starcrest-teaser {
   display: block;
-  max-width: 100%;
-  width: 100%;
+  width: min(620px, 100%);
   height: auto;
   object-fit: contain;
+  border-radius: 16px;
+  margin: 0.75rem auto 0;
 }
 
 /* Divider between social links and legal text in footer */
@@ -1387,7 +1386,7 @@ html.ie11 .site-footer {
   background-blend-mode: overlay !important;
   padding: 1rem !important;
   border-radius: 26px !important;
-  box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 6px 3px rgba(255,255,255,0.29), inset 0px -6px 3px rgba(0,0,0,0.52) !important;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.31), inset 0px -2px 1px rgba(0,0,0,0.4) !important;
   border: none !important;
   color: #ffffff !important;
 }
