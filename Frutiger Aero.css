@@ -1048,7 +1048,8 @@ html.frutiger-aero.solid-panels .muted {
   border: 6px solid transparent;
   box-sizing: border-box;
   background-image:
-    linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
+    /* Fill layer (padding-box): hides the border gradient from the center */
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
     repeating-linear-gradient(135deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
@@ -1056,7 +1057,6 @@ html.frutiger-aero.solid-panels .muted {
   background-size: auto, 720px 720px;
   background-position: 0 0, 0 0;
   animation: game-outline-sweep 1.6s linear infinite;
-  z-index: 3;
 }
 
 @keyframes game-outline-sweep {
@@ -1218,7 +1218,7 @@ html.frutiger-aero.solid-panels .muted {
     border: 6px solid transparent;
     box-sizing: border-box;
     background-image:
-      linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)),
+      linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
       repeating-linear-gradient(135deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
     background-clip: padding-box, border-box;
     background-origin: padding-box, border-box;
