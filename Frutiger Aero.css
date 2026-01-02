@@ -1036,8 +1036,8 @@ html.frutiger-aero.solid-panels .muted {
   box-shadow: 0 0 0 1px var(--ribbons-outline);
   background-repeat: no-repeat;
   background-image: none;
-  background-size: 200% 3px, 3px 200%, 200% 3px, 3px 200%;
-  background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%;
+  background-size: 40px 3px, 3px 40px, 40px 3px, 3px 40px;
+  background-position: 0px 0px, 100% 0px, 0px 100%, 0px 0px;
   opacity: 1;
   pointer-events: none;
   transition: box-shadow 180ms ease, opacity 180ms ease;
@@ -1049,16 +1049,17 @@ html.frutiger-aero.solid-panels .muted {
     0 0 0 3px var(--ribbons-accent),
     0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18);
   background-image:
-    linear-gradient(90deg, rgba(0,0,0,0), rgba(var(--ribbons-accent-rgb, 87,188,255),0.95), rgba(0,0,0,0)),
-    linear-gradient(180deg, rgba(0,0,0,0), rgba(var(--ribbons-accent-rgb, 87,188,255),0.95), rgba(0,0,0,0)),
-    linear-gradient(90deg, rgba(0,0,0,0), rgba(var(--ribbons-accent-rgb, 87,188,255),0.95), rgba(0,0,0,0)),
-    linear-gradient(180deg, rgba(0,0,0,0), rgba(var(--ribbons-accent-rgb, 87,188,255),0.95), rgba(0,0,0,0));
+    repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 20px, rgb(42,122,214) 40px),
+    repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 20px, rgb(42,122,214) 40px),
+    repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 20px, rgb(42,122,214) 40px),
+    repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 20px, rgb(42,122,214) 40px);
+  background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
   animation: game-outline-sweep 1.6s linear infinite;
 }
 
 @keyframes game-outline-sweep {
-  0% { background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%; }
-  100% { background-position: 100% 0%, 100% 100%, 0% 100%, 0% 0%; }
+  0% { background-position: 0px 0px, 100% 0px, 0px 100%, 0px 0px; }
+  100% { background-position: 40px 0px, 100% 40px, -40px 100%, 0px -40px; }
 }
 
 /* Translucent curved sheen at the top inside the outline */
@@ -1216,10 +1217,11 @@ html.frutiger-aero.solid-panels .muted {
       0 0 0 3px rgba(182,220,255,0.95),
       0 0 14px rgba(182,220,255,0.95);
     background-image:
-      linear-gradient(90deg, rgba(0,0,0,0), rgba(182,220,255,0.95), rgba(0,0,0,0)),
-      linear-gradient(180deg, rgba(0,0,0,0), rgba(182,220,255,0.95), rgba(0,0,0,0)),
-      linear-gradient(90deg, rgba(0,0,0,0), rgba(182,220,255,0.95), rgba(0,0,0,0)),
-      linear-gradient(180deg, rgba(0,0,0,0), rgba(182,220,255,0.95), rgba(0,0,0,0));
+      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 20px, rgb(42,122,214) 40px),
+      repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 20px, rgb(42,122,214) 40px),
+      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 20px, rgb(42,122,214) 40px),
+      repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 20px, rgb(42,122,214) 40px);
+    background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
     animation: game-outline-sweep 1.6s linear infinite;
   }
   .frutiger-aero .nav-item:hover,
