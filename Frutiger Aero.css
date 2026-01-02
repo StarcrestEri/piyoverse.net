@@ -416,7 +416,7 @@ html.frutiger-aero.solid-panels .muted {
 /* Ensure the Starcrest teaser image fits inside the home panel */
 .frutiger-aero .upcoming-release .starcrest-teaser {
   display: block;
-  width: min(310px, 50%);
+  width: min(240px, 100%);
   height: auto;
   object-fit: contain;
   border-radius: 16px;
