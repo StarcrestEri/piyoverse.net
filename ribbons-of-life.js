@@ -293,16 +293,99 @@
 		var center = 0.52 * h;
 		drawOne(center, thickBase);
 
+		// Keep side ribbons from ever overlapping the center ribbon.
+		// The ribbon centerlines share the same wave function, so separation is controlled only by the
+		// centerY offset vs the (slightly varying) half-thickness of each ribbon.
+		var maxOffset = 0.22 * h;
+		var gap = Math.max(8, 0.015 * h);
+
 		var sideThickness = 0.38 * thickBase;
-		var offset = Math.min(0.22 * h, Math.max(20, 0.72 * thickBase));
+
+		// Worst-case band thickness can reach ~1.1 * thickness.
+		// Require: offset >= 0.5 * (1.1*thickBase + 1.1*sideThickness) + gap
+		var requiredOffset = 0.55 * (thickBase + sideThickness) + gap;
+		if (requiredOffset > maxOffset) {
+			// If the viewport is too short, shrink side ribbons so we can still guarantee no overlap.
+			sideThickness = Math.max(0.12 * thickBase, (maxOffset - gap) / 0.55 - thickBase);
+			requiredOffset = 0.55 * (thickBase + sideThickness) + gap;
+		}
+
+		var offset = Math.min(maxOffset, Math.max(20, requiredOffset));
 		drawOne(center - offset, sideThickness);
 		drawOne(center + offset, sideThickness);
+	}
+
+	var sparkles = [];
+	var sparklesW = 0;
+	var sparklesH = 0;
+
+	function rebuildSparkles(w, h) {
+		sparklesW = w;
+		sparklesH = h;
+		sparkles.length = 0;
+
+		var density = perfMode || ie11 ? 0.00005 : 0.00009;
+		var count = Math.max(18, Math.min(90, Math.floor(w * h * density)));
+
+		for (var i = 0; i < count; i++) {
+			sparkles.push({
+				x: Math.random() * w,
+				y: Math.random() * h,
+				r: (perfMode || ie11 ? 0.9 : 1.1) + Math.random() * (perfMode || ie11 ? 1.4 : 2.1),
+				tw: 0.7 + Math.random() * 1.8,
+				ph: Math.random() * Math.PI * 2,
+				a: 0.06 + Math.random() * 0.11,
+			});
+		}
+	}
+
+	function drawSparkles(w, h, colors) {
+		if (!sparkles.length || sparklesW !== w || sparklesH !== h) rebuildSparkles(w, h);
+
+		var core = mix([255, 255, 255], colors.accent, 0.22);
+		var glow = mix([255, 255, 255], colors.accent, 0.42);
+
+		ctx.save();
+		ctx.globalCompositeOperation = "lighter";
+		ctx.lineCap = "round";
+
+		if (!perfMode && !ie11) {
+			ctx.shadowColor = rgba(glow, 0.28);
+			ctx.shadowBlur = 8;
+		}
+
+		for (var i = 0; i < sparkles.length; i++) {
+			var s = sparkles[i];
+			var tw = 0.5 + 0.5 * Math.sin(s.ph + s.tw * tAccum);
+			var alpha = s.a * (0.25 + 0.75 * tw * tw);
+			var r = s.r * (0.8 + 0.35 * tw);
+
+			ctx.strokeStyle = rgba(core, alpha);
+			ctx.lineWidth = perfMode || ie11 ? 1 : 1.2;
+
+			// XMB-ish tiny star: main cross plus smaller diagonals
+			ctx.beginPath();
+			ctx.moveTo(s.x - r, s.y);
+			ctx.lineTo(s.x + r, s.y);
+			ctx.moveTo(s.x, s.y - r);
+			ctx.lineTo(s.x, s.y + r);
+
+			var d = 0.62 * r;
+			ctx.moveTo(s.x - d, s.y - d);
+			ctx.lineTo(s.x + d, s.y + d);
+			ctx.moveTo(s.x - d, s.y + d);
+			ctx.lineTo(s.x + d, s.y - d);
+			ctx.stroke();
+		}
+
+		ctx.restore();
 	}
 
 	function drawFrame(w, h) {
 		var colors = getThemeColors();
 		drawBackground(w, h, colors);
 		drawRibbonBand(w, h, colors);
+		drawSparkles(w, h, colors);
 
 		var edge = ctx.createLinearGradient(0, 0, w, 0);
 		edge.addColorStop(0, "rgba(0,0,0,0.20)");
@@ -349,6 +432,8 @@
 		ctx.rect(ox, oy, drawW, drawH);
 		ctx.clip();
 		ctx.translate(ox, oy);
+		// Sparkle field depends on draw-space size
+		if (sparklesW !== drawW || sparklesH !== drawH) rebuildSparkles(drawW, drawH);
 		drawFrame(drawW, drawH);
 		ctx.restore();
 
