@@ -57,7 +57,22 @@
     // allow hash-only navigations
     if(href.indexOf('#') === 0 || (href.indexOf(window.location.pathname + '#') === 0)) return;
     try{ if(ev.preventDefault) ev.preventDefault(); else ev.returnValue = false; }catch(e){}
-    ajaxNavigate(href, true);
+    // Try SPA navigation, but ensure we fallback to a full load if AJAX doesn't complete.
+    try{
+      ajaxNavigate(href, true);
+    }catch(e){
+      try{ window.location.href = href; }catch(ex){}
+      return;
+    }
+    try{
+      // If SPA doesn't navigate within 1200ms, fall back to full navigation.
+      setTimeout(function(){
+        try{
+          // If location didn't change and document didn't update, force navigation
+          if(window.location.href.indexOf(href) === -1){ window.location.href = href; }
+        }catch(e){}
+      }, 1200);
+    }catch(e){}
   }
 
   function ajaxNavigate(href, addToHistory){
