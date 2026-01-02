@@ -1036,32 +1036,30 @@ html.frutiger-aero.solid-panels .muted {
   box-shadow: 0 0 0 1px var(--ribbons-outline);
   background-repeat: no-repeat;
   background-image: none;
+  background-size: 360px 3px, 3px 360px, 360px 3px, 3px 360px;
+  background-position: 0px 0px, 100% 0px, 0px 100%, 0px 0px;
   opacity: 1;
   pointer-events: none;
   transition: box-shadow 180ms ease, opacity 180ms ease;
   z-index: 2;
 }
 .frutiger-aero .game-card:hover::after {
-  /* On hover, keep this as glow-only so it doesn't read as a second outer border. */
-  box-shadow: 0 0 18px rgba(var(--ribbons-accent-rgb, 87,188,255),0.45);
-  /* Gradient border that actually follows border-radius (works in IE11 too). */
-  border: 6px solid transparent;
-  box-sizing: border-box;
+  box-shadow:
+    0 0 0 1px var(--ribbons-outline),
+    0 0 0 3px var(--ribbons-accent),
+    0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18);
   background-image:
-    /* Fill layer (padding-box): hides the border gradient from the center */
-    linear-gradient(180deg, rgba(90,95,99,0.66) 0%, rgba(0,0,0,0.62) 50%, rgba(62,65,67,0.60) 100%),
-    repeating-linear-gradient(135deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
-  background-clip: padding-box, border-box;
-  background-origin: padding-box, border-box;
-  background-repeat: no-repeat, repeat;
-  background-size: auto, 720px 720px;
-  background-position: 0 0, 0 0;
+    repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 180px, rgb(42,122,214) 360px),
+    repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 180px, rgb(42,122,214) 360px),
+    repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 180px, rgb(42,122,214) 360px),
+    repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 180px, rgb(42,122,214) 360px);
+  background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
   animation: game-outline-sweep 1.6s linear infinite;
 }
 
 @keyframes game-outline-sweep {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 0 0, 720px 720px; }
+  0% { background-position: 0px 0px, 100% 0px, 0px 100%, 0px 0px; }
+  100% { background-position: 360px 0px, 100% 360px, -360px 100%, 0px -360px; }
 }
 
 /* Translucent curved sheen at the top inside the outline */
@@ -1214,17 +1212,16 @@ html.frutiger-aero.solid-panels .muted {
 
   /* Animated hover outline for game listings (IE11-safe, no CSS variables) */
   .frutiger-aero .game-card:hover::after {
-    box-shadow: 0 0 18px rgba(182,220,255,0.95);
-    border: 6px solid transparent;
-    box-sizing: border-box;
+    box-shadow:
+      0 0 0 1px rgba(43,111,160,0.95),
+      0 0 0 3px rgba(182,220,255,0.95),
+      0 0 14px rgba(182,220,255,0.95);
     background-image:
-      linear-gradient(180deg, rgba(90,95,99,0.66) 0%, rgba(0,0,0,0.62) 50%, rgba(62,65,67,0.60) 100%),
-      repeating-linear-gradient(135deg, rgb(42,122,214) 0px, rgb(182,220,255) 360px, rgb(42,122,214) 720px);
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-    background-repeat: no-repeat, repeat;
-    background-size: auto, 720px 720px;
-    background-position: 0 0, 0 0;
+      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 180px, rgb(42,122,214) 360px),
+      repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 180px, rgb(42,122,214) 360px),
+      repeating-linear-gradient(90deg, rgb(42,122,214) 0px, rgb(182,220,255) 180px, rgb(42,122,214) 360px),
+      repeating-linear-gradient(180deg, rgb(42,122,214) 0px, rgb(182,220,255) 180px, rgb(42,122,214) 360px);
+    background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
     animation: game-outline-sweep 1.6s linear infinite;
   }
   .frutiger-aero .nav-item:hover,
