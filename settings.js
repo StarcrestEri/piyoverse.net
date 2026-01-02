@@ -963,6 +963,7 @@ document.addEventListener('DOMContentLoaded', function() {
       try { var dr = document.getElementById('disable-ribbons').checked ? '1' : '0'; setPref('site-disable-ribbons', dr); } catch(e) {}
       try { var bt = document.getElementById('black-text').checked ? '1' : '0'; setPref('site-black-text', bt); } catch(e) {}
       try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}
+      try{ if(window.siteMusicEnabled && window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); else { try{ var __ma = document.getElementById('piyoverse-music'); if(__ma){ try{ __ma.pause(); __ma.volume = 0; }catch(e){} } }catch(e){} }catch(e){}
       // Apply accessibility/display settings immediately
       try { if(getPref('site-reduce-transparency','0') === '1') document.documentElement.classList.add('reduce-transparency'); else document.documentElement.classList.remove('reduce-transparency'); } catch(e) {}
       try { if(getPref('site-reduce-animation','0') === '1') document.documentElement.classList.add('reduce-animation'); else document.documentElement.classList.remove('reduce-animation'); } catch(e) {}

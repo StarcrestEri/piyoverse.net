@@ -79,6 +79,48 @@
     }, Math.round((duration||600)/steps));
   }
 
+  // Ensure music is playing when enabled. Exposed for SPA/settings toggles.
+  window.siteEnsureMusicPlaying = function(){
+    try{
+      if(!window.siteMusicEnabled) return;
+      var a = createAudio();
+      try{ if(a.loop !== true) a.loop = true; }catch(e){}
+      var p = null;
+      try{ p = a.play && a.play(); }catch(e){ p = null; }
+      if(p && p.then){
+        p.then(function(){ try{ fadeTo(targetVol, 900); }catch(e){} }).catch(function(){ /* autoplay blocked */ });
+      } else if(p === null){
+        // play() threw or not available; wait for user gesture to resume
+        try{ document.addEventListener('pointerdown', function ong(){ try{ a.play && a.play(); fadeTo(targetVol,900); }catch(e){} try{ document.removeEventListener('pointerdown', ong); }catch(e){} }, { once:true }); }catch(e){}
+      } else { try{ fadeTo(targetVol, 900); }catch(e){} }
+      // periodically save time
+      try{ if (saveInterval) clearInterval(saveInterval); saveInterval = setInterval(function(){ try{ if(audioEl && !audioEl.paused) sessionStorage.setItem('market-music-time', String(audioEl.currentTime)); }catch(e){} }, 1000); }catch(e){}
+      // ensure unlock on gesture
+      unlockAudioOnGesture();
+    }catch(e){}
+  };
+
+  // attempt initial start if enabled
+  try{ if(window.siteMusicEnabled && window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); }catch(e){}
+
+  // Respond to storage events (other tabs) so toggling music elsewhere resumes/pauses here
+  try{
+    if(window.addEventListener){
+      window.addEventListener('storage', function(ev){
+        try{
+          if(!ev || !ev.key) return;
+          if(ev.key === 'site-music'){
+            try{ window.siteMusicEnabled = (localStorage.getItem('site-music') === 'on'); }catch(e){}
+            if(window.siteMusicEnabled){ try{ if(window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); }catch(e){} }
+            else {
+              try{ var _a = document.getElementById('piyoverse-music'); if(_a){ try{ _a.pause(); _a.volume = 0; }catch(e){} } }catch(e){}
+            }
+          }
+        }catch(e){}
+      }, false);
+    }
+  }catch(e){}
+
   // Run site music when the user has music enabled site-wide.
   // This enables persistent audio for SPA-style navigation.
   if(window.siteMusicEnabled){
