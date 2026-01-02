@@ -908,7 +908,7 @@ html.frutiger-aero.solid-panels .muted {
   grid-template-columns: clamp(60px, 7vw, 85px) 1fr;
   column-gap: 0.8rem;
   row-gap: 0;
-  align-items: stretch;
+  align-items: start;
   box-shadow: none;
   border: none;
 }
@@ -921,18 +921,12 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .game-card .game-info {
   grid-column: 2;
   grid-row: 1;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  column-gap: 0.9rem;
-  row-gap: 0.1rem;
-  align-items: start;
-  align-self: stretch;
-  height: 100%;
+  display: block;
+  position: relative;
+  /* Reserve space for the action button so text never overlaps it */
+  padding-right: 11.5rem;
   min-width: 0;
 }
-
-/* Keep title/meta content in the left column when actions are present */
-.frutiger-aero .game-card .game-info > :not(.game-actions) { grid-column: 1; }
 
 .frutiger-aero .game-card .game-thumb {
   /* Thumbnail is inline content only — no background or shadow so it doesn't
@@ -961,13 +955,22 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .game-meta { font-size: 0.8rem; color: rgba(255,255,255,0.78); line-height: 1.15; }
 
 .frutiger-aero .game-actions {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   gap: 0.5rem;
   margin-top: 0;
-  grid-column: 2;
-  grid-row: 1 / -1;
-  align-self: center;
-  justify-self: end;
+}
+
+@media (max-width: 560px) {
+  .frutiger-aero .game-card .game-info { padding-right: 0; }
+  .frutiger-aero .game-actions {
+    position: static;
+    transform: none;
+    margin-top: 0.35rem;
+  }
 }
 
 /* Make game action buttons look like the nav items for visual consistency */
