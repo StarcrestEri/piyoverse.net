@@ -41,7 +41,7 @@ body.settings-page .settings-btn { display: none !important; }
 .settings-panel h2 {
   font-size: 1.3rem;
   margin-bottom: 1.2rem;
-  color: #57bcff;
+  color: var(--highlight);
 }
 
 /* Small note text used in the settings panel for compatibility warnings */
@@ -67,7 +67,7 @@ html.black-text .settings-panel .settings-note { color: #071025 !important; }
   font-size: 1rem;
   padding: 0.4rem 0.7rem;
   border-radius: 7px;
-  border: 1px solid #57bcff;
+  border: 1px solid var(--highlight);
   background: #0b1a2a;
   color: #fff;
 }
@@ -80,10 +80,10 @@ html.black-text .settings-panel .settings-note { color: #071025 !important; }
   width: 80vw;
   max-width: 900px;
   /* Fallback for browsers that don't support CSS variables in rgba() */
-  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(87,188,255,0.25) 20%, rgba(87,188,255,0.95) 50%, rgba(87,188,255,0.25) 80%, rgba(0,0,0,0.06) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(255,242,176,0.25) 20%, rgba(255,242,176,0.95) 50%, rgba(255,242,176,0.25) 80%, rgba(0,0,0,0.06) 100%);
   border-radius: 4px;
   width: min(900px, 80vw);
-  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 20%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.95) 50%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 80%, rgba(0,0,0,0.06) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(var(--ribbons-accent-rgb, 255,242,176),0.25) 20%, rgba(var(--ribbons-accent-rgb, 255,242,176),0.95) 50%, rgba(var(--ribbons-accent-rgb, 255,242,176),0.25) 80%, rgba(0,0,0,0.06) 100%);
   box-shadow: none !important;
 }
 
@@ -92,7 +92,7 @@ html.ie11 .section-separator,
 html.ie7 .section-separator {
   width: 80vw;
   max-width: 900px;
-  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(87,188,255,0.25) 20%, rgba(87,188,255,0.95) 50%, rgba(87,188,255,0.25) 80%, rgba(0,0,0,0.06) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(255,242,176,0.25) 20%, rgba(255,242,176,0.95) 50%, rgba(255,242,176,0.25) 80%, rgba(0,0,0,0.06) 100%);
   box-shadow: none !important;
 }
 
@@ -124,11 +124,11 @@ html.ie7 .section-separator {
 
 .ice-cream {
   /* Color Variables */
-  --gradient-from: rgba(12, 122, 226, 0.76);
-  --gradient-to: rgba(0, 178, 202, 0.822);
-  --highlight: #57bcff;
-  --ribbons-accent: #57bcff; /* updated dynamically by ribbons-of-life.js */
-  --ribbons-outline: #2b6fa0; /* darker default outline; updated dynamically by ribbons-of-life.js */
+  --gradient-from: rgba(255, 246, 205, 0.94);
+  --gradient-to: rgba(244, 230, 170, 0.90);
+  --highlight: #fff2b0;
+  --ribbons-accent: #fff2b0; /* updated dynamically by ribbons-of-life.js */
+  --ribbons-outline: #c4a768; /* warm outline; updated dynamically by ribbons-of-life.js */
 
   --foreground: oklch(0.985 0 0);
   --popover: oklch(72.007% 0.12846 221.186);
@@ -159,10 +159,10 @@ html.ice-cream {
   --side-bar-width: calc((100vw - var(--safe-width)) / 2);
   --content-width: calc(100vw - (var(--side-bar-width) * 2));
 
-  background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
-              radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
-              radial-gradient(circle at 18% 78%, rgba(134, 255, 207, 0.18), transparent 30%),
-              linear-gradient(180deg, rgba(4, 24, 46, 0.98), rgba(3, 41, 74, 0.94) 44%, rgba(3, 16, 36, 0.98));
+  background: radial-gradient(circle at 16% 18%, rgba(var(--ribbons-accent-rgb,255,242,176), 0.16), transparent 32%),
+              radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.16), transparent 32%),
+              radial-gradient(circle at 18% 78%, rgba(var(--ribbons-accent-rgb,255,242,176), 0.12), transparent 30%),
+              linear-gradient(180deg, rgba(255, 250, 235, 0.98), rgba(252, 241, 205, 0.94) 44%, rgba(245, 230, 175, 0.98));
   background-attachment: fixed;
   color: #ffffff;
   font-family: "tahoma.otf", Tahoma, Verdana, Arial, sans-serif;
@@ -221,7 +221,7 @@ html.ice-cream::after {
   height: 100vh;
   pointer-events: none;
   z-index: 2;
-  background: radial-gradient(circle at 50% 30%, rgba(0, 140, 255, 0.12), transparent 50%);
+  background: radial-gradient(circle at 50% 30%, rgba(var(--ribbons-accent-rgb,255,242,176), 0.12), transparent 50%);
   filter: saturate(1.05);
 }
 
