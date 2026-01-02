@@ -57,22 +57,7 @@
     // allow hash-only navigations
     if(href.indexOf('#') === 0 || (href.indexOf(window.location.pathname + '#') === 0)) return;
     try{ if(ev.preventDefault) ev.preventDefault(); else ev.returnValue = false; }catch(e){}
-    // Try SPA navigation, but ensure we fallback to a full load if AJAX doesn't complete.
-    try{
-      ajaxNavigate(href, true);
-    }catch(e){
-      try{ window.location.href = href; }catch(ex){}
-      return;
-    }
-    try{
-      // If SPA doesn't navigate within 1200ms, fall back to full navigation.
-      setTimeout(function(){
-        try{
-          // If location didn't change and document didn't update, force navigation
-          if(window.location.href.indexOf(href) === -1){ window.location.href = href; }
-        }catch(e){}
-      }, 1200);
-    }catch(e){}
+    ajaxNavigate(href, true);
   }
 
   function ajaxNavigate(href, addToHistory){
@@ -91,9 +76,12 @@
           var doc = null;
           try{ var dp = new DOMParser(); doc = dp.parseFromString(resp, 'text/html'); }catch(e){ doc = null; }
           if(!doc){ try{ var tmp = document.implementation.createHTMLDocument('tmp'); tmp.documentElement.innerHTML = resp; doc = tmp; }catch(e){} }
-          if(!doc){ window.location.href = href; return; }
-
-          // Update title
+          var xhrTimer = null;
+          xhr.onreadystatechange = function(){
+            try{
+              if(xhr.readyState !== 4) return;
+              // Treat 2xx as success, and also allow status===0 when responseText exists
+              if((xhr.status >= 200 && xhr.status < 300) || (xhr.status === 0 && xhr.responseText)){
           try{ var nt = doc.getElementsByTagName('title')[0]; if(nt) document.title = nt.textContent || nt.innerText || document.title; }catch(e){}
 
           // Replace <main>
@@ -152,9 +140,16 @@
       xhr.send(null);
     }catch(e){ try{ window.location.href = href; }catch(ex){} }
   }
+              } catch(e){
+                try{ window.location.href = href; }catch(ex){}
+              }
+          };
+          // network error fallback
+          xhr.onerror = function(){ try{ window.location.href = href; }catch(e){} };
+          // timeout fallback: if XHR doesn't finish in 8s, navigate normally
+          try{ xhrTimer = setTimeout(function(){ try{ if(xhr && xhr.readyState !== 4) { try{ xhr.abort(); }catch(e){} try{ window.location.href = href; }catch(ex){} } }catch(e){} }, 8000); }catch(e){}
 
-  function onPopState(){ ajaxNavigate(window.location.href, false); }
-
+          try{ if(xhrTimer){ clearTimeout(xhrTimer); xhrTimer = null; } }catch(e){}
   if(document.addEventListener) document.addEventListener('click', onLinkClick, false);
   else if(document.attachEvent) document.attachEvent('onclick', onLinkClick);
   if(window.addEventListener) window.addEventListener('popstate', onPopState);
