@@ -4,7 +4,7 @@
 
 html.legacy-lowend,
 html.legacy-lowend body {
-  background: #031024;
+  background: #1b1607;
   color: #ffffff;
 }
 
@@ -76,7 +76,7 @@ html.legacy-lowend .nav-item {
   padding: 3px 6px;
   font-size: 0.95em;
   border: 1px solid #c4a768;
-  background: #071a2b;
+  background: #2a210c;
   color: #ffffff;
   text-decoration: none;
 }
@@ -110,7 +110,7 @@ html.legacy-lowend main {
 html.legacy-lowend main,
 html.legacy-lowend .bg-popover,
 html.legacy-lowend .site-footer {
-  background: #071a2b;
+  background: #2a210c;
   border: 1px solid #c4a768;
   border-radius: 4px;
   box-shadow: none !important;
@@ -177,20 +177,21 @@ html.legacy-lowend .social-bar {
 html.legacy-lowend .social-item {
   display: inline-block;
   vertical-align: top;
-  margin: 0 6px;
+  margin: 0 3px;
 }
 html.legacy-lowend .social-link {
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   display: inline-block;
-  border-radius: 10px;
+  border-radius: 8px;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: 32px 32px;
 }
-html.legacy-lowend .social-youtube { background-image: url('Images/youtubeicon-48.png') !important; }
-html.legacy-lowend .social-discord { background-image: url('Images/discordicon-48.png') !important; }
-html.legacy-lowend .social-bsky { background-image: url('Images/bskyicon-48.png') !important; }
-html.legacy-lowend .social-twt { background-image: url('Images/twticon-48.png') !important; }
+html.legacy-lowend .social-youtube { background-image: url('Images/youtubeicon-32.png') !important; }
+html.legacy-lowend .social-discord { background-image: url('Images/discordicon-32.png') !important; }
+html.legacy-lowend .social-bsky { background-image: url('Images/bskyicon-32.png') !important; }
+html.legacy-lowend .social-twt { background-image: url('Images/twticon-32.png') !important; }
 
 html.legacy-lowend .btn,
 html.legacy-lowend button,
@@ -204,7 +205,7 @@ html.legacy-lowend .marketplace-btn {
   padding: 3px 6px;
   font-size: 0.95em;
   border: 1px solid #c4a768;
-  background: #071a2b;
+  background: #2a210c;
   color: #ffffff;
   text-decoration: none;
   border-radius: 6px;

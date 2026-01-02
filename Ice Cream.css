@@ -240,9 +240,8 @@ html.ice-cream::after {
   /* slightly more translucent glass-like popover */
   background: linear-gradient(
     165deg,
-    rgba(var(--ribbons-accent-rgb,255,242,176), 0.46) 0%,
-    rgba(255, 255, 255, 0.28) 50%,
-    rgba(var(--ribbons-outline-rgb,196,167,104), 0.18) 100%
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(var(--ribbons-accent-rgb,255,242,176), 0.34) 100%
   );
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.6),
               inset 0px 2px 1px rgba(255, 255, 255, 0.2),
@@ -251,7 +250,7 @@ html.ice-cream::after {
   -webkit-backdrop-filter: blur(6px) saturate(1.03);
   border-radius: 1.75rem;
   padding: 1rem;
-  color: #ffffff;
+  color: #2a210c;
 }
 
 .ice-cream .overlay {
@@ -265,9 +264,8 @@ html.ice-cream::after {
   /* slightly more translucent main panel to read as glass while keeping sheen */
   background: linear-gradient(
     180deg,
-    rgba(90, 95, 99, 0.66) 0%,
-    rgba(0, 0, 0, 0.62) 50%,
-    rgba(62, 65, 67, 0.60) 100%
+    rgba(245, 230, 175, 0.86) 0%,
+    rgba(255, 255, 255, 0.92) 100%
   );
   padding: 1rem;
   border-radius: 1.75rem;
@@ -278,8 +276,7 @@ html.ice-cream::after {
   box-sizing: border-box;
   width: var(--content-width);
   max-width: 1200px;
-  background-blend-mode: overlay;
-  color: #ffffff;
+  color: #2a210c;
   position: relative;
 }
 
@@ -391,7 +388,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .bg-popover,
 .ice-cream .game-card,
 .ice-cream .settings-panel {
-  color: #ffffff !important;
+  color: #2a210c !important;
 }
 
 /* Ensure headings, links, and meta inside panels are white unless explicitly overridden */
@@ -407,7 +404,7 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .game-card h3,
 .ice-cream .game-card .game-meta,
 .ice-cream .social-label {
-  color: #ffffff !important;
+  color: #2a210c !important;
 }
 
 /* Footer should be its own panel with white text */
@@ -415,9 +412,8 @@ html.ice-cream.solid-panels .muted {
   /* Match the panel gradient used by `main` and other panels for visual consistency */
   background: linear-gradient(
     180deg,
-    rgba(90,95,99,0.66) 0%,
-    rgba(0,0,0,0.62) 50%,
-    rgba(62,65,67,0.60) 100%
+    rgba(245, 230, 175, 0.86) 0%,
+    rgba(255, 255, 255, 0.92) 100%
   );
   padding: 1rem;
   border-radius: 1.75rem;
@@ -426,9 +422,9 @@ html.ice-cream.solid-panels .muted {
   width: var(--content-width);
   max-width: 1200px;
   box-shadow: 0px 8px 20px rgba(0,0,0,0.48);
-  color: #ffffff;
+  color: #2a210c;
 }
-.ice-cream .site-footer p { margin: 0.4rem 0; color: #ffffff; }
+.ice-cream .site-footer p { margin: 0.4rem 0; color: inherit; }
 
 /* Legal text: make it about half the normal footer size */
 .ice-cream .site-footer .legal-note {
@@ -491,15 +487,15 @@ html.ice-cream.solid-panels .muted {
 .ice-cream .prose pre {
   background: linear-gradient(
     155deg,
-    rgba(15, 71, 134, 0.596) 0%,
-    rgba(28, 148, 92, 0.247) 50%,
-    rgba(2, 133, 24, 0.26) 100%
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(var(--ribbons-accent-rgb,255,242,176), 0.38) 55%,
+    rgba(var(--ribbons-outline-rgb,196,167,104), 0.22) 100%
   );
   padding: 1rem;
   border-radius: 12px;
   overflow-x: auto;
   font-family: 'Courier New', monospace;
-  color: white;
+  color: #2a210c;
 }
 
 /* =======================
@@ -873,7 +869,7 @@ html.ice-cream.solid-panels .muted {
 
 /* accessibility: focus outline for keyboard users */
 .ice-cream .social-link:focus {
-  outline: 3px solid rgba(90,180,255,0.35);
+  outline: 3px solid rgba(var(--ribbons-accent-rgb,255,242,176), 0.55);
   outline-offset: 3px;
 }
 
@@ -1789,25 +1785,20 @@ html.ie7.ice-cream:after,
   display: none !important;
 }
 
-/* Restore pillarbox bars by default (unless `.no-pillarbox` is present).
-   This rule appears last to override earlier `display:none !important`
-   declarations so modern mode and IE11 mode show the black side bars.
-   Use :not(.no-pillarbox) so the helper class can still hide them when
-   explicitly requested. */
-html.ice-cream:not(.no-pillarbox)::before,
-html.ice-cream:not(.no-pillarbox)::after,
-html.ie11.ice-cream:not(.no-pillarbox)::before,
-html.ie11.ice-cream:not(.no-pillarbox)::after,
-html:not(.no-pillarbox).ice-cream::before,
-html:not(.no-pillarbox).ice-cream::after {
+/* Pillarbox bars are rendered by `ribbons-of-life.js` into the canvas.
+   Keep the CSS pseudo-bars disabled so modern browsers don't overlay the
+   canvas with potentially mis-sized var() widths (a common source of
+   "background looks wrong" reports in modern mode). */
+html.ice-cream::before,
+html.ice-cream::after,
+html.ie11.ice-cream::before,
+html.ie11.ice-cream::after,
+html.ice-cream:before,
+html.ice-cream:after,
+html.ie11.ice-cream:before,
+html.ie11.ice-cream:after {
   content: "" !important;
-  position: fixed !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  width: var(--side-bar-width) !important;
-  background: #000 !important;
-  z-index: 9000 !important;
-  pointer-events: none !important;
-  display: block !important;
+  display: none !important;
+  width: 0 !important;
 }
 
