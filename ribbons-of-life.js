@@ -299,14 +299,14 @@
 		var maxOffset = 0.22 * h;
 		var gap = Math.max(8, 0.015 * h);
 
-		var sideThickness = 0.38 * thickBase;
+		var sideThickness = 0.038 * thickBase;
 
 		// Worst-case band thickness can reach ~1.1 * thickness.
 		// Require: offset >= 0.5 * (1.1*thickBase + 1.1*sideThickness) + gap
 		var requiredOffset = 0.55 * (thickBase + sideThickness) + gap;
 		if (requiredOffset > maxOffset) {
 			// If the viewport is too short, shrink side ribbons so we can still guarantee no overlap.
-			sideThickness = Math.max(0.12 * thickBase, (maxOffset - gap) / 0.55 - thickBase);
+			sideThickness = Math.max(0.01 * thickBase, (maxOffset - gap) / 0.55 - thickBase);
 			requiredOffset = 0.55 * (thickBase + sideThickness) + gap;
 		}
 
