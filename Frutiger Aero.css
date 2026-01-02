@@ -77,9 +77,14 @@ html.black-text .settings-panel .settings-note { color: #071025 !important; }
   border: 0 !important;
   height: 4px;
   margin: 2.2rem auto 1.2rem auto;
-  width: min(900px, 80vw);
+  width: 80vw;
+  max-width: 900px;
+  /* Fallback for browsers that don't support CSS variables in rgba() */
+  background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(87,188,255,0.25) 20%, rgba(87,188,255,0.95) 50%, rgba(87,188,255,0.25) 80%, rgba(0,0,0,0.06) 100%);
   border-radius: 4px;
+  width: min(900px, 80vw);
   background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 20%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.95) 50%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 80%, rgba(0,0,0,0.06) 100%);
+  box-shadow: 0 0 14px rgba(87,188,255,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
   box-shadow: 0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
@@ -525,7 +530,7 @@ html.frutiger-aero.solid-panels .muted {
   border-radius: 8px;
   filter: drop-shadow(2px 1px 1px black);
   /* use the same translucent blue base as game action buttons */
-  background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+  background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -538,7 +543,7 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .settings-panel .btn {
   padding: 0.35rem 0.85rem;
   border-radius: 8px;
-  background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+  background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
@@ -552,7 +557,7 @@ html.frutiger-aero.solid-panels .muted {
 }
 .frutiger-aero .settings-panel .btn:hover,
 .frutiger-aero .settings-panel .btn:focus {
-  background: linear-gradient(180deg, rgba(138,237,255,0.95), rgba(0,60,255,0.92));
+  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0,0,0,0.55);
 }
@@ -861,7 +866,7 @@ html.frutiger-aero.solid-panels .muted {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+  background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   color: white;
   filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
   box-shadow: 0 2px 10px rgba(0,0,0,0.35);
@@ -898,12 +903,12 @@ html.frutiger-aero.solid-panels .muted {
     Remove padding/borders/shadows so each card doesn't read as a separate surface. */
   background: transparent;
   border-radius: 0;
-  padding: 0.6rem 0; /* slightly larger padding for extra breathing room */
+  padding: 0.6rem 0.75rem; /* breathing room inside the outline */
   display: grid;
   grid-template-columns: clamp(60px, 7vw, 85px) 1fr;
   column-gap: 0.8rem;
   row-gap: 0;
-  align-items: start;
+  align-items: stretch;
   box-shadow: none;
   border: none;
 }
@@ -916,11 +921,18 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .game-card .game-info {
   grid-column: 2;
   grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 0.9rem;
+  row-gap: 0.1rem;
+  align-items: start;
+  align-self: stretch;
+  height: 100%;
   min-width: 0;
 }
+
+/* Keep title/meta content in the left column when actions are present */
+.frutiger-aero .game-card .game-info > :not(.game-actions) { grid-column: 1; }
 
 .frutiger-aero .game-card .game-thumb {
   /* Thumbnail is inline content only — no background or shadow so it doesn't
@@ -948,7 +960,15 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .game-desc { color: rgba(255,255,255,0.92); font-size: 0.9rem; line-height: 1.18; }
 .frutiger-aero .game-meta { font-size: 0.8rem; color: rgba(255,255,255,0.78); line-height: 1.15; }
 
-.frutiger-aero .game-actions { display:flex; gap:0.5rem; margin-top: 0.25rem; }
+.frutiger-aero .game-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0;
+  grid-column: 2;
+  grid-row: 1 / -1;
+  align-self: center;
+  justify-self: end;
+}
 
 /* Make game action buttons look like the nav items for visual consistency */
 .frutiger-aero .game-actions .btn {
@@ -956,7 +976,7 @@ html.frutiger-aero.solid-panels .muted {
   padding: 0.35rem 0.85rem;
   border-radius: 8px;
   filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
-  background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+  background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   color: white;
   text-decoration: none;
   font-weight: bold;
@@ -964,6 +984,7 @@ html.frutiger-aero.solid-panels .muted {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
   gap: 0.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(0,0,0,0.35);
@@ -971,7 +992,7 @@ html.frutiger-aero.solid-panels .muted {
 
 .frutiger-aero .game-actions .btn:hover,
 .frutiger-aero .game-actions .btn:focus {
-  background: linear-gradient(180deg, rgba(138,237,255,0.95), rgba(0,60,255,0.92));
+  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0,0,0,0.5);
 }
@@ -1149,7 +1170,7 @@ html.frutiger-aero.solid-panels .muted {
   .frutiger-aero .nav-item,
   .frutiger-aero .marketplace-btn,
   .frutiger-aero .game-actions .btn {
-    background: linear-gradient(180deg, rgba(138,237,255,0.09), rgba(0,60,255,0.14));
+    background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
     color: #fff;
   }
   .frutiger-aero .nav-item:hover,
@@ -1164,7 +1185,7 @@ html.frutiger-aero.solid-panels .muted {
   .frutiger-aero .marketplace-btn:focus-visible,
   .frutiger-aero .game-actions .btn:active,
   .frutiger-aero .game-actions .btn:focus-visible {
-    background: linear-gradient(180deg, rgba(138,237,255,0.95), rgba(0,60,255,0.92));
+    background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
     transform: translateY(1px);
     box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
     outline: none;
@@ -1182,7 +1203,7 @@ html.frutiger-aero.solid-panels .muted {
 .frutiger-aero .btn:focus-visible,
 .frutiger-aero .settings-btn:active,
 .frutiger-aero .settings-btn:focus-visible {
-  background: linear-gradient(180deg, rgba(138,237,255,0.95), rgba(0,60,255,0.92));
+  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   transform: translateY(1px);
   box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
   outline: none;
@@ -1368,7 +1389,7 @@ html.ie11 .listing-card {
   box-shadow: none !important;
   border: none !important;
   border-radius: 0 !important;
-  padding: 0.5rem 0 !important;
+  padding: 0.6rem 0.75rem !important;
   margin: 0 0 0.75rem 0 !important;
 }
 /* Ensure card internals remain readable and aligned inside the parent panel */
@@ -1379,6 +1400,12 @@ html.ie11 .listing-card .info {
   padding: 0 !important;
   box-shadow: none !important;
 }
+
+/* IE11 layout: use flex (no CSS grid) and vertically center action buttons */
+html.ie11 .game-card { display: flex !important; align-items: stretch !important; }
+html.ie11 .game-card .game-thumb { flex: 0 0 85px !important; margin-right: 0.8rem !important; }
+html.ie11 .game-card .game-info { flex: 1 1 auto !important; position: relative !important; padding-right: 180px !important; }
+html.ie11 .game-card .game-actions { position: absolute !important; top: 50% !important; right: 0 !important; transform: translateY(-50%) !important; margin-top: 0 !important; }
 
 /* constrain main width to a simpler fixed size similar to IE11 layouts */
 html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 8px !important; }
@@ -1393,7 +1420,12 @@ html.ie11 .social-bar { display: flex !important; justify-content: center !impor
 
 /* Ensure header and page title are centered and readable */
 html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
-html.ie11 .page-name { font-size: 1.45rem !important; }
+html.ie11 .page-name {
+  font-size: 1.45rem !important;
+  /* IE11 doesn't reliably support filter: drop-shadow() on text */
+  filter: none !important;
+  text-shadow: 2px 1px 1px rgba(0,0,0,0.85) !important;
+}
 
 /* Make footer simpler and consistent width */
 html.ie11 .site-footer { width: 1000px !important; max-width: 1000px !important; margin: 1rem auto 2rem auto !important; }
