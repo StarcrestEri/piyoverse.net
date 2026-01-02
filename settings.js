@@ -933,7 +933,21 @@ document.addEventListener('DOMContentLoaded', function() {
           try { var musicVal = document.getElementById('music-toggle').value; setPref('site-music', musicVal); } catch(e) {}
           try { var sfxVal = document.getElementById('sfx-toggle').value; setPref('site-sfx', sfxVal); } catch(e) {}
           try { window.siteMusicEnabled = (getPref('site-music','on') === 'on'); window.siteSfxEnabled = (getPref('site-sfx','on') === 'on'); } catch(e) {}
-          try{ if(window.siteMusicEnabled && window.siteEnsureMusicPlaying) window.siteEnsureMusicPlaying(); else { try{ var __ma = document.getElementById('piyoverse-music'); if(__ma){ try{ __ma.pause(); __ma.volume = 0; }catch(e){} } }catch(e){} }catch(e){}
+          try{
+            if(window.siteMusicEnabled){
+              if(window.siteEnsureMusicPlaying) {
+                try{ window.siteEnsureMusicPlaying(); }catch(e){}
+              } else {
+                // Fallback: attempt to resume existing audio element directly
+                try{
+                  var __ma = document.getElementById('piyoverse-music');
+                  if(__ma){ try{ var pp = __ma.play && __ma.play(); if(pp && pp.then){ pp.catch(function(){}); } __ma.volume = 0.65; }catch(e){} }
+                }catch(e){}
+              }
+            } else {
+              try{ var __ma2 = document.getElementById('piyoverse-music'); if(__ma2){ try{ __ma2.pause(); __ma2.volume = 0; }catch(e){} } }catch(e){}
+            }
+          }catch(e){}
           // Reapply saved values to the form so they reflect persisted state
           try{ var mt2 = document.getElementById('music-toggle'); if(mt2) mt2.value = getPref('site-music','on'); }catch(e){}
           try{ var st2 = document.getElementById('sfx-toggle'); if(st2) st2.value = getPref('site-sfx','on'); }catch(e){}
