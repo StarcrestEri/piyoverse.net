@@ -1333,7 +1333,7 @@ html.ie11 .nav-container { display: flex !important; gap: 1rem !important; align
 html.ie11 .nav-container .nav-item { display: inline-block !important; float: none !important; margin: 0 0.45rem !important; }
 html.ie11 .nav-logo { width: 64px !important; height: 64px !important; margin-right: 0.8rem !important; overflow: hidden !important; }
 html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; display: block !important; }
-html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 1.35rem !important; }
+html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 26px !important; }
 html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
 /* Avoid overly-large canvas stacking issues in forced IE11 layout */
 html.ie11 .ribbons-canvas { z-index: 0 !important; }
@@ -1375,7 +1375,7 @@ html.ie11 .site-footer {
   ) !important;
   background-blend-mode: overlay !important;
   padding: 1rem !important;
-  border-radius: 1.35rem !important;
+  border-radius: 26px !important;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.3), inset 0px 2px 1px rgba(255,255,255,0.31), inset 0px -2px 1px rgba(0,0,0,0.4) !important;
   border: none !important;
   color: #ffffff !important;
@@ -1390,7 +1390,7 @@ html.ie11 .listing-card {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
-  border-radius: 0 !important;
+  border-radius: 14px !important;
   padding: 0.6rem 0.75rem !important;
   margin: 0 0 0.75rem 0 !important;
 }
@@ -1410,7 +1410,7 @@ html.ie11 .game-card .game-info { flex: 1 1 auto !important; position: relative 
 html.ie11 .game-card .game-actions { position: absolute !important; top: 50% !important; right: 0 !important; transform: translateY(-50%) !important; margin-top: 0 !important; }
 
 /* constrain main width to a simpler fixed size similar to IE11 layouts */
-html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 1.35rem !important; }
+html.ie11 main { margin: 1rem auto !important; width: 1000px !important; max-width: 1000px !important; padding: 1rem !important; border-radius: 26px !important; }
 
 /* Nav/logo adjustments to match IE11 sizing/flow */
 html.ie11 .nav-container { display: flex !important; align-items: center !important; justify-content: flex-start !important; }
