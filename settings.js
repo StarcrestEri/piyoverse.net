@@ -940,6 +940,10 @@ document.addEventListener('DOMContentLoaded', function() {
           try{ if(modeSel) modeSel.value = getPref('site-theme-mode','dark'); }catch(e){}
           try{ if(langSel) langSel.value = getPref('site-language','en'); }catch(e){}
           try{ alert('Settings saved!'); }catch(e){}
+          // Ensure music-playing flag reflects the persisted music setting so reload/resume logic
+          try{ if(window.localStorage){ try{ localStorage.setItem('site-music-playing', (getPref('site-music','on') === 'on')? '1' : '0'); }catch(e){} } }catch(e){}
+          // Reload the page so saved settings are applied consistently (helps when audio persists)
+          try{ window.location.reload(); }catch(e){}
         };
       }catch(e){}
     }catch(e){}
