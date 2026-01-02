@@ -185,21 +185,30 @@ html.frutiger-aero, html.frutiger-aero body {
 /* Pillarbox bars (black) */
 html.frutiger-aero::before,
 html.frutiger-aero::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  /* Default to no bars for engines that don't support CSS variables.
-     Prevents full-screen black overlays on browsers that treat var() as invalid. */
-  width: 0;
-  width: var(--side-bar-width);
-  background: #000;
-  z-index: 9000;
-  pointer-events: none;
+  /* Default OFF for browsers that don't support CSS variables or @supports.
+     Prevents full-screen black overlays on Wii U / 3DS-class engines. */
+  content: none;
+  display: none;
 }
 
 html.frutiger-aero::before { left: 0; }
 html.frutiger-aero::after { right: 0; }
+
+/* Enable pillarbox bars only when CSS variables are supported */
+@supports (--pve: 0) {
+  html.frutiger-aero::before,
+  html.frutiger-aero::after {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: var(--side-bar-width);
+    background: #000;
+    z-index: 9000;
+    pointer-events: none;
+  }
+}
 
 .frutiger-aero body {
   background: transparent;
@@ -1036,7 +1045,7 @@ html.frutiger-aero.solid-panels .muted {
   bottom: 0;
   left: 0;
   border-radius: 14px;
-  box-shadow: 0 0 0 1px var(--ribbons-outline);
+  box-shadow: 0 0 0 2px var(--ribbons-outline);
   background-repeat: no-repeat;
   background-image: none;
   background-size: 360px 3px, 3px 360px, 360px 3px, 3px 360px;
@@ -1048,8 +1057,8 @@ html.frutiger-aero.solid-panels .muted {
 }
 .frutiger-aero .game-card:hover::after {
   box-shadow:
-    0 0 0 1px var(--ribbons-outline),
-    0 0 0 3px var(--ribbons-accent),
+    0 0 0 2px var(--ribbons-outline),
+    0 0 0 4px var(--ribbons-accent),
     0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18);
   background-image: none;
 }
@@ -1205,8 +1214,8 @@ html.frutiger-aero.solid-panels .muted {
   /* Animated hover outline for game listings (IE11-safe, no CSS variables) */
   .frutiger-aero .game-card:hover::after {
     box-shadow:
-      0 0 0 1px rgba(43,111,160,0.95),
-      0 0 0 3px rgba(182,220,255,0.95),
+      0 0 0 2px rgba(43,111,160,0.95),
+      0 0 0 4px rgba(182,220,255,0.95),
       0 0 14px rgba(182,220,255,0.95);
     background-image: none;
   }
