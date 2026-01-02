@@ -84,8 +84,7 @@ html.black-text .settings-panel .settings-note { color: #071025 !important; }
   border-radius: 4px;
   width: min(900px, 80vw);
   background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 20%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.95) 50%, rgba(var(--ribbons-accent-rgb, 87,188,255),0.25) 80%, rgba(0,0,0,0.06) 100%);
-  box-shadow: 0 0 14px rgba(87,188,255,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
-  box-shadow: 0 0 14px rgba(var(--ribbons-accent-rgb, 87,188,255),0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+  box-shadow: none !important;
 }
 
 /* IE11 mode: ensure separator renders (no min(), no CSS variables) */
@@ -94,7 +93,7 @@ html.ie7 .section-separator {
   width: 80vw;
   max-width: 900px;
   background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(87,188,255,0.25) 20%, rgba(87,188,255,0.95) 50%, rgba(87,188,255,0.25) 80%, rgba(0,0,0,0.06) 100%);
-  box-shadow: 0 0 14px rgba(87,188,255,0.18), inset 0 1px 0 rgba(255,255,255,0.06);
+  box-shadow: none !important;
 }
 
 .games-section-title.section-large {
