@@ -180,6 +180,18 @@ html.legacy-lowend .game-thumb img {
   display: block;
 }
 
+/* DSi + PSP: use native 64x64 listing thumbs (no upscaling). */
+html.legacy-lowend.dsi .game-thumb,
+html.legacy-lowend.psp .game-thumb {
+  width: 64px;
+  height: 64px;
+}
+html.legacy-lowend.dsi .game-thumb img,
+html.legacy-lowend.psp .game-thumb img {
+  width: 64px !important;
+  height: 64px !important;
+}
+
 html.legacy-lowend .game-info {
   overflow: hidden;
 }
