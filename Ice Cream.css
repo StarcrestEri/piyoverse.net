@@ -132,7 +132,8 @@ html.ie7 .section-separator {
 
   /* Ice Cream signature geometry (keeps palette; changes silhouette) */
   --icecream-panel-radius: 22px;
-  --icecream-chrome-radius: 14px;
+  /* Use a pill radius for buttons/nav items (user preference). */
+  --icecream-chrome-radius: 999px;
 
   --foreground: oklch(0.985 0 0);
   --popover: oklch(72.007% 0.12846 221.186);
@@ -698,7 +699,7 @@ html.ice-cream.solid-panels .muted {
   width: 140%;
   height: 140%;
   transform: translate(-50%, -50%) scale(0.85);
-  border-radius: inherit;
+  border-radius: 50%;
   /* very subtle cyan aura */
   background: radial-gradient(circle at 50% 40%, rgba(0,200,255,0.03), transparent 18%),
               radial-gradient(circle at 60% 60%, rgba(0,200,255,0.02), transparent 22%);
