@@ -166,11 +166,12 @@
 		// Swap listing/teaser images to `/Images/Ice Cream Mini/` for PSP + DSi only.
 		if (isPSP || isDSi) {
 			(function () {
-				// Avoid percent-encoding the folder/name here. Older console browsers can be
-				// picky about encoded paths; letting the browser handle it is more compatible.
-				var MINI_BASE = "/Images/Ice Cream Mini/";
+				// Use UTF-8 percent-encoded URLs to avoid relying on the browser's manual
+				// character encoding setting for non-ASCII filenames.
+				var MINI_BASE = "/Images/Ice%20Cream%20Mini/";
 				var done = false;
 				var tries = 0;
+				var stablePasses = 0;
 
 				function isMiniSrc(src) {
 					return src.indexOf("/Images/Ice%20Cream%20Mini/") !== -1 || src.indexOf("/Images/Ice Cream Mini/") !== -1;
@@ -231,7 +232,14 @@
 							decoded = file;
 						}
 
-						var nextSrc = MINI_BASE + decoded;
+						var encoded = decoded;
+						try {
+							encoded = encodeURIComponent(decoded);
+						} catch (_) {
+							encoded = decoded;
+						}
+
+						var nextSrc = MINI_BASE + encoded;
 						try {
 							img.setAttribute("src", nextSrc);
 						} catch (_) {
@@ -242,8 +250,10 @@
 						changed++;
 					}
 
-					// If we managed to swap anything, stop polling.
-					if (changed > 0) done = true;
+					// Keep polling until we see a few passes with no changes.
+					if (changed === 0) stablePasses++;
+					else stablePasses = 0;
+					if (stablePasses >= 3) done = true;
 				}
 
 				try {
@@ -258,7 +268,7 @@
 						try {
 							swapOnce();
 						} catch (_) {}
-						if (done || tries > 40) {
+						if (done || tries > 60) {
 							try {
 								window.clearInterval(id);
 							} catch (_) {}
