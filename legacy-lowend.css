@@ -17,6 +17,7 @@ html.legacy-lowend {
 html.legacy-lowend body {
   /* Keep content off the very edges on tiny screens (DSi). */
   padding: 4px;
+  text-align: center;
 }
 
 html.legacy-lowend::before,
@@ -102,6 +103,7 @@ html.legacy-lowend footer {
 
 html.legacy-lowend main {
   padding: 4px;
+  text-align: center;
 }
 
 /* Panels: simple solid background and border */
@@ -124,6 +126,7 @@ html.legacy-lowend .game-card {
   margin: 8px 0;
   padding: 4px;
   overflow: hidden;
+  text-align: center;
 }
 
 html.legacy-lowend .game-card::before,
@@ -133,10 +136,10 @@ html.legacy-lowend .game-card::after {
 }
 
 html.legacy-lowend .game-thumb {
-  float: left;
+  float: none;
   width: 85px;
   height: 85px;
-  margin: 0 8px 0 0;
+  margin: 0 auto 6px;
 }
 
 html.legacy-lowend .game-thumb img {
@@ -147,6 +150,20 @@ html.legacy-lowend .game-thumb img {
 
 html.legacy-lowend .game-info {
   overflow: hidden;
+}
+
+/* PSP: reduce memory usage aggressively.
+   The PSP browser tends to run out of memory quickly on image-heavy pages.
+   Keep navigation/back icons, but drop large content images and listing thumbs. */
+html.legacy-lowend.psp .game-thumb,
+html.legacy-lowend.psp .game-thumb img,
+html.legacy-lowend.psp main img {
+  display: none !important;
+}
+
+html.legacy-lowend.psp .nav-logo img,
+html.legacy-lowend.psp .panel-back img {
+  display: inline-block !important;
 }
 
 html.legacy-lowend img {
