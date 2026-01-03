@@ -46,7 +46,9 @@
 		}
 
 		try {
-			isPSP = /PlayStation\s*Portable|\bPSP\b/i.test(ua);
+			// PSP UA strings vary a lot across firmware/regions/NetFront builds.
+			// Keep this intentionally broad (still scoped to obvious PSP markers).
+			isPSP = /PlayStation\s*Portable|PlayStationPortable|\bPSP\b|PSP\s*\)|PSP\s*Browser/i.test(ua);
 		} catch (_) {
 			isPSP = false;
 		}
@@ -140,7 +142,9 @@
 		// Swap listing/teaser images to `/Images/Ice Cream Mini/` for PSP + DSi only.
 		if (isPSP || isDSi) {
 			(function () {
-				var MINI_BASE = "/Images/Ice%20Cream%20Mini/";
+				// Avoid percent-encoding the folder/name here. Older console browsers can be
+				// picky about encoded paths; letting the browser handle it is more compatible.
+				var MINI_BASE = "/Images/Ice Cream Mini/";
 				var done = false;
 				var tries = 0;
 
@@ -203,14 +207,7 @@
 							decoded = file;
 						}
 
-						var encoded = decoded;
-						try {
-							encoded = encodeURIComponent(decoded);
-						} catch (_) {
-							encoded = decoded;
-						}
-
-						var nextSrc = MINI_BASE + encoded;
+						var nextSrc = MINI_BASE + decoded;
 						try {
 							img.setAttribute("src", nextSrc);
 						} catch (_) {
