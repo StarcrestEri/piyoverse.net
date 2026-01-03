@@ -55,19 +55,26 @@ html.legacy-lowend .nav-container {
   margin: 0 auto;
   padding: 4px;
   text-align: center;
+  background: #071a2b;
+  border: 1px solid #2b6fa0;
+  border-radius: 4px;
+  box-shadow: none !important;
 }
 
 html.legacy-lowend .nav-logo {
   display: inline-block;
-  width: 48px;
-  height: 48px;
+  width: 48px !important;
+  height: 48px !important;
   overflow: hidden;
   vertical-align: middle;
 }
 
 html.legacy-lowend .nav-logo img {
-  width: 48px;
-  height: 48px;
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  display: block;
 }
 
 html.legacy-lowend .nav-item {
@@ -78,6 +85,20 @@ html.legacy-lowend .nav-item {
   background: #0b2a44;
   color: #ffffff;
   text-decoration: none;
+  border-radius: 8px;
+  box-shadow: none !important;
+}
+
+/* Some higher-capability browsers (e.g., PSP) can apply the modern theme's
+   decorative pseudo-elements. Disable them so legacy visuals are consistent. */
+html.legacy-lowend .nav-item::before,
+html.legacy-lowend .nav-item::after,
+html.legacy-lowend .btn::before,
+html.legacy-lowend .btn::after,
+html.legacy-lowend .game-actions .btn::before,
+html.legacy-lowend .game-actions .btn::after {
+  content: none !important;
+  display: none !important;
 }
 
 html.legacy-lowend .page-name-container,
@@ -99,6 +120,17 @@ html.legacy-lowend footer {
   html.legacy-lowend footer {
     max-width: 240px !important;
   }
+}
+
+/* PSP has a wider viewport than DSi; force the same narrow legacy layout so
+   PSP matches the DSi "Ice Cream Mini" look. */
+html.legacy-lowend.psp .nav-container,
+html.legacy-lowend.psp .page-name-container,
+html.legacy-lowend.psp main,
+html.legacy-lowend.psp .social-bar,
+html.legacy-lowend.psp .site-footer,
+html.legacy-lowend.psp footer {
+  max-width: 240px !important;
 }
 
 html.legacy-lowend main {

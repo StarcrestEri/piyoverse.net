@@ -123,21 +123,45 @@
 			addClass("ice-cream-mini");
 		}
 
-		// Load legacy stylesheet
-		try {
-			var head = document.getElementsByTagName("head")[0];
-			if (head) {
-				var link = document.createElement("link");
-				link.rel = "stylesheet";
-				link.type = "text/css";
-				link.href = "/legacy-lowend.css";
-				head.appendChild(link);
-			}
-		} catch (_) {
+		// Load legacy stylesheet (robust for very old browsers).
+		// Some engines may expose DOM APIs but still fail to apply <link> injected into <head>
+		// during early parsing, or may not have a usable <head> node yet.
+		(function () {
+			var href = "/legacy-lowend.css";
+			// 1) Preferred: append into <head>
 			try {
-				document.write('<link rel="stylesheet" type="text/css" href="/legacy-lowend.css">');
+				var heads = document.getElementsByTagName("head");
+				var head = heads && heads[0] ? heads[0] : null;
+				if (head) {
+					var link = document.createElement("link");
+					link.rel = "stylesheet";
+					link.type = "text/css";
+					link.href = href;
+					head.appendChild(link);
+					return;
+				}
 			} catch (_) {}
-		}
+
+			// 2) Fallback: document.write while parsing
+			try {
+				if (document.write) {
+					document.write('<link rel="stylesheet" type="text/css" href="' + href + '">');
+					return;
+				}
+			} catch (_) {}
+
+			// 3) Last resort: append to <html>
+			try {
+				var de2 = document && document.documentElement ? document.documentElement : null;
+				if (de2) {
+					var link2 = document.createElement("link");
+					link2.rel = "stylesheet";
+					link2.type = "text/css";
+					link2.href = href;
+					de2.appendChild(link2);
+				}
+			} catch (_) {}
+		})();
 
 		// Swap listing/teaser images to `/Images/Ice Cream Mini/` for PSP + DSi only.
 		if (isPSP || isDSi) {
