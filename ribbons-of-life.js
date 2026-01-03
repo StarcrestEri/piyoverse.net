@@ -132,15 +132,18 @@
 	var viewH = 0;
 
 	function resize() {
+		// Prefer layout viewport measurements so pillarbox borders line up with
+		// CSS widths (avoids cross-browser differences where `innerWidth` includes
+		// scrollbar width).
 		viewW =
-			window.innerWidth ||
 			(document.documentElement && document.documentElement.clientWidth) ||
 			(document.body && document.body.clientWidth) ||
+			window.innerWidth ||
 			0;
 		viewH =
-			window.innerHeight ||
 			(document.documentElement && document.documentElement.clientHeight) ||
 			(document.body && document.body.clientHeight) ||
+			window.innerHeight ||
 			0;
 
 		canvas.width = Math.max(1, Math.floor(viewW * dpr));

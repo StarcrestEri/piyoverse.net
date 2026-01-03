@@ -155,8 +155,13 @@ html.frutiger-aero {
   /* Defaults to 4:3, but JS can override based on crt.png's real aspect */
   --crt-aspect-num: 4;
   --crt-aspect-den: 3;
-  --safe-width: min(100vw, calc(100vh * var(--crt-aspect-num) / var(--crt-aspect-den)));
-  --side-bar-width: calc((100vw - var(--safe-width)) / 2);
+  /* `100vw` can include scrollbar width on some browsers, which causes
+     cross-browser drift vs the actual layout viewport.
+     This expression resolves to the layout viewport width (≈ `100%`) while
+     still reacting like viewport units. */
+  --viewport-width: calc(100vw - (100vw - 100%));
+  --safe-width: min(var(--viewport-width), calc(100vh * var(--crt-aspect-num) / var(--crt-aspect-den)));
+  --side-bar-width: calc((var(--viewport-width) - var(--safe-width)) / 2);
 
   background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
               radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
