@@ -1486,6 +1486,21 @@ html.ie11 .nav-container { display: flex !important; align-items: center !import
 html.ie11 .nav-logo { width: 72px !important; height: 72px !important; margin-right: 1rem !important; overflow: visible !important; }
 html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-width: 100% !important; max-height: 100% !important; display: block !important; }
 
+/* IE11 border fallback: modern outlines use CSS variables (unsupported in real IE11).
+   Provide a fixed-color outline so listings match modern mode more closely. */
+html.ie11.frutiger-aero .game-card::after {
+  /* Use border (not box-shadow) so the outline reliably renders in IE11. */
+  box-shadow: none;
+  border: 1px solid #2b6fa0;
+  border: 1px solid var(--ribbons-outline);
+}
+
+html.ie11.frutiger-aero .game-card:hover::after {
+  border: 4px solid #b6dcff;
+  border: 4px solid var(--ribbons-accent);
+  box-shadow: 0 0 10px rgba(182,220,255,0.75);
+}
+
 /* Center social tabs in IE11 by fixing the panel width and centering it */
 html.ie11 .social-bar { display: flex !important; justify-content: center !important; align-items: center !important; width: 1000px !important; margin: 0.75rem auto 0 !important; }
 
