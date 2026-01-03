@@ -130,6 +130,10 @@ html.ie7 .section-separator {
   --ribbons-accent: #57bcff; /* updated dynamically by ribbons-of-life.js */
   --ribbons-outline: #2b6fa0; /* darker default outline; updated dynamically by ribbons-of-life.js */
 
+  /* Ice Cream signature geometry (keeps palette; changes silhouette) */
+  --icecream-panel-radius: 22px;
+  --icecream-chrome-radius: 14px;
+
   --foreground: oklch(0.985 0 0);
   --popover: oklch(72.007% 0.12846 221.186);
   --popover-foreground: oklch(0.985 0 0);
@@ -276,10 +280,11 @@ html.ice-cream::after {
     rgba(62, 65, 67, 0.60) 100%
   );
   padding: 1rem;
-  border-radius: 1.75rem;
+  border-radius: var(--icecream-panel-radius);
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3),
               inset 0px 2px 1px rgba(255, 255, 255, 0.31),
               inset 0px -2px 1px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.10);
   margin: 1rem auto;
   box-sizing: border-box;
   width: var(--content-width);
@@ -426,13 +431,14 @@ html.ice-cream.solid-panels .muted {
     rgba(62,65,67,0.60) 100%
   );
   padding: 1rem;
-  border-radius: 1.75rem;
+  border-radius: var(--icecream-panel-radius);
   margin: 1rem auto 2rem auto;
   box-sizing: border-box;
   width: var(--content-width);
   max-width: 1200px;
   box-shadow: 0px 8px 20px rgba(0,0,0,0.48);
   color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.10);
 }
 .ice-cream .site-footer p { margin: 0.4rem 0; color: #ffffff; }
 
@@ -527,10 +533,11 @@ html.ice-cream.solid-panels .muted {
   width: var(--content-width);
   max-width: 1200px;
   padding: 5px 10px;
-  border-radius: 8px;
+  border-radius: var(--icecream-panel-radius);
   background: linear-gradient(180deg, #f2faff40, #0000001f);
   filter: drop-shadow(2px 1px 1px black);
   position: relative;
+  border: 1px solid rgba(255,255,255,0.10);
 }
 
 /* Small logo in the top-left of the banner/nav panel */
@@ -574,7 +581,7 @@ html.ice-cream.solid-panels .muted {
 
 .ice-cream .nav-item {
   padding: 0.25rem 1rem;
-  border-radius: 999px;
+  border-radius: var(--icecream-chrome-radius);
   filter: drop-shadow(2px 1px 1px black);
   /* use the same translucent blue base as game action buttons */
   background: linear-gradient(180deg, rgba(79, 110, 129, 0.28), rgba(175, 207, 230, 0.22));
@@ -582,6 +589,7 @@ html.ice-cream.solid-panels .muted {
   text-decoration: none;
   font-weight: bold;
   transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 .ice-cream .nav-container .nav-item:first-of-type { margin-left: 0.6rem; }
@@ -589,7 +597,7 @@ html.ice-cream.solid-panels .muted {
 /* Settings panel save button should match other action buttons */
 .ice-cream .settings-panel .btn {
   padding: 0.35rem 0.85rem;
-  border-radius: 999px;
+  border-radius: var(--icecream-chrome-radius);
   background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   color: #ffffff;
   text-decoration: none;
@@ -601,6 +609,7 @@ html.ice-cream.solid-panels .muted {
   gap: 0.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12);
 }
 .ice-cream .settings-panel .btn:hover,
 .ice-cream .settings-panel .btn:focus {
@@ -648,7 +657,8 @@ html.ice-cream.solid-panels .muted {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.16));
   color: var(--foreground);
   padding: 0.6rem 1rem;
-  border-radius: 999px;
+  border-radius: var(--icecream-chrome-radius);
+  border: 1px solid rgba(255,255,255,0.12);
   cursor: pointer;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
   z-index: 1;
@@ -665,7 +675,7 @@ html.ice-cream.solid-panels .muted {
   position: absolute;
   /* make the glow tighter and very subtle */
   inset: -4px;
-  border-radius: 999px;
+  border-radius: inherit;
   background: linear-gradient(90deg, var(--gradient-from), var(--gradient-to));
   /* low blur so it's gentle and cyan-leaning */
   filter: blur(4px) saturate(1.02);
@@ -688,7 +698,7 @@ html.ice-cream.solid-panels .muted {
   width: 140%;
   height: 140%;
   transform: translate(-50%, -50%) scale(0.85);
-  border-radius: 50%;
+  border-radius: inherit;
   /* very subtle cyan aura */
   background: radial-gradient(circle at 50% 40%, rgba(0,200,255,0.03), transparent 18%),
               radial-gradient(circle at 60% 60%, rgba(0,200,255,0.02), transparent 22%);
@@ -907,7 +917,7 @@ html.ice-cream.solid-panels .muted {
   min-width: min(360px, 44vw);
   padding: 1.15rem 1.75rem;
   font-size: 1.35rem;
-  border-radius: 999px;
+  border-radius: var(--icecream-chrome-radius);
   text-decoration: none;
   font-weight: 700;
   display: inline-flex;
@@ -918,6 +928,7 @@ html.ice-cream.solid-panels .muted {
   color: white;
   filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
   box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 .ice-cream .marketplace-btn:hover,
@@ -1027,7 +1038,7 @@ html.ice-cream.solid-panels .muted {
   /* mirror .nav-item for consistent appearance: translucent light-blue -> blue base */
   padding: 0.35rem 0.85rem;
   width: 7.5rem;
-  border-radius: 999px;
+  border-radius: var(--icecream-chrome-radius);
   filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5));
   background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   color: white;
@@ -1041,6 +1052,7 @@ html.ice-cream.solid-panels .muted {
   gap: 0.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 .ice-cream .game-actions .btn:hover,
@@ -1054,7 +1066,7 @@ html.ice-cream.solid-panels .muted {
 /* games live directly in main; no extra panel */
 
 /* Card hover: subtle lift + tilt effect */
-.ice-cream .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: 14px; }
+.ice-cream .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: var(--icecream-panel-radius); }
 .ice-cream .game-card:hover { /* subtle highlight only, no lift */ background-color: rgba(255,255,255,0.02); transform: none; }
 
 /* Place outline around the content area (.game-info) so it doesn't overlap the thumbnail */
@@ -1070,8 +1082,8 @@ html.ice-cream.solid-panels .muted {
   right: 0;
   bottom: 0;
   left: 0;
-  border-radius: 14px;
-  box-shadow: 0 0 0 1px var(--ribbons-outline);
+  border-radius: var(--icecream-panel-radius);
+  box-shadow: 0 0 0 1px var(--ribbons-outline), inset 0 0 0 1px rgba(255,255,255,0.10);
   background-repeat: no-repeat;
   background-image: none;
   background-size: 360px 3px, 3px 360px, 360px 3px, 3px 360px;

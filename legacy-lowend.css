@@ -56,7 +56,7 @@ html.legacy-lowend .nav-container {
   padding: 4px;
   text-align: center;
   background: #071a2b;
-  border: 1px solid #2b6fa0;
+  border: 2px double #2b6fa0;
   border-radius: 4px;
   box-shadow: none !important;
 }
@@ -81,7 +81,7 @@ html.legacy-lowend .nav-item {
   display: inline-block;
   margin: 4px;
   padding: 3px 6px;
-  border: 1px solid #2b6fa0;
+  border: 2px double #2b6fa0;
   background: #0b2a44;
   color: #ffffff;
   text-decoration: none;
@@ -143,7 +143,7 @@ html.legacy-lowend main,
 html.legacy-lowend .bg-popover,
 html.legacy-lowend .site-footer {
   background: #071a2b;
-  border: 1px solid #2b6fa0;
+  border: 2px double #2b6fa0;
   border-radius: 4px;
   box-shadow: none !important;
 }
@@ -267,7 +267,7 @@ html.legacy-lowend .marketplace-btn {
   width: auto !important;
   min-width: 0 !important;
   padding: 3px 6px;
-  border: 1px solid #2b6fa0;
+  border: 2px double #2b6fa0;
   background: #0b2a44;
   color: #ffffff;
   text-decoration: none;
