@@ -5,6 +5,14 @@
 		if (window.__legacy_low_end) return;
 	} catch (_) {}
 
+	try {
+		var de = document && document.documentElement;
+		if (de) {
+			var cn = " " + (de.className || "") + " ";
+			if (cn.indexOf(" no-ribbons ") !== -1) return;
+		}
+	} catch (_) {}
+
 	function parseRgbString(value, fallback) {
 		try {
 			if (!value) return fallback;

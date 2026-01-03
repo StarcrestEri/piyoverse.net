@@ -163,6 +163,7 @@ html.frutiger-aero {
   --safe-width: min(var(--viewport-width), calc(100vh * var(--crt-aspect-num) / var(--crt-aspect-den)));
   --side-bar-width: calc((var(--viewport-width) - var(--safe-width)) / 2);
 
+  background-color: #031024;
   background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
               radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
               radial-gradient(circle at 18% 78%, rgba(134, 255, 207, 0.18), transparent 30%),
