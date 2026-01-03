@@ -175,15 +175,25 @@ html.legacy-lowend .social-bar {
 html.legacy-lowend .social-item {
   display: inline-block;
   vertical-align: top;
-  margin: 0 6px;
+  margin: 0 2px;
+  width: 36px;
 }
 html.legacy-lowend .social-link {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   display: inline-block;
-  border-radius: 10px;
+  border-radius: 8px;
   background-position: center;
   background-repeat: no-repeat;
+}
+html.legacy-lowend .social-label {
+  display: block;
+  text-align: center;
+  font-size: 0.65rem;
+  line-height: 1.1;
+  margin-top: 4px;
+  width: 36px;
+  overflow: hidden;
 }
 html.legacy-lowend .social-youtube { background-image: url('Images/youtubeicon-48.png') !important; }
 html.legacy-lowend .social-discord { background-image: url('Images/discordicon-48.png') !important; }

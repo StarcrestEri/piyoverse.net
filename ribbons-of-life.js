@@ -180,9 +180,10 @@
 	}
 
 	function drawBackground(w, h, colors) {
-		var top = mix([255, 255, 255], colors.accent, 0.12);
-		var mid = mix([255, 255, 255], colors.accent, 0.18);
-		var bot = mix([255, 255, 255], colors.outline, 0.1);
+		// Blue-white gradient behind ribbons/sparkles (top -> bottom)
+		var top = [255, 255, 255];
+		var mid = mix([255, 255, 255], colors.accent, 0.16);
+		var bot = mix([255, 255, 255], colors.accent, 0.28);
 
 		var grad = ctx.createLinearGradient(0, 0, 0, h);
 		grad.addColorStop(0, rgb(top));
@@ -331,7 +332,7 @@
 			sparkles.push({
 				x: Math.random() * w,
 				y: Math.random() * h,
-				r: (perfMode || ie11 ? 0.9 : 1.1) + Math.random() * (perfMode || ie11 ? 1.4 : 2.1),
+				r: 0.2 * ((perfMode || ie11 ? 0.9 : 1.1) + Math.random() * (perfMode || ie11 ? 1.4 : 2.1)),
 				tw: 0.7 + Math.random() * 1.8,
 				ph: Math.random() * Math.PI * 2,
 				a: 0.06 + Math.random() * 0.11,
@@ -351,7 +352,7 @@
 
 		if (!perfMode && !ie11) {
 			ctx.shadowColor = rgba(glow, 0.28);
-			ctx.shadowBlur = 8;
+			ctx.shadowBlur = 2;
 		}
 
 		for (var i = 0; i < sparkles.length; i++) {
@@ -361,7 +362,7 @@
 			var r = s.r * (0.8 + 0.35 * tw);
 
 			ctx.strokeStyle = rgba(core, alpha);
-			ctx.lineWidth = perfMode || ie11 ? 1 : 1.2;
+			ctx.lineWidth = perfMode || ie11 ? 0.7 : 0.9;
 
 			// XMB-ish tiny star: main cross plus smaller diagonals
 			ctx.beginPath();
