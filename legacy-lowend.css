@@ -154,9 +154,8 @@ html.legacy-lowend .game-info {
 
 /* PSP: reduce memory usage aggressively.
    The PSP browser tends to run out of memory quickly on image-heavy pages.
-   Keep navigation/back icons, but drop large content images and listing thumbs. */
-html.legacy-lowend.psp .game-thumb,
-html.legacy-lowend.psp .game-thumb img,
+   Hide most images, but allow small UI icons plus listing thumbs and the Starcrest teaser
+   (which are swapped to the smaller "Ice Cream Mini" versions by `legacy-lowend.js`). */
 html.legacy-lowend.psp main img {
   display: none !important;
 }
@@ -164,6 +163,11 @@ html.legacy-lowend.psp main img {
 html.legacy-lowend.psp .nav-logo img,
 html.legacy-lowend.psp .panel-back img {
   display: inline-block !important;
+}
+
+html.legacy-lowend.psp .game-thumb img,
+html.legacy-lowend.psp img.starcrest-teaser {
+  display: block !important;
 }
 
 html.legacy-lowend img {

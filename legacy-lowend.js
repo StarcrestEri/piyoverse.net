@@ -1,1 +1,250 @@
-!function(){try{var t="";try{t=navigator&&navigator.userAgent?navigator.userAgent:""}catch(e){t=""}var e=!1;try{e=/Nintendo\s+(3DS|DSi)/i.test(t)||/Nitro/i.test(t)}catch(t){e=!1}var a=!1;try{a=/NintendoBrowser/i.test(t)||/WiiU/i.test(t)}catch(t){a=!1}var c=!1;try{c=/NetFront/i.test(t)||/NX\b/i.test(t)}catch(t){c=!1}var n=!1;try{n=/Opera\/(9\.5\d?)/i.test(t)||/Opera\s+9\.5/i.test(t)}catch(t){n=!1}var r=!1;try{r=/PlayStation\s*Portable|\bPSP\b/i.test(t)}catch(t){r=!1}var s=!1;try{s=/PlayStation\s*Vita/i.test(t)}catch(t){s=!1}var d=!1;try{document&&document.getElementById&&document.getElementsByTagName||(d=!0)}catch(t){d=!0}try{window&&window.XMLHttpRequest||(d=!0)}catch(t){d=!0}try{document.addEventListener||document.attachEvent||(d=!0)}catch(t){d=!0}try{if(r||s){var i=document.documentElement;if(i){var o=i.className||"";-1===o.indexOf("no-ribbons")&&(i.className=o?o+" no-ribbons":"no-ribbons")}}}catch(t){}try{if(r){var l=document.documentElement;if(l){var m=l.className||"";-1===m.indexOf("psp")&&(l.className=m?m+" psp":"psp")}}}catch(t){}var y=!!(e||c||n||d||r);try{document&&document.documentMode&&(y=!1)}catch(t){}try{if(a){var h=document.documentElement;if(h){var u=h.className||"";-1===u.indexOf("no-pillarbox")&&(h.className=u?u+" no-pillarbox":"no-pillarbox")}}}catch(t){}try{if(e||c||n||a||r){var v=document.documentElement;if(v){var f=v.className||"";-1===f.indexOf("ie11-cards")&&(v.className=f?f+" ie11-cards":"ie11-cards")}}}catch(t){}if(!y)return;try{window.__legacy_low_end=!0}catch(t){}try{var p=document.documentElement;if(p){var w=p.className||"";-1===w.indexOf("legacy-lowend")&&(p.className=w?w+" legacy-lowend":"legacy-lowend")}}catch(t){}try{var g=document.getElementsByTagName("head")[0];if(g){var b=document.createElement("link");return b.rel="stylesheet",b.type="text/css",b.href="/legacy-lowend.css",void g.appendChild(b)}}catch(t){}try{document.write('<link rel="stylesheet" type="text/css" href="/legacy-lowend.css">')}catch(t){}}catch(t){}}();
+(function () {
+	try {
+		var ua = "";
+		try {
+			ua = navigator && navigator.userAgent ? navigator.userAgent : "";
+		} catch (_) {
+			ua = "";
+		}
+
+		var isDSi = false;
+		var is3DS = false;
+		var isWiiU = false;
+		var isNetFront = false;
+		var isOpera95 = false;
+		var isPSP = false;
+		var isVita = false;
+
+		try {
+			isDSi = /Nintendo\s+DSi/i.test(ua) || /\bDSi\b/i.test(ua);
+		} catch (_) {
+			isDSi = false;
+		}
+
+		try {
+			is3DS = /Nintendo\s+3DS/i.test(ua);
+		} catch (_) {
+			is3DS = false;
+		}
+
+		try {
+			isWiiU = /NintendoBrowser/i.test(ua) || /WiiU/i.test(ua);
+		} catch (_) {
+			isWiiU = false;
+		}
+
+		try {
+			isNetFront = /NetFront/i.test(ua) || /NX\b/i.test(ua);
+		} catch (_) {
+			isNetFront = false;
+		}
+
+		try {
+			isOpera95 = /Opera\/(9\.5\d?)/i.test(ua) || /Opera\s+9\.5/i.test(ua);
+		} catch (_) {
+			isOpera95 = false;
+		}
+
+		try {
+			isPSP = /PlayStation\s*Portable|\bPSP\b/i.test(ua);
+		} catch (_) {
+			isPSP = false;
+		}
+
+		try {
+			isVita = /PlayStation\s*Vita/i.test(ua);
+		} catch (_) {
+			isVita = false;
+		}
+
+		var missingFeatures = false;
+		try {
+			if (!(document && document.getElementById && document.getElementsByTagName)) missingFeatures = true;
+		} catch (_) {
+			missingFeatures = true;
+		}
+		try {
+			if (!(window && window.XMLHttpRequest)) missingFeatures = true;
+		} catch (_) {
+			missingFeatures = true;
+		}
+		try {
+			if (!(document.addEventListener || document.attachEvent)) missingFeatures = true;
+		} catch (_) {
+			missingFeatures = true;
+		}
+
+		var de = null;
+		try {
+			de = document && document.documentElement ? document.documentElement : null;
+		} catch (_) {
+			de = null;
+		}
+
+		function addClass(cls) {
+			try {
+				if (!de) return;
+				var cn = de.className || "";
+				if ((" " + cn + " ").indexOf(" " + cls + " ") !== -1) return;
+				de.className = cn ? cn + " " + cls : cls;
+			} catch (_) {}
+		}
+
+		if (isWiiU) addClass("no-pillarbox");
+		if (isDSi) addClass("dsi");
+		if (is3DS) addClass("n3ds");
+		if (isPSP) addClass("psp");
+		if (isPSP || isVita) addClass("no-ribbons");
+
+		// Some devices need the "IE11-style" listing layout.
+		if (isDSi || is3DS || isNetFront || isOpera95 || isWiiU || isPSP) addClass("ie11-cards");
+
+		// Legacy/mini CSS path (DSi/3DS/PSP/NetFront/old Opera/feature-poor engines)
+		var legacy = !!(isDSi || is3DS || isNetFront || isOpera95 || missingFeatures || isPSP);
+		try {
+			if (document && document.documentMode) legacy = false;
+		} catch (_) {}
+
+		if (!legacy) return;
+
+		try {
+			window.__legacy_low_end = true;
+		} catch (_) {}
+
+		addClass("legacy-lowend");
+
+		// Only PSP + DSi should use the lighter "Ice Cream Mini" thumbnails.
+		if (isPSP || isDSi) {
+			try {
+				window.__ice_cream_mini = true;
+			} catch (_) {}
+			addClass("ice-cream-mini");
+		}
+
+		// Load legacy stylesheet
+		try {
+			var head = document.getElementsByTagName("head")[0];
+			if (head) {
+				var link = document.createElement("link");
+				link.rel = "stylesheet";
+				link.type = "text/css";
+				link.href = "/legacy-lowend.css";
+				head.appendChild(link);
+			}
+		} catch (_) {
+			try {
+				document.write('<link rel="stylesheet" type="text/css" href="/legacy-lowend.css">');
+			} catch (_) {}
+		}
+
+		// Swap listing/teaser images to `/Images/Ice Cream Mini/` for PSP + DSi only.
+		if (isPSP || isDSi) {
+			(function () {
+				var MINI_BASE = "/Images/Ice%20Cream%20Mini/";
+				var done = false;
+				var tries = 0;
+
+				function isMiniSrc(src) {
+					return src.indexOf("/Images/Ice%20Cream%20Mini/") !== -1 || src.indexOf("/Images/Ice Cream Mini/") !== -1;
+				}
+
+				function swapOnce() {
+					if (done) return;
+
+					var imgs = null;
+					try {
+						imgs = document.getElementsByTagName("img");
+					} catch (_) {
+						imgs = null;
+					}
+
+					if (!imgs || !imgs.length) return;
+
+					var changed = 0;
+					for (var i = 0; i < imgs.length; i++) {
+						var img = imgs[i];
+						if (!img) continue;
+
+						var imgCls = " ";
+						try {
+							imgCls = " " + (img.className || "") + " ";
+						} catch (_) {
+							imgCls = " ";
+						}
+
+						var parentCls = " ";
+						try {
+							var p = img.parentNode;
+							parentCls = p ? " " + (p.className || "") + " " : " ";
+						} catch (_) {
+							parentCls = " ";
+						}
+
+						var isThumb = parentCls.indexOf(" game-thumb ") !== -1;
+						var isTeaser = imgCls.indexOf(" starcrest-teaser ") !== -1;
+						if (!isThumb && !isTeaser) continue;
+
+						var src = "";
+						try {
+							src = img.getAttribute ? img.getAttribute("src") : img.src;
+						} catch (_) {
+							src = "";
+						}
+
+						if (!src) continue;
+						if (isMiniSrc(src)) continue;
+						if (src.indexOf("/Images/") === -1) continue;
+
+						var file = src.substring(src.lastIndexOf("/") + 1);
+						var decoded = file;
+						try {
+							decoded = decodeURIComponent(file);
+						} catch (_) {
+							decoded = file;
+						}
+
+						var encoded = decoded;
+						try {
+							encoded = encodeURIComponent(decoded);
+						} catch (_) {
+							encoded = decoded;
+						}
+
+						var nextSrc = MINI_BASE + encoded;
+						try {
+							img.setAttribute("src", nextSrc);
+						} catch (_) {
+							try {
+								img.src = nextSrc;
+							} catch (_) {}
+						}
+						changed++;
+					}
+
+					// If we managed to swap anything, stop polling.
+					if (changed > 0) done = true;
+				}
+
+				try {
+					swapOnce();
+				} catch (_) {}
+
+				// Very old engines may not fire DOMContentLoaded reliably.
+				// Poll a bit until content exists.
+				try {
+					var id = window.setInterval(function () {
+						tries++;
+						try {
+							swapOnce();
+						} catch (_) {}
+						if (done || tries > 40) {
+							try {
+								window.clearInterval(id);
+							} catch (_) {}
+						}
+					}, 250);
+				} catch (_) {}
+			})();
+		}
+	} catch (_) {}
+})();
