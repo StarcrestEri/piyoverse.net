@@ -432,7 +432,13 @@ html.ice-cream.solid-panels .muted {
 
 /* Legal text: make it about half the normal footer size */
 .ice-cream .site-footer .legal-note {
-  font-size: 0.45rem;
+  font-size: 0.55rem;
+  line-height: 1.2;
+}
+
+/* Footer copyright line: match legal note size */
+.ice-cream .site-footer p[data-i18n="footer-copy"] {
+  font-size: 0.55rem;
   line-height: 1.2;
 }
 

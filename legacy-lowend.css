@@ -154,6 +154,12 @@ html.legacy-lowend img {
   height: auto !important;
 }
 
+html.legacy-lowend .legal-note,
+html.legacy-lowend p[data-i18n="footer-copy"] {
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
 html.legacy-lowend .game-actions {
   position: static !important;
   right: auto !important;
