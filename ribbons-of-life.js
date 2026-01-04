@@ -117,6 +117,8 @@
 
 	var perfMode = false;
 	var ie11 = false;
+	var reduceMotion = false;
+	var lowEnd = false;
 
 	try {
 		perfMode = window.PVE_MODE === "perf";
@@ -126,12 +128,32 @@
 		ie11 = window.PVE_MODE === "ie11";
 	} catch (_) {}
 
+	// Respect OS accessibility settings.
+	try {
+		reduceMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+	} catch (_) {
+		reduceMotion = false;
+	}
+
+	// Auto-perf on low-end devices (best-effort).
+	try {
+		var hc = navigator && typeof navigator.hardwareConcurrency === "number" ? navigator.hardwareConcurrency : 0;
+		var dm = navigator && typeof navigator.deviceMemory === "number" ? navigator.deviceMemory : 0;
+		var saveData = !!(navigator && navigator.connection && navigator.connection.saveData);
+		lowEnd = saveData || (hc && hc <= 4) || (dm && dm <= 4);
+	} catch (_) {
+		lowEnd = false;
+	}
+
 	try {
 		if (document.documentElement && document.documentElement.classList) {
 			if (document.documentElement.classList.contains("perf-base")) perfMode = true;
 			if (document.documentElement.classList.contains("ie11")) ie11 = true;
 		}
 	} catch (_) {}
+
+	if (reduceMotion) perfMode = true;
+	if (lowEnd) perfMode = true;
 
 	var dpr = Math.max(1, window.devicePixelRatio || 1);
 	if (perfMode || ie11) dpr = 1;
@@ -169,7 +191,7 @@
 	var lastTs = window.performance.now();
 	var throttleTs = 0;
 	var tAccum = 0;
-	var targetMs = 1000 / 30;
+	var targetMs = 1000 / (reduceMotion ? 12 : perfMode ? 24 : 30);
 
 	function getThemeColors() {
 		var accent = DEFAULT_ACCENT;
@@ -409,6 +431,12 @@
 	}
 
 	function raf(ts) {
+		// Pause when hidden or if the canvas was removed.
+		try {
+			if (document && document.hidden) return;
+			if (!canvas || !canvas.parentNode) return;
+		} catch (_) {}
+
 		var dt = (ts - lastTs) / 1000;
 		if (!isFinite(dt) || dt < 0) dt = 0;
 		dt = Math.min(0.05, dt);
@@ -452,5 +480,34 @@
 		window.requestAnimationFrame(raf);
 	}
 
-	window.requestAnimationFrame(raf);
+	var rafId = 0;
+	function start() {
+		try {
+			if (document && document.hidden) return;
+		} catch (_) {}
+		try {
+			lastTs = window.performance.now();
+			throttleTs = 0;
+		} catch (_) {}
+		rafId = window.requestAnimationFrame(raf);
+	}
+	function stop() {
+		try {
+			if (rafId) window.cancelAnimationFrame(rafId);
+		} catch (_) {}
+		rafId = 0;
+	}
+
+	try {
+		if (document && document.addEventListener) {
+			document.addEventListener("visibilitychange", function () {
+				try {
+					if (document.hidden) stop();
+					else start();
+				} catch (_) {}
+			});
+		}
+	} catch (_) {}
+
+	start();
 })();
