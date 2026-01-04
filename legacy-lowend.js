@@ -76,6 +76,15 @@
 			missingFeatures = true;
 		}
 
+		// Ultra-minimal fallback: for unknown/very old browsers that are too limited
+		// to reliably render the modern themes. This is our "IE1"-style mode.
+		var ultraLegacy = false;
+		try {
+			ultraLegacy = !!missingFeatures;
+		} catch (_) {
+			ultraLegacy = true;
+		}
+
 		var de = null;
 		try {
 			de = document && document.documentElement ? document.documentElement : null;
@@ -90,6 +99,58 @@
 				if ((" " + cn + " ").indexOf(" " + cls + " ") !== -1) return;
 				de.className = cn ? cn + " " + cls : cls;
 			} catch (_) {}
+		}
+
+		function injectStylesheet(href) {
+			// 1) Preferred: append into <head>
+			try {
+				var heads = document.getElementsByTagName("head");
+				var head = heads && heads[0] ? heads[0] : null;
+				if (head && document.createElement) {
+					var link = document.createElement("link");
+					link.rel = "stylesheet";
+					link.type = "text/css";
+					link.href = href;
+					head.appendChild(link);
+					return true;
+				}
+			} catch (_) {}
+
+			// 2) Fallback: document.write while parsing
+			try {
+				if (document.write) {
+					document.write('<link rel="stylesheet" type="text/css" href="' + href + '">');
+					return true;
+				}
+			} catch (_) {}
+
+			// 3) Last resort: append to <html>
+			try {
+				var de2 = document && document.documentElement ? document.documentElement : null;
+				if (de2 && document.createElement) {
+					var link2 = document.createElement("link");
+					link2.rel = "stylesheet";
+					link2.type = "text/css";
+					link2.href = href;
+					de2.appendChild(link2);
+					return true;
+				}
+			} catch (_) {}
+
+			return false;
+		}
+
+		// IE1-style mode: minimal CSS + disable heavy effects.
+		// Applies to "undetected" low-end browsers (feature-poor) so users can still navigate.
+		if (ultraLegacy) {
+			addClass("ie1");
+			addClass("no-ribbons");
+			addClass("no-pillarbox");
+			try {
+				window.__legacy_low_end = true;
+			} catch (_) {}
+			injectStylesheet("/ie1.css");
+			return;
 		}
 
 		if (isWiiU) addClass("no-pillarbox");

@@ -1,0 +1,113 @@
+/* IE1-style ultra-minimal fallback
+   Activated when <html> has class "ie1".
+   Goal: keep the site navigable and readable on extremely limited/unknown browsers.
+*/
+
+html.ie1,
+html.ie1 body {
+  background: #000;
+  color: #fff;
+}
+
+html.ie1 body {
+  margin: 0;
+  padding: 8px;
+  font: 14px/1.35 Arial, sans-serif;
+}
+
+html.ie1 a {
+  color: #9fd3ff;
+  text-decoration: underline;
+}
+
+html.ie1 canvas,
+html.ie1 .ribbons-canvas,
+html.ie1 #ribbons-of-life {
+  display: none;
+}
+
+/* Remove layout assumptions */
+html.ie1 nav,
+html.ie1 main,
+html.ie1 header,
+html.ie1 footer,
+html.ie1 section,
+html.ie1 article,
+html.ie1 figure,
+html.ie1 div {
+  display: block;
+}
+
+/* Basic boxed sections (very simple borders) */
+html.ie1 .nav-container,
+html.ie1 .page-name-container,
+html.ie1 main,
+html.ie1 .social-bar,
+html.ie1 .site-footer,
+html.ie1 footer {
+  border: 1px solid #555;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+/* Logo is optional; keep it small */
+html.ie1 .nav-logo img {
+  width: 48px;
+  height: 48px;
+}
+
+/* Make nav links a simple list */
+html.ie1 .nav-item {
+  display: block;
+  margin: 4px 0;
+}
+
+/* Back link should be readable even if the circular button styling fails */
+html.ie1 .panel-back {
+  display: inline;
+}
+html.ie1 .panel-back-icon {
+  font-weight: bold;
+}
+html.ie1 .panel-back-text {
+  display: inline;
+  margin-left: 6px;
+}
+
+/* Listings: force small thumbs so images don't dominate */
+html.ie1 .game-grid {
+  display: block;
+}
+html.ie1 .game-card {
+  display: block;
+  border-top: 1px solid #333;
+  padding: 8px 0;
+}
+html.ie1 .game-thumb {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 0 6px 0;
+}
+html.ie1 .game-thumb img {
+  width: 64px;
+  height: 64px;
+  max-width: 64px;
+  max-height: 64px;
+  display: block;
+}
+
+html.ie1 img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Disable fancy button sizing; keep them as normal links */
+html.ie1 .btn,
+html.ie1 .marketplace-btn,
+html.ie1 .settings-btn {
+  display: inline;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}

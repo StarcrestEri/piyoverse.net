@@ -354,6 +354,7 @@ html.ice-cream::after {
 }
 
 .ice-cream .panel-back img { display: none !important; }
+.ice-cream .panel-back .panel-back-text { display: none; }
 .ice-cream .panel-back .panel-back-icon {
   display: block;
   font-size: 22px;

@@ -342,6 +342,7 @@ html.frutiger-aero::after {
 }
 
 .frutiger-aero .panel-back img { display: none !important; }
+.frutiger-aero .panel-back .panel-back-text { display: none; }
 .frutiger-aero .panel-back .panel-back-icon {
   display: block;
   font-size: 22px;
