@@ -333,7 +333,8 @@ html.ice-cream::after {
   justify-content: center;
   /* Avoid thin top/bottom artifacts by using an opaque-ish surface,
      clipping, and a shadow ring instead of a border. */
-  background: linear-gradient(180deg, rgba(82, 110, 128, 0.62), rgba(197, 215, 228, 0.46));
+  /* Solid fill avoids 1px gradient banding in older engines */
+  background: #0b2a44;
   border: none;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.16), 0 2px 8px rgba(0,0,0,0.35);
   filter: none;
@@ -363,7 +364,7 @@ html.ice-cream::after {
 
 .ice-cream .panel-back:hover,
 .ice-cream .panel-back:focus {
-  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
+  background: #2b6fa0;
   outline: none;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.22), 0 4px 14px rgba(0,0,0,0.55);
 }
@@ -1571,6 +1572,37 @@ html.ie11.ice-cream input[type="submit"],
 html.ie11.ice-cream .marketplace-btn,
 html.ie11.ice-cream .settings-btn,
 html.ie11.ice-cream .panel-back {
+  border-radius: 999px !important;
+}
+
+/* Forced IE11 mode (`?force_ie11=1`) uses `force-ie11` in addition to `ie11`. */
+html.force-ie11.ice-cream .nav-item,
+html.force-ie11.ice-cream .btn,
+html.force-ie11.ice-cream button,
+html.force-ie11.ice-cream input[type="button"],
+html.force-ie11.ice-cream input[type="submit"],
+html.force-ie11.ice-cream .marketplace-btn,
+html.force-ie11.ice-cream .settings-btn,
+html.force-ie11.ice-cream .panel-back,
+html.force-ie11.ice-cream .game-card {
+  border-radius: 999px !important;
+}
+html.ie11.ice-cream .nav-item::before,
+html.ie11.ice-cream .nav-item::after,
+html.ie11.ice-cream .btn::before,
+html.ie11.ice-cream .btn::after,
+html.ie11.ice-cream button::before,
+html.ie11.ice-cream button::after,
+html.ie11.ice-cream .game-card::before,
+html.ie11.ice-cream .game-card::after,
+html.force-ie11.ice-cream .nav-item::before,
+html.force-ie11.ice-cream .nav-item::after,
+html.force-ie11.ice-cream .btn::before,
+html.force-ie11.ice-cream .btn::after,
+html.force-ie11.ice-cream button::before,
+html.force-ie11.ice-cream button::after,
+html.force-ie11.ice-cream .game-card::before,
+html.force-ie11.ice-cream .game-card::after {
   border-radius: 999px !important;
 }
 
