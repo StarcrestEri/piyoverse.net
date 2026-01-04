@@ -62,11 +62,11 @@ html.legacy-lowend .nav-container {
 }
 
 html.legacy-lowend .nav-logo {
-  display: inline-block;
+  display: block;
   width: 48px !important;
   height: 48px !important;
   overflow: hidden;
-  vertical-align: middle;
+  margin: 0 auto 6px;
 }
 
 html.legacy-lowend .nav-logo img {
@@ -88,6 +88,31 @@ html.legacy-lowend .nav-item {
   border-radius: 8px;
   box-shadow: none !important;
 }
+
+/* Legacy back button: use a small circular CSS button (no image). */
+html.legacy-lowend .panel-back {
+  position: static !important;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  margin: 6px auto 0;
+  padding: 0;
+  text-align: center;
+  background: #0b2a44;
+  border: 2px double #2b6fa0;
+  border-radius: 999px;
+  color: #ffffff;
+  text-decoration: none;
+}
+html.legacy-lowend .panel-back img { display: none !important; }
+html.legacy-lowend .panel-back .panel-back-icon {
+  display: inline;
+  font-size: 18px;
+  font-weight: 700;
+}
+/* Don't reserve space for the absolute-positioned back button in legacy mode. */
+html.legacy-lowend .panel-back + section { padding-top: 0 !important; }
 
 /* Some higher-capability browsers (e.g., PSP) can apply the modern theme's
    decorative pseudo-elements. Disable them so legacy visuals are consistent. */
@@ -146,6 +171,16 @@ html.legacy-lowend .site-footer {
   border: 2px double #2b6fa0;
   border-radius: 4px;
   box-shadow: none !important;
+}
+
+/* DSi + PSP: round the Mini panels more (matches the rounder look of other Mini variants). */
+html.legacy-lowend.dsi .nav-container,
+html.legacy-lowend.dsi main,
+html.legacy-lowend.dsi .site-footer,
+html.legacy-lowend.psp .nav-container,
+html.legacy-lowend.psp main,
+html.legacy-lowend.psp .site-footer {
+  border-radius: 12px;
 }
 
 /* Games/music listings: IE11-style layout (small thumb at left) */

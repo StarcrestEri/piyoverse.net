@@ -323,11 +323,11 @@ html.frutiger-aero::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
-  border: none;
+  background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
+  border: 1px solid rgba(255,255,255,0.14);
   box-shadow: none;
   filter: none;
-  border-radius: 0;
+  border-radius: 999px;
   text-decoration: none;
   z-index: 3;
   padding: 0;
@@ -339,18 +339,22 @@ html.frutiger-aero::after {
   padding-top: 64px;
 }
 
-.frutiger-aero .panel-back img {
-  width: 32px;
-  height: 32px;
+.frutiger-aero .panel-back img { display: none !important; }
+.frutiger-aero .panel-back .panel-back-icon {
   display: block;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+  color: #ffffff;
   pointer-events: none;
+  transform: translateX(-1px);
 }
 
 .frutiger-aero .panel-back:hover,
 .frutiger-aero .panel-back:focus {
-  background: none;
+  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   outline: none;
-  box-shadow: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.55);
 }
 
 /* give extra breathing room after the about section */
