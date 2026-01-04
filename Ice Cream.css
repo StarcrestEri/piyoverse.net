@@ -1071,7 +1071,7 @@ html.ice-cream.solid-panels .muted {
 /* games live directly in main; no extra panel */
 
 /* Card hover: subtle lift + tilt effect */
-.ice-cream .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: var(--icecream-panel-radius); }
+.ice-cream .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: var(--icecream-chrome-radius); }
 .ice-cream .game-card:hover { /* subtle highlight only, no lift */ background-color: rgba(255,255,255,0.02); transform: none; }
 
 /* Place outline around the content area (.game-info) so it doesn't overlap the thumbnail */
@@ -1087,7 +1087,7 @@ html.ice-cream.solid-panels .muted {
   right: 0;
   bottom: 0;
   left: 0;
-  border-radius: var(--icecream-panel-radius);
+  border-radius: inherit;
   box-shadow: 0 0 0 1px var(--ribbons-outline), inset 0 0 0 1px rgba(255,255,255,0.10);
   background-repeat: no-repeat;
   background-image: none;
@@ -1113,7 +1113,7 @@ html.ice-cream.solid-panels .muted {
   bottom: 0; /* span to inside of outline */
   left: 0;
   right: 0;
-  border-radius: 12px;
+  border-radius: inherit;
   background-image: 
     linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0.06)),
     linear-gradient(to bottom, rgba(255,255,255,0.08), rgba(255,255,255,0.00)),
@@ -1498,7 +1498,7 @@ html.ie11 .listing-card {
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
-  border-radius: 18px !important;
+  border-radius: 999px !important;
   padding: 0.6rem 0.75rem !important;
   margin: 0 0 0.75rem 0 !important;
 }
@@ -1540,12 +1540,14 @@ html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-w
 html.ie11.ice-cream .game-card::after {
   /* Use border (not box-shadow) so the outline reliably renders in IE11. */
   box-shadow: none;
+  border-radius: inherit;
   border: 1px solid #2b6fa0;
   border: 1px solid var(--ribbons-outline);
 }
 
 html.ie11.ice-cream .game-card:hover::after {
   /* Slightly thinner than modern (4px instead of 5px) */
+  border-radius: inherit;
   border: 4px solid #b6dcff;
   border: 4px solid var(--ribbons-accent);
   box-shadow: 0 0 10px rgba(182,220,255,0.75);
@@ -1651,7 +1653,7 @@ html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
    contrast in accessibility modes. */
 html.ice-cream.reduce-transparency .game-card {
   padding: 0.6rem; /* ensure the content is inset from the edges */
-  border-radius: 14px !important;
+  border-radius: var(--icecream-chrome-radius) !important;
   position: relative !important;
   overflow: visible !important;
 }
@@ -1662,7 +1664,7 @@ html.ice-cream.reduce-transparency .game-card::after {
   right: 0 !important;
   bottom: 0 !important;
   left: 0 !important;
-  border-radius: 14px !important;
+  border-radius: inherit !important;
   box-shadow: 0 0 0 1px var(--ribbons-outline) !important;
   z-index: 2 !important;
 }
@@ -1673,7 +1675,7 @@ html.ice-cream.reduce-transparency .game-card::before {
   right: 0 !important;
   bottom: 0 !important;
   left: 0 !important;
-  border-radius: 12px !important;
+  border-radius: inherit !important;
   opacity: 0.9 !important;
   z-index: 1 !important;
 }
