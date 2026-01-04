@@ -134,6 +134,8 @@ html.ie7 .section-separator {
   --icecream-panel-radius: 22px;
   /* Use a pill radius for buttons/nav items (user preference). */
   --icecream-chrome-radius: 999px;
+  /* Cards should be rounded/pill-ish, but not so extreme that content intersects the outline. */
+  --icecream-card-radius: 28px;
 
   --foreground: oklch(0.985 0 0);
   --popover: oklch(72.007% 0.12846 221.186);
@@ -333,8 +335,8 @@ html.ice-cream::after {
   justify-content: center;
   /* Avoid thin top/bottom artifacts by using an opaque-ish surface,
      clipping, and a shadow ring instead of a border. */
-  /* Solid fill avoids 1px gradient banding in older engines */
-  background: #0b2a44;
+  /* Match theme chrome (avoid a black button). */
+  background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   border: none;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.16), 0 2px 8px rgba(0,0,0,0.35);
   filter: none;
@@ -364,7 +366,7 @@ html.ice-cream::after {
 
 .ice-cream .panel-back:hover,
 .ice-cream .panel-back:focus {
-  background: #2b6fa0;
+  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   outline: none;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.22), 0 4px 14px rgba(0,0,0,0.55);
 }
@@ -976,7 +978,7 @@ html.ice-cream.solid-panels .muted {
     Remove padding/borders/shadows so each card doesn't read as a separate surface. */
   background: transparent;
   border-radius: 0;
-  padding: 0.6rem 0.75rem; /* breathing room inside the outline */
+  padding: 0.75rem 1rem; /* extra breathing room so outlines never touch the thumbnail */
   display: grid;
   grid-template-columns: clamp(60px, 7vw, 85px) 1fr;
   column-gap: 0.8rem;
@@ -1081,7 +1083,7 @@ html.ice-cream.solid-panels .muted {
 /* games live directly in main; no extra panel */
 
 /* Card hover: subtle lift + tilt effect */
-.ice-cream .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: 999px; border-radius: var(--icecream-chrome-radius); }
+.ice-cream .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: var(--icecream-card-radius, 28px); }
 .ice-cream .game-card:hover { /* subtle highlight only, no lift */ background-color: rgba(255,255,255,0.02); transform: none; }
 
 /* Place outline around the content area (.game-info) so it doesn't overlap the thumbnail */
@@ -1140,9 +1142,9 @@ html.ice-cream.solid-panels .muted {
 }
 .ice-cream .game-card:hover::before { opacity: 1; transform: translateY(-2px); }
 
-/* ensure thumbnail and info are above the sheen and outline */
-.ice-cream .game-card .game-thumb { position: relative; z-index: 2; }
-.ice-cream .game-card .game-info { position: relative; z-index: 3; }
+/* Keep content below the outline (but padded away from it). */
+.ice-cream .game-card .game-thumb { position: relative; z-index: 1; }
+.ice-cream .game-card .game-info { position: relative; z-index: 1; }
 
 /* draw subtle separators between cards so the panel feels continuous */
 /* Removed separators — the games-panel is a single mother panel with content rows */
@@ -1583,9 +1585,14 @@ html.force-ie11.ice-cream input[type="button"],
 html.force-ie11.ice-cream input[type="submit"],
 html.force-ie11.ice-cream .marketplace-btn,
 html.force-ie11.ice-cream .settings-btn,
-html.force-ie11.ice-cream .panel-back,
-html.force-ie11.ice-cream .game-card {
+html.force-ie11.ice-cream .panel-back {
   border-radius: 999px !important;
+}
+
+/* Even in IE11/forced-IE11, keep listing cards less extreme so they don't intersect thumbnails. */
+html.ie11.ice-cream .game-card,
+html.force-ie11.ice-cream .game-card {
+  border-radius: 28px !important;
 }
 html.ie11.ice-cream .nav-item::before,
 html.ie11.ice-cream .nav-item::after,
@@ -1593,17 +1600,20 @@ html.ie11.ice-cream .btn::before,
 html.ie11.ice-cream .btn::after,
 html.ie11.ice-cream button::before,
 html.ie11.ice-cream button::after,
-html.ie11.ice-cream .game-card::before,
-html.ie11.ice-cream .game-card::after,
 html.force-ie11.ice-cream .nav-item::before,
 html.force-ie11.ice-cream .nav-item::after,
 html.force-ie11.ice-cream .btn::before,
 html.force-ie11.ice-cream .btn::after,
 html.force-ie11.ice-cream button::before,
-html.force-ie11.ice-cream button::after,
+html.force-ie11.ice-cream button::after {
+  border-radius: 999px !important;
+}
+
+html.ie11.ice-cream .game-card::before,
+html.ie11.ice-cream .game-card::after,
 html.force-ie11.ice-cream .game-card::before,
 html.force-ie11.ice-cream .game-card::after {
-  border-radius: 999px !important;
+  border-radius: 28px !important;
 }
 
 /* Center social tabs in IE11 by fixing the panel width and centering it */
@@ -1706,7 +1716,7 @@ html.ie11.ice-cream.reduce-transparency[data-theme-mode="light"] .site-footer {
    contrast in accessibility modes. */
 html.ice-cream.reduce-transparency .game-card {
   padding: 0.6rem; /* ensure the content is inset from the edges */
-  border-radius: var(--icecream-chrome-radius) !important;
+  border-radius: var(--icecream-card-radius, 28px) !important;
   position: relative !important;
   overflow: visible !important;
 }

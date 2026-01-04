@@ -323,7 +323,8 @@ html.frutiger-aero::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0b2a44;
+  /* Match theme chrome (avoid a black button). */
+  background: linear-gradient(180deg, rgba(82, 110, 128, 0.28), rgba(197, 215, 228, 0.22));
   border: none;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.16), 0 2px 8px rgba(0,0,0,0.35);
   filter: none;
@@ -353,7 +354,7 @@ html.frutiger-aero::after {
 
 .frutiger-aero .panel-back:hover,
 .frutiger-aero .panel-back:focus {
-  background: #2b6fa0;
+  background: linear-gradient(180deg, rgba(215, 230, 240, 0.92), rgba(115, 140, 160, 0.86));
   outline: none;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.22), 0 4px 14px rgba(0,0,0,0.55);
 }
@@ -367,7 +368,6 @@ html.ie11.frutiger-aero input[type="submit"],
 html.ie11.frutiger-aero .marketplace-btn,
 html.ie11.frutiger-aero .settings-btn,
 html.ie11.frutiger-aero .panel-back,
-html.ie11.frutiger-aero .game-card,
 html.force-ie11.frutiger-aero .nav-item,
 html.force-ie11.frutiger-aero .btn,
 html.force-ie11.frutiger-aero button,
@@ -375,9 +375,14 @@ html.force-ie11.frutiger-aero input[type="button"],
 html.force-ie11.frutiger-aero input[type="submit"],
 html.force-ie11.frutiger-aero .marketplace-btn,
 html.force-ie11.frutiger-aero .settings-btn,
-html.force-ie11.frutiger-aero .panel-back,
-html.force-ie11.frutiger-aero .game-card {
+html.force-ie11.frutiger-aero .panel-back {
   border-radius: 999px !important;
+}
+
+/* Keep listing cards less extreme so outlines don't intersect thumbnails. */
+html.ie11.frutiger-aero .game-card,
+html.force-ie11.frutiger-aero .game-card {
+  border-radius: 28px !important;
 }
 html.ie11.frutiger-aero .nav-item::before,
 html.ie11.frutiger-aero .nav-item::after,
@@ -385,17 +390,20 @@ html.ie11.frutiger-aero .btn::before,
 html.ie11.frutiger-aero .btn::after,
 html.ie11.frutiger-aero button::before,
 html.ie11.frutiger-aero button::after,
-html.ie11.frutiger-aero .game-card::before,
-html.ie11.frutiger-aero .game-card::after,
 html.force-ie11.frutiger-aero .nav-item::before,
 html.force-ie11.frutiger-aero .nav-item::after,
 html.force-ie11.frutiger-aero .btn::before,
 html.force-ie11.frutiger-aero .btn::after,
 html.force-ie11.frutiger-aero button::before,
-html.force-ie11.frutiger-aero button::after,
+html.force-ie11.frutiger-aero button::after {
+  border-radius: 999px !important;
+}
+
+html.ie11.frutiger-aero .game-card::before,
+html.ie11.frutiger-aero .game-card::after,
 html.force-ie11.frutiger-aero .game-card::before,
 html.force-ie11.frutiger-aero .game-card::after {
-  border-radius: 999px !important;
+  border-radius: 28px !important;
 }
 
 /* give extra breathing room after the about section */
@@ -984,7 +992,7 @@ html.frutiger-aero.solid-panels .muted {
     Remove padding/borders/shadows so each card doesn't read as a separate surface. */
   background: transparent;
   border-radius: 0;
-  padding: 0.6rem 0.75rem; /* breathing room inside the outline */
+  padding: 0.75rem 1rem; /* extra breathing room so outlines never touch the thumbnail */
   display: grid;
   grid-template-columns: clamp(60px, 7vw, 85px) 1fr;
   column-gap: 0.8rem;
@@ -1087,7 +1095,7 @@ html.frutiger-aero.solid-panels .muted {
 /* games live directly in main; no extra panel */
 
 /* Card hover: subtle lift + tilt effect */
-.frutiger-aero .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: 999px; }
+.frutiger-aero .game-card { transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; transform-origin: center; border-radius: 28px; }
 .frutiger-aero .game-card:hover { /* subtle highlight only, no lift */ background-color: rgba(255,255,255,0.02); transform: none; }
 
 /* Place outline around the content area (.game-info) so it doesn't overlap the thumbnail */
@@ -1147,9 +1155,9 @@ html.frutiger-aero.solid-panels .muted {
 }
 .frutiger-aero .game-card:hover::before { opacity: 1; transform: translateY(-2px); }
 
-/* ensure thumbnail and info are above the sheen and outline */
-.frutiger-aero .game-card .game-thumb { position: relative; z-index: 2; }
-.frutiger-aero .game-card .game-info { position: relative; z-index: 3; }
+/* Keep content below the outline (but padded away from it). */
+.frutiger-aero .game-card .game-thumb { position: relative; z-index: 1; }
+.frutiger-aero .game-card .game-info { position: relative; z-index: 1; }
 
 /* draw subtle separators between cards so the panel feels continuous */
 /* Removed separators — the games-panel is a single mother panel with content rows */
