@@ -304,6 +304,53 @@ html.legacy-lowend .social-discord { background-image: url('Images/discordicon-4
 html.legacy-lowend .social-bsky { background-image: url('Images/bskyicon-48.png') !important; }
 html.legacy-lowend .social-twt { background-image: url('Images/twticon-48.png') !important; }
 
+/* IE7 mode (or IE7-like compatibility): apply IE7 layout quirks fixes.
+   - IE7 does not reliably support inline-block on all elements.
+   - Give key containers "hasLayout" so borders wrap contents.
+   - Force thumbs to a small size so they don't fill the viewport.
+*/
+html.ie7.legacy-lowend .nav-container,
+html.ie7.legacy-lowend .page-name-container,
+html.ie7.legacy-lowend main,
+html.ie7.legacy-lowend .social-bar,
+html.ie7.legacy-lowend .site-footer,
+html.ie7.legacy-lowend footer {
+  zoom: 1;
+}
+
+/* Keep nav items on one line in IE7. */
+html.ie7.legacy-lowend .nav-item {
+  display: inline;
+  zoom: 1;
+}
+
+/* Social icons: force a horizontal row in IE7. */
+html.ie7.legacy-lowend .social-bar {
+  white-space: nowrap;
+}
+html.ie7.legacy-lowend .social-item {
+  display: inline;
+  zoom: 1;
+}
+html.ie7.legacy-lowend .social-link {
+  display: inline;
+  zoom: 1;
+}
+
+/* Listings: clamp thumbnail size hard so images never take over the screen.
+   (Also overrides the global `html.legacy-lowend img { height:auto !important; }` rule.) */
+html.ie7.legacy-lowend .game-thumb {
+  width: 64px;
+  height: 64px;
+}
+html.ie7.legacy-lowend .game-thumb img {
+  width: 64px !important;
+  height: 64px !important;
+  max-width: 64px !important;
+  max-height: 64px !important;
+  -ms-interpolation-mode: bicubic;
+}
+
 html.legacy-lowend .btn,
 html.legacy-lowend button,
 html.legacy-lowend input[type="button"],
