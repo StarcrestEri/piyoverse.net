@@ -9,7 +9,8 @@
 		var de = document && document.documentElement;
 		if (de) {
 			var cn = " " + (de.className || "") + " ";
-			if (cn.indexOf(" no-ribbons ") !== -1) return;
+			// Allow a global override to force the ribbons back on in a low-cost mode.
+			if (cn.indexOf(" no-ribbons ") !== -1 && !window.RIBBONS_FORCE_480P_15FPS) return;
 		}
 	} catch (_) {}
 
@@ -155,6 +156,13 @@
 	if (reduceMotion) perfMode = true;
 	if (lowEnd) perfMode = true;
 
+	// Optional global force mode: render at 480p max and 15fps. Useful for
+	// low-power or remote environments where you want the visual but at low cost.
+	var force480 = !!window.RIBBONS_FORCE_480P_15FPS;
+	if (force480) {
+		perfMode = true;
+	}
+
 	var dpr = Math.max(1, window.devicePixelRatio || 1);
 	if (perfMode || ie11) dpr = 1;
 	// Cap DPR to avoid excessive canvas pixel work on high-DPI displays.
@@ -179,11 +187,24 @@
 			window.innerHeight ||
 			0;
 
-		canvas.width = Math.max(1, Math.floor(viewW * dpr));
-		canvas.height = Math.max(1, Math.floor(viewH * dpr));
+		// If force480 is enabled, limit the effective DPR so the canvas height in
+		// device pixels does not exceed ~480px. This renders at a low internal
+		// resolution while keeping CSS layout at full viewport size.
+		var effDpr = dpr;
+		try {
+			if (force480) {
+				var maxH = 480.0;
+				if (viewH > 0) effDpr = Math.min(dpr, maxH / Math.max(1, viewH));
+				// Ensure at least 1px device pixel tall
+				effDpr = Math.max(0.25, effDpr);
+			}
+		} catch (_) {}
+
+		canvas.width = Math.max(1, Math.floor(viewW * effDpr));
+		canvas.height = Math.max(1, Math.floor(viewH * effDpr));
 		canvas.style.width = viewW + "px";
 		canvas.style.height = viewH + "px";
-		if (ctx.setTransform) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+		if (ctx.setTransform) ctx.setTransform(effDpr, 0, 0, effDpr, 0, 0);
 	}
 
 	if (window.addEventListener) window.addEventListener("resize", resize);
@@ -194,7 +215,8 @@
 	var lastTs = window.performance.now();
 	var throttleTs = 0;
 	var tAccum = 0;
-	var targetMs = 1000 / (reduceMotion ? 12 : perfMode ? 24 : 30);
+	// Use 15 FPS when force mode is enabled, otherwise fall back to existing logic.
+	var targetMs = force480 ? (1000 / 15) : 1000 / (reduceMotion ? 12 : perfMode ? 24 : 30);
 
 	function getThemeColors() {
 		var accent = DEFAULT_ACCENT;
@@ -362,11 +384,12 @@
 		sparkles.length = 0;
 
 		var density = perfMode || ie11 ? 0.00005 : 0.00006;
-		// Reduce density further on very large viewports to limit work.
+		// If forcing 480p, reduce density aggressively; also reduce on very large viewports.
 		try {
+			if (force480) density *= 0.45;
 			if ((w * h) > (1600 * 900)) density *= 0.7;
 		} catch (_) {}
-		var count = Math.max(18, Math.min(90, Math.floor(w * h * density)));
+		var count = Math.max(8, Math.min(90, Math.floor(w * h * density)));
 
 		for (var i = 0; i < count; i++) {
 			sparkles.push({
