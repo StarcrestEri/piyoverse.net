@@ -96,6 +96,35 @@ html.ie7 .section-separator {
   box-shadow: none !important;
 }
 
+/* IE11 fallback tweaks: remove heavy filters/backdrop-filters and simplify shadows
+   so IE11 and other legacy engines get a visually similar result without the
+   modern repaint cost. */
+html.ie11 .bg-popover,
+html.ie7 .bg-popover {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  filter: none !important;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12) !important;
+  background: linear-gradient(165deg, rgba(0,140,255,0.36) 0%, rgba(69,160,152,0.24) 50%, rgba(0,255,42,0.20) 100%) !important;
+}
+
+html.ie11 body[data-scroll-locked] main,
+html.ie7 body[data-scroll-locked] main {
+  filter: none !important; /* avoid expensive blur on older engines */
+}
+
+html.ie11 .ribbons-canvas,
+html.ie7 .ribbons-canvas {
+  filter: none !important; /* canvas rendering is handled in JS; avoid CSS filters */
+  will-change: auto !important;
+}
+
+html.ie11 .ice-cream,
+html.ie7 .ice-cream {
+  background-attachment: scroll !important; /* fixed backgrounds are costly */
+}
+
+
 .games-section-title.section-large {
   font-size: 1.45rem;
   letter-spacing: 0.01em;

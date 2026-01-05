@@ -157,6 +157,9 @@
 
 	var dpr = Math.max(1, window.devicePixelRatio || 1);
 	if (perfMode || ie11) dpr = 1;
+	// Cap DPR to avoid excessive canvas pixel work on high-DPI displays.
+	// Keeps the visual crispness but limits CPU/GPU cost on modern browsers.
+	dpr = Math.min(dpr, 1.5);
 
 	var viewW = 0;
 	var viewH = 0;
@@ -275,10 +278,10 @@
 
 			if (!perfMode && !ie11) {
 				ctx.shadowColor = "rgba(0,0,0,0.22)";
-				ctx.shadowBlur = 14;
-				ctx.shadowOffsetY = 6;
-			}
-
+			// Reduce shadow blur on high-DPR displays to cut rendering cost.
+			var _shadowBlur = dpr > 1.25 ? 8 : 14;
+			ctx.shadowBlur = _shadowBlur;
+			ctx.shadowOffsetY = dpr > 1.25 ? 4 : 6;
 			var fillGrad = ctx.createLinearGradient(0, centerY - ampBase - thickness, 0, centerY + ampBase + thickness);
 			fillGrad.addColorStop(0, rgba(mix(colors.ribbon, [255, 255, 255], 0.55), 0));
 			fillGrad.addColorStop(0.35, rgba(mix(colors.ribbon, [255, 255, 255], 0.3), 0.75));
@@ -358,7 +361,11 @@
 		sparklesH = h;
 		sparkles.length = 0;
 
-		var density = perfMode || ie11 ? 0.00005 : 0.00009;
+		var density = perfMode || ie11 ? 0.00005 : 0.00006;
+		// Reduce density further on very large viewports to limit work.
+		try {
+			if ((w * h) > (1600 * 900)) density *= 0.7;
+		} catch (_) {}
 		var count = Math.max(18, Math.min(90, Math.floor(w * h * density)));
 
 		for (var i = 0; i < count; i++) {
@@ -385,7 +392,7 @@
 
 		if (!perfMode && !ie11) {
 			ctx.shadowColor = rgba(glow, 0.28);
-			ctx.shadowBlur = 2;
+			ctx.shadowBlur = dpr > 1.25 ? 1 : 2;
 		}
 
 		for (var i = 0; i < sparkles.length; i++) {
@@ -506,6 +513,10 @@
 					else start();
 				} catch (_) {}
 			});
+			// Ensure RAF stops on page unload too.
+			try {
+				window.addEventListener && window.addEventListener("unload", function () { try { stop(); } catch (_) {} });
+			} catch (_) {}
 		}
 	} catch (_) {}
 
