@@ -115,7 +115,25 @@
 
 	var ctx = canvas.getContext("2d");
 	if (!ctx) return;
-
+// Optional static background image support: if /background.jpg or background.jpg
+// exists, we will draw it as the background inside the central crop area while
+// keeping the black pillarbox bars outside that crop.
+var bgImage = null;
+var bgImageLoaded = false;
+(function(){
+	try{
+		var candidates = ['/background.jpg', 'background.jpg'];
+		for(var i=0;i<candidates.length;i++){
+			try{
+				var img = new Image();
+				img.onload = (function(im){ return function(){ bgImage = im; bgImageLoaded = true; }; })(img);
+				img.onerror = (function(){ return function(){}; })();
+				img.src = candidates[i];
+				// Once one loads, stop trying others (onload will set bgImageLoaded)
+			}catch(e){}
+		}
+	}catch(e){}
+})();
 	var perfMode = false;
 	var ie11 = false;
 	var reduceMotion = false;
@@ -238,6 +256,46 @@
 	}
 
 	function drawBackground(w, h, colors) {
+		// If a static background image loaded successfully, draw it to cover
+		// the clipped central area (cover/crop behavior), preserving aspect.
+		if (bgImageLoaded && bgImage) {
+			try {
+				var iw = bgImage.width || 1, ih = bgImage.height || 1;
+				var ar = iw / ih;
+				var tar = w / h;
+				var sx = 0, sy = 0, sw = iw, sh = ih;
+				if (ar > tar) {
+					// source is wider than target: crop left/right
+					var desiredW = ih * tar;
+					sx = Math.round((iw - desiredW) / 2);
+					sw = Math.round(desiredW);
+				} else {
+					// source is taller: crop top/bottom
+					var desiredH = iw / tar;
+					sy = Math.round((ih - desiredH) / 2);
+					sh = Math.round(desiredH);
+				}
+				// draw image to fill the clipped area
+				ctx.drawImage(bgImage, sx, sy, sw, sh, 0, 0, w, h);
+
+				// Apply a subtle vignette on top so the image reads similarly to the
+				// previous gradient/vignette treatment.
+				var vignette = ctx.createRadialGradient(
+					0.5 * w,
+					0.45 * h,
+					0.18 * Math.min(w, h),
+					0.5 * w,
+					0.55 * h,
+					0.95 * Math.max(w, h)
+				);
+				vignette.addColorStop(0, "rgba(0,0,0,0)");
+				vignette.addColorStop(1, "rgba(0,0,0,0.22)");
+				ctx.fillStyle = vignette;
+				ctx.fillRect(0, 0, w, h);
+				return;
+			} catch (e) {}
+		}
+
 		// Blue-white gradient behind ribbons/sparkles (top -> bottom)
 		var top = [255, 255, 255];
 		var mid = mix([255, 255, 255], colors.accent, 0.16);
