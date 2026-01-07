@@ -189,8 +189,43 @@ html.frutiger-aero, html.frutiger-aero body {
 }
 
 /* Pillarbox bars (black)
-   Bars are now rendered by `ribbons-of-life.js` into the background canvas.
-   Keep these pseudo-elements disabled to avoid double bars/overlays. */
+   By default we keep the page background black and draw a centered 4:3
+   background image (background.jpg at site root) inside a centered crop
+   so the left/right pillarboxes remain black. This ensures a consistent
+   background across all pages even when the ribbons canvas is disabled. */
+html {
+  background-color: #000;
+}
+
+/* Centered 4:3 crop container using a pseudo-element so the image behaves
+   like a cinematic background and leaves black bars outside of the crop. */
+html::before {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url('/background.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  pointer-events: none;
+  z-index: -1;
+  /* Default (narrow viewports): width matches viewport width, height set to 3/4 */
+  width: 100vw;
+  height: calc(100vw * 3 / 4);
+}
+
+/* Wide viewports: cap to a 4:3 area based on viewport height so pillarbox bars
+   appear on the left/right sides instead of stretching the image. */
+@media (min-aspect-ratio: 4/3) {
+  html::before {
+    width: calc(100vh * 4 / 3);
+    height: 100vh;
+  }
+}
+
+/* Keep these original pseudo-elements disabled to avoid double bars/overlays. */
 html.frutiger-aero::before,
 html.frutiger-aero::after {
   content: "";

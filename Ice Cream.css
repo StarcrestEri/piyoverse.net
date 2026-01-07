@@ -226,8 +226,36 @@ html.ice-cream, html.ice-cream body {
 }
 
 /* Pillarbox bars (black)
-   Bars are now rendered by `ribbons-of-life.js` into the background canvas.
-   Keep these pseudo-elements disabled to avoid double bars/overlays. */
+   We draw a centered 4:3 background image (background.jpg at site root)
+   using a pseudo-element so the black pillarbox bars remain on all pages.
+   This works even when the ribbons canvas is disabled.
+*/
+html {
+  background-color: #000;
+}
+html::before {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url('/background.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  pointer-events: none;
+  z-index: -1;
+  width: 100vw;
+  height: calc(100vw * 3 / 4);
+}
+@media (min-aspect-ratio: 4/3) {
+  html::before {
+    width: calc(100vh * 4 / 3);
+    height: 100vh;
+  }
+}
+
+/* Keep theme-specific pseudo-elements disabled to avoid double bars/overlays. */
 html.ice-cream::before,
 html.ice-cream::after {
   content: "";

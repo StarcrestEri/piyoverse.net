@@ -527,8 +527,10 @@ var bgImageLoaded = false;
 			return;
 		}
 
-		ctx.fillStyle = "#000";
-		ctx.fillRect(0, 0, viewW, viewH);
+		// Clear canvas so underlying CSS background (html::before) is visible
+		// and we draw only the central crop area. This ensures the CSS
+		// background.jpg is visible across all pages even if the canvas fails.
+		ctx.clearRect(0, 0, viewW, viewH);
 
 		// preserve the original 4:3 crop behavior
 		var aspect = viewW / viewH;
