@@ -219,10 +219,9 @@ html.ice-cream {
   --side-bar-width: calc((var(--viewport-width) - var(--safe-width)) / 2);
   --content-width: var(--safe-width);
 
-  /* Present the background image without theme overlays, falling back to
-     a local copy if the root-relative asset is missing. */
-  background-color: #000;
-  background-image: url('background.jpg'), url('Images/background.jpg');
+    /* Present only the primary background image; no gradient or extra fallback. */
+    background-color: #000;
+    background-image: url('Images/background.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
