@@ -192,37 +192,6 @@ html {
    Using two pseudo-elements keeps the black pillarbox behind the image and
    ensures content can sit above both reliably by giving primary content a
    positive z-index. */
-html::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: #000;
-  pointer-events: none;
-  z-index: -1000;
-}
-html::after {
-  content: "";
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  /* Try both candidate paths; relative so file:// testing works */
-  background-image: url('background.jpg'), url('Images/background.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  pointer-events: none;
-  z-index: -999;
-  width: 100vw;
-  height: calc(100vw * 3 / 4);
-}
-@media (min-aspect-ratio: 4/3) {
-  html::after {
-    width: calc(100vh * 4 / 3);
-    height: 100vh;
-  }
-}
-
 /* Ensure main page content and chrome sit above the background */
 .nav-container,
 .page-name-container,
@@ -277,38 +246,7 @@ html.ice-cream, html.ice-cream body {
   flex: 1 1 auto;
 }
 
-/* Pillarbox bars (black)
-   We draw a centered 4:3 background image (background.jpg at site root)
-   using a pseudo-element so the black pillarbox bars remain on all pages.
-   This works even when the ribbons canvas is disabled.
-*/
-html {
-  background-color: #000;
-}
-html::before {
-  content: "";
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  /* prefer site root, but fall back to Images/ if image lives there */
-  background-image: url('/background.jpg'), url('/Images/background.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  pointer-events: none;
-  z-index: -1;
-  width: 100vw;
-  height: calc(100vw * 3 / 4);
-}
-@media (min-aspect-ratio: 4/3) {
-  html::before {
-    width: calc(100vh * 4 / 3);
-    height: 100vh;
-  }
-}
-
-/* Keep theme-specific pseudo-elements disabled to avoid double bars/overlays. */
+/* Keep theme-specific pseudo-elements disabled so no extra overlays appear. */
 html.ice-cream::before,
 html.ice-cream::after {
   content: "";
@@ -1973,31 +1911,5 @@ html.ie7.ice-cream:after,
    Use :not(.no-pillarbox) so the helper class can still hide them when
    explicitly requested. */
 html.ice-cream:not(.no-pillarbox)::before,
+
 html.ie11.ice-cream:not(.no-pillarbox)::before,
-html:not(.no-pillarbox).ice-cream::before,
-html.ice-cream:not(.no-pillarbox)::after,
-html.ie11.ice-cream:not(.no-pillarbox)::after,
-html:not(.no-pillarbox).ice-cream::after {
-  content: "" !important;
-  position: fixed !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  width: var(--side-bar-width) !important;
-  background: #000 !important;
-  z-index: 9000 !important;
-  pointer-events: none !important;
-  display: block !important;
-}
-
-html.ice-cream:not(.no-pillarbox)::before,
-html.ie11.ice-cream:not(.no-pillarbox)::before,
-html:not(.no-pillarbox).ice-cream::before {
-  left: 0 !important;
-}
-
-html.ice-cream:not(.no-pillarbox)::after,
-html.ie11.ice-cream:not(.no-pillarbox)::after,
-html:not(.no-pillarbox).ice-cream::after {
-  right: 0 !important;
-}
-
