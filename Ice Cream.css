@@ -310,14 +310,16 @@ html::before {
   }
 }
 
-/* Keep theme-specific pseudo-elements disabled to avoid double bars/overlays. */
-html.ice-cream::before,
+/* Keep theme-specific pseudo-elements disabled to avoid double bars/overlays.
+   (This rule prevented the background image from showing on pages with
+    the "ice-cream" class; it's been removed so the background can render.) */
+/* html.ice-cream::before,
 html.ice-cream::after {
   content: "";
   display: none;
   width: 0;
   pointer-events: none;
-}
+} */
 
 /* Keep primary content above the pillarbox pseudo-elements.
    Some niche/older engines miscompute viewport units during zoom, which can
