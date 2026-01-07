@@ -126,7 +126,7 @@ var bgImageLoaded = false;
 		for(var i=0;i<candidates.length;i++){
 			try{
 				var img = new Image();
-				img.onload = (function(im){ return function(){ bgImage = im; bgImageLoaded = true; }; })(img);
+				img.onload = (function(im){ return function(){ bgImage = im; bgImageLoaded = true; try{ resize(); raf(); }catch(e){} }; })(img);
 				img.onerror = (function(){ return function(){}; })();
 				img.src = candidates[i];
 				// Once one loads, stop trying others (onload will set bgImageLoaded)
@@ -504,11 +504,12 @@ var bgImageLoaded = false;
 	}
 
 	function drawFrame(w, h) {
+		// Only draw the static background and a subtle edge overlay to preserve
+		// the pillarbox look. No ribbons or sparkles (static image only).
 		var colors = getThemeColors();
 		drawBackground(w, h, colors);
-		drawRibbonBand(w, h, colors);
-		drawSparkles(w, h, colors);
 
+		// Edge overlay (soft bars gradient)
 		var edge = ctx.createLinearGradient(0, 0, w, 0);
 		edge.addColorStop(0, "rgba(0,0,0,0.20)");
 		edge.addColorStop(0.06, "rgba(0,0,0,0)");
@@ -518,25 +519,13 @@ var bgImageLoaded = false;
 		ctx.fillRect(0, 0, w, h);
 	}
 
-	function raf(ts) {
-		// Pause when hidden or if the canvas was removed.
+	function raf() {
+		// Single-shot draw: paint black outer area and the centered crop (4:3) once.
 		try {
-			if (document && document.hidden) return;
 			if (!canvas || !canvas.parentNode) return;
-		} catch (_) {}
-
-		var dt = (ts - lastTs) / 1000;
-		if (!isFinite(dt) || dt < 0) dt = 0;
-		dt = Math.min(0.05, dt);
-		lastTs = ts;
-		tAccum += dt;
-
-		if (!throttleTs) throttleTs = ts;
-		if (ts - throttleTs < targetMs) {
-			window.requestAnimationFrame(raf);
+		} catch (_) {
 			return;
 		}
-		throttleTs = ts;
 
 		ctx.fillStyle = "#000";
 		ctx.fillRect(0, 0, viewW, viewH);
@@ -560,30 +549,16 @@ var bgImageLoaded = false;
 		ctx.rect(ox, oy, drawW, drawH);
 		ctx.clip();
 		ctx.translate(ox, oy);
-		// Sparkle field depends on draw-space size
-		if (sparklesW !== drawW || sparklesH !== drawH) rebuildSparkles(drawW, drawH);
 		drawFrame(drawW, drawH);
 		ctx.restore();
-
-		window.requestAnimationFrame(raf);
 	}
 
-	var rafId = 0;
-	function start() {
-		try {
-			if (document && document.hidden) return;
-		} catch (_) {}
-		try {
-			lastTs = window.performance.now();
-			throttleTs = 0;
-		} catch (_) {}
-		rafId = window.requestAnimationFrame(raf);
-	}
-	function stop() {
-		try {
-			if (rafId) window.cancelAnimationFrame(rafId);
-		} catch (_) {}
-		rafId = 0;
+function start() {
+	// Draw once (no animation). Triggered on page load / resize / image load.
+	raf();
+}
+function stop() {
+	// No-op for static background.
 	}
 
 	try {
