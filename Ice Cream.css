@@ -255,11 +255,13 @@ html.ice-cream {
 
   /* Keep the previous color fallback for non-image cases */
   background-color: #031024;
-  background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
-              radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
-              radial-gradient(circle at 18% 78%, rgba(134, 255, 207, 0.18), transparent 30%),
-              linear-gradient(180deg, rgba(4, 24, 46, 0.98), rgba(3, 41, 74, 0.94) 44%, rgba(3, 16, 36, 0.98));
-  background-attachment: fixed;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
+    radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
+    radial-gradient(circle at 18% 78%, rgba(134, 255, 207, 0.18), transparent 30%),
+    linear-gradient(180deg, rgba(4, 24, 46, 0.98), rgba(3, 41, 74, 0.94) 44%, rgba(3, 16, 36, 0.98)),
+    url('Images/background.jpg') center center / cover no-repeat;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
   color: #ffffff;
   font-family: "tahoma.otf", Tahoma, Verdana, Arial, sans-serif;
   margin: 0;
@@ -310,16 +312,14 @@ html::before {
   }
 }
 
-/* Keep theme-specific pseudo-elements disabled to avoid double bars/overlays.
-   (This rule prevented the background image from showing on pages with
-    the "ice-cream" class; it's been removed so the background can render.) */
-/* html.ice-cream::before,
+/* Keep theme-specific pseudo-elements disabled to avoid double bars/overlays. */
+html.ice-cream::before,
 html.ice-cream::after {
   content: "";
   display: none;
   width: 0;
   pointer-events: none;
-} */
+}
 
 /* Keep primary content above the pillarbox pseudo-elements.
    Some niche/older engines miscompute viewport units during zoom, which can
