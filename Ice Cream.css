@@ -186,6 +186,32 @@ html.ie7 .ice-cream {
 }
 
 /* Body & Background */
+/* Global background: center 4:3 image with black pillarbox bars. */
+html {
+  background-color: #000;
+}
+html::before {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url('background.jpg'), url('Images/background.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  pointer-events: none;
+  z-index: -1;
+  width: 100vw;
+  height: calc(100vw * 3 / 4);
+}
+@media (min-aspect-ratio: 4/3) {
+  html::before {
+    width: calc(100vh * 4 / 3);
+    height: 100vh;
+  }
+}
+
 html.ice-cream {
   /* 4:3 safe area (pillarboxed) */
   /* Defaults to 4:3, but JS can override based on crt.png's real aspect */
@@ -200,6 +226,7 @@ html.ice-cream {
   --side-bar-width: calc((var(--viewport-width) - var(--safe-width)) / 2);
   --content-width: var(--safe-width);
 
+  /* Keep the previous color fallback for non-image cases */
   background-color: #031024;
   background: radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
               radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
