@@ -250,15 +250,14 @@ html.ice-cream {
   --side-bar-width: calc((var(--viewport-width) - var(--safe-width)) / 2);
   --content-width: var(--safe-width);
 
-  /* Keep the previous color fallback for non-image cases */
-  background-color: #031024;
-  background:
-    radial-gradient(circle at 16% 18%, rgba(88, 214, 255, 0.18), transparent 32%),
-    radial-gradient(circle at 82% 12%, rgba(255, 173, 255, 0.16), transparent 32%),
-    radial-gradient(circle at 18% 78%, rgba(134, 255, 207, 0.18), transparent 30%),
-    linear-gradient(180deg, rgba(4, 24, 46, 0.98), rgba(3, 41, 74, 0.94) 44%, rgba(3, 16, 36, 0.98)),
-    url('Images/background.jpg') center center / cover no-repeat;
-  background-attachment: fixed, fixed, fixed, fixed, fixed;
+  /* Present the background image without theme overlays, falling back to
+     a local copy if the root-relative asset is missing. */
+  background-color: #000;
+  background-image: url('background.jpg'), url('Images/background.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   color: #ffffff;
   font-family: "tahoma.otf", Tahoma, Verdana, Arial, sans-serif;
   margin: 0;
@@ -1974,10 +1973,10 @@ html.ie7.ice-cream:after,
    Use :not(.no-pillarbox) so the helper class can still hide them when
    explicitly requested. */
 html.ice-cream:not(.no-pillarbox)::before,
-html.ice-cream:not(.no-pillarbox)::after,
 html.ie11.ice-cream:not(.no-pillarbox)::before,
-html.ie11.ice-cream:not(.no-pillarbox)::after,
 html:not(.no-pillarbox).ice-cream::before,
+html.ice-cream:not(.no-pillarbox)::after,
+html.ie11.ice-cream:not(.no-pillarbox)::after,
 html:not(.no-pillarbox).ice-cream::after {
   content: "" !important;
   position: fixed !important;
@@ -1988,5 +1987,17 @@ html:not(.no-pillarbox).ice-cream::after {
   z-index: 9000 !important;
   pointer-events: none !important;
   display: block !important;
+}
+
+html.ice-cream:not(.no-pillarbox)::before,
+html.ie11.ice-cream:not(.no-pillarbox)::before,
+html:not(.no-pillarbox).ice-cream::before {
+  left: 0 !important;
+}
+
+html.ice-cream:not(.no-pillarbox)::after,
+html.ie11.ice-cream:not(.no-pillarbox)::after,
+html:not(.no-pillarbox).ice-cream::after {
+  right: 0 !important;
 }
 
