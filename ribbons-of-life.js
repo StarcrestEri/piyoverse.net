@@ -122,7 +122,7 @@ var bgImage = null;
 var bgImageLoaded = false;
 (function(){
 	try{
-		var candidates = ['/background.jpg', 'background.jpg'];
+		var candidates = ['/background.jpg', '/Images/background.jpg', 'background.jpg', 'Images/background.jpg'];
 		for(var i=0;i<candidates.length;i++){
 			try{
 				var img = new Image();

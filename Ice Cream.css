@@ -239,7 +239,8 @@ html::before {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-image: url('/background.jpg');
+  /* prefer site root, but fall back to Images/ if image lives there */
+  background-image: url('/background.jpg'), url('/Images/background.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
