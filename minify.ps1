@@ -15,7 +15,7 @@ $files = @(
   'legacy-lowend.js',
   'market-audio.js',
   'pwa.js',
-  'ribbons-of-life.js',
+
   'spa.js',
   'sw.js'
 )
