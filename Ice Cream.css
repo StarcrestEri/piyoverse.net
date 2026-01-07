@@ -96,7 +96,7 @@ html.ie7 .section-separator {
   box-shadow: none !important;
 }
 
-   so IE11 and other legacy engines get a visually similar result without the
+/* so IE11 and other legacy engines get a visually similar result without the
    modern repaint cost. */
 html.ie11 .bg-popover,
 html.ie7 .bg-popover {
@@ -1909,6 +1909,4 @@ html.ie7.ice-cream:after,
    declarations so modern mode and IE11 mode show the black side bars.
    Use :not(.no-pillarbox) so the helper class can still hide them when
    explicitly requested. */
-html.ice-cream:not(.no-pillarbox)::before,
-
-html.ie11.ice-cream:not(.no-pillarbox)::before,
+/* Removed incomplete selector at end of file to fix "selector expected" error */
