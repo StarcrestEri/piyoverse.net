@@ -28,11 +28,6 @@ html.legacy-lowend body::after {
   display: none !important;
 }
 
-html.legacy-lowend .ribbons-canvas,
-html.legacy-lowend #ribbons-of-life {
-  display: none !important;
-}
-
 html.legacy-lowend * {
   animation: none !important;
   transition: none !important;

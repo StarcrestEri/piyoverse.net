@@ -20,9 +20,7 @@ html.ie1 a {
   text-decoration: underline;
 }
 
-html.ie1 canvas,
-html.ie1 .ribbons-canvas,
-html.ie1 #ribbons-of-life {
+html.ie1 canvas {
   display: none;
 }
 

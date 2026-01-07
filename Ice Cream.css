@@ -96,7 +96,6 @@ html.ie7 .section-separator {
   box-shadow: none !important;
 }
 
-/* IE11 fallback tweaks: remove heavy filters/backdrop-filters and simplify shadows
    so IE11 and other legacy engines get a visually similar result without the
    modern repaint cost. */
 html.ie11 .bg-popover,
@@ -108,15 +107,14 @@ html.ie7 .bg-popover {
   background: linear-gradient(165deg, rgba(0,140,255,0.36) 0%, rgba(69,160,152,0.24) 50%, rgba(0,255,42,0.20) 100%) !important;
 }
 
+html.ie11 .ie-pillars {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
 html.ie11 body[data-scroll-locked] main,
 html.ie7 body[data-scroll-locked] main {
   filter: none !important; /* avoid expensive blur on older engines */
-}
-
-html.ie11 .ribbons-canvas,
-html.ie7 .ribbons-canvas {
-  filter: none !important; /* canvas rendering is handled in JS; avoid CSS filters */
-  will-change: auto !important;
 }
 
 html.ie11 .ice-cream,
@@ -156,8 +154,8 @@ html.ie7 .ice-cream {
   --gradient-from: rgba(12, 122, 226, 0.76);
   --gradient-to: rgba(0, 178, 202, 0.822);
   --highlight: #57bcff;
-  --ribbons-accent: #57bcff; /* updated dynamically by ribbons-of-life.js */
-  --ribbons-outline: #2b6fa0; /* darker default outline; updated dynamically by ribbons-of-life.js */
+  --ribbons-accent: #57bcff; /* accent used across legacy ribbons palette */
+  --ribbons-outline: #2b6fa0; /* darker outline to balance the accent tone */
 
   /* Ice Cream signature geometry (keeps palette; changes silhouette) */
   --icecream-panel-radius: 22px;
@@ -232,7 +230,6 @@ main,
 .site-footer,
 footer,
 .page-name,
-.ribbons-canvas,
 .nav-logo,
 .nav-item {
   position: relative;
@@ -339,17 +336,6 @@ html.ice-cream::after {
   min-height: 100vh;
   position: relative;
   padding-top: 0; /* compact banner: no extra reserved space */
-}
-
-.ice-cream .ribbons-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 2;
-  background: radial-gradient(circle at 50% 30%, rgba(0, 140, 255, 0.12), transparent 50%);
-  filter: saturate(1.05);
 }
 
 .ice-cream body main {
@@ -1361,17 +1347,6 @@ html.ice-cream.solid-panels .muted {
   .ice-cream .nav-item { color: #ffffff; }
   .ice-cream .social-label { color: #ffffff; }
 
-  /* IE doesn't support `inset:`; make sure the background canvas truly covers the viewport */
-  .ice-cream .ribbons-canvas {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
   /* Replace var()-based gradients with fixed values */
   .ice-cream .nav-item,
   .ice-cream .marketplace-btn,
@@ -1554,7 +1529,6 @@ html.ie11 .nav-logo img { width: auto !important; height: auto !important; max-w
 html.ie11 main { margin: 1rem auto !important; width: 94%; max-width: 1000px; padding: 1rem !important; border-radius: 34px !important; }
 html.ie11 .page-name-container, html.ie11 .site-header { text-align: center !important; }
 /* Avoid overly-large canvas stacking issues in forced IE11 layout */
-html.ie11 .ribbons-canvas { z-index: 0 !important; }
 
 /* Ensure pillarbox helper also hides pseudo elements where appropriate */
 html.ie11:before, html.ie11:after, html.ie11::before, html.ie11::after, .no-pillarbox:before, .no-pillarbox:after { display: none !important; }
@@ -1591,8 +1565,7 @@ html.ie11-cards .game-card .game-info { overflow: hidden !important; }
 
 /* hide/disable heavy decorative canvas and filters only when forcing IE11 fallbacks
   (use `?force_ie11=1`) — real IE11 should still show a reduced-quality canvas. */
-html.force-ie11 .ribbons-canvas { display: none !important; }
-html.force-ie11 .ribbons-canvas, html.force-ie11 .bg-popover, html.force-ie11 .nav-logo img { filter: none !important; -webkit-filter: none !important; backdrop-filter: none !important; }
+html.force-ie11 .bg-popover, html.force-ie11 .nav-logo img { filter: none !important; -webkit-filter: none !important; backdrop-filter: none !important; }
 
 /* In IE11, use the same translucent panel treatment as the normal theme.
    This preserves the design language while keeping compatibility tweaks
@@ -1765,9 +1738,9 @@ html.ice-cream.reduce-transparency[data-theme-mode="dark"] .site-footer {
   /* Dark-mode reduced-transparency: keep the translucent dark surface but
      add a subtle accent tint so panels visually relate to the selected
      theme (uses --ribbons-accent-rgb if available). */
-  /* Use theme accent to tint the dark translucent surface so panels visually
-     relate to the selected theme. We rely on `--ribbons-accent-rgb` and
-     `--ribbons-outline` which are set by `ribbonsSetTheme`. */
+    /* Use the accent tint to keep reduced-transparency panels tied to the active
+      theme. When `--ribbons-accent-rgb` or `--ribbons-outline-rgb` are not
+      provided the static defaults above preserve the expected palette. */
   background-image:
     linear-gradient(180deg, rgba(18,22,28,0.66) 0%, rgba(12,14,18,0.48) 60%),
     linear-gradient(180deg, rgba(var(--ribbons-accent-rgb,87,188,255),0.06) 0%, rgba(0,0,0,0) 60%);
@@ -1943,9 +1916,6 @@ html.reduce-animation *::after {
   transition: none !important;
   animation: none !important;
 }
-
-/* Disable ribbons: hide the canvas when decorative ribbons/sparkles are disabled */
-html.no-ribbons .ribbons-canvas { display: none !important; }
 
 /* When ribbons are disabled, make the background static (no parallax/fixed)
    for IE modes and modern browsers when requested, while preserving the
